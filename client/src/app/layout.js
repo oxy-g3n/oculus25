@@ -14,6 +14,7 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "Oculus 2k25",
   description: "S.P.I.T. Annual Fest 8th Edition",
+  // icons: "../../public/assets/gold_white_O.png"
 };
 
 export default function RootLayout({ children }) {
