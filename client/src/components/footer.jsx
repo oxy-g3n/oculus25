@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from "next/image";
 import googlePlay from '../../public/assets/google-play.png'
 import InstagramIcon from '@mui/icons-material/Instagram';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
@@ -58,7 +59,7 @@ function Footer() {
               Mobile App
             </div>
             <button>
-              <img
+              <Image
                 src={googlePlay}
                 alt="Play Store"
                 width={150}
@@ -93,7 +94,7 @@ function Footer() {
         />
         <div className='mb-[-10px]'>
           <div className='opacity-60 max-xs:text-sm w-full '>
-            © Oculus The Fest 2024. All rights reserved
+            © Oculus The Fest 2025. All rights reserved
           </div>
         </div>
       </div>
