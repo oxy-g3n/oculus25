@@ -1474,7 +1474,7 @@ function $m6Ky$var$_createClass(Constructor, protoProps, staticProps) {
   return Constructor;
 }
 
-var $m6Ky$var$TEXT = 'Oculus';
+var $m6Ky$var$TEXT = 'Oculus25';
 var $m6Ky$var$FONT_SIZE = 30;
 var $m6Ky$var$FONT_SIZE_SP = 24;
 var $m6Ky$var$FONT_SIZE_MIN = 20;
