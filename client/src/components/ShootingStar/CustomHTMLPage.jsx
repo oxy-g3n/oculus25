@@ -14,7 +14,8 @@ export default function CustomHTMLPage() {
           height: "600px",
         }}
         scrolling="no"
-      ></iframe>
+      >
+      </iframe>
     </div>
   );
 }
