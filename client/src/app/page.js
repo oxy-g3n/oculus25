@@ -9,6 +9,7 @@ import CustomHTMLPage from "../components/FluidAnimation/CustomHTMLPage"
 export default function LandingPage(){
     const [navOpen, setNavOpen] = useState(false);
     return (<>
+      <Navbar/>
       <CustomHTMLPage/>
     
       
