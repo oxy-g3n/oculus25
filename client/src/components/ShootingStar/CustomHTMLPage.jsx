@@ -4,22 +4,22 @@ export default function CustomHTMLPage() {
   return (
     <div className="relative w-full h-screen flex items-center justify-center bg-white">
       {/* Container for the iframe */}
-      <div className="absolute inset-0 w-full h-[600px]">
+      <div className="absolute inset-0 w-full h-screen">
         <iframe
-          src="/shooting-star/index.html"
+          src="/fluid-animation/index.html"
           className="w-full h-full border-none"
-          scrolling="no"
+          scrolling="yes"
         />
       </div>
       
       {/* Centered image container */}
-      <div className="relative z-10 w-80" style={{
-          transform: 'translate(0px, -91px)' // Adjust these values: X = -50px (left), Y = 20px (down)
+      <div className="relative z-50 w-96" style={{
+          transform: 'translate(0px, 0px)' // Adjust these values: X = -50px (left), Y = 20px (down)
         }}>
         <img 
-          src="/assets/full_white_transparent.png"
+          src="/assets/gold_gradient_full_transparent_cropped.png"
           alt="Centered image"
-          className="rounded-lg shadow-lg"
+          className="rounded-3xl"
         />
       </div>
     </div>
