@@ -2,22 +2,6 @@
 
 export default function CustomHTMLPage() {
   return (
-<<<<<<< HEAD
-    <div style={{ overflow: "hidden", width: "100%", height: "600px" }}>
-      <iframe
-        src="/shooting-star/index.html"
-        width="100%"
-        height="600px"
-        style={{
-          border: "none",
-          overflow: "hidden",
-          width: "100%",
-          height: "600px",
-        }}
-        scrolling="no"
-      >
-      </iframe>
-=======
     <div className="relative w-full h-screen flex items-center justify-center bg-white">
       {/* Container for the iframe */}
       <div className="absolute inset-0 w-full h-[600px]">
@@ -38,7 +22,6 @@ export default function CustomHTMLPage() {
           className="rounded-lg shadow-lg"
         />
       </div>
->>>>>>> origin/swaraj
     </div>
   );
 }
