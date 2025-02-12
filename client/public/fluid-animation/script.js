@@ -1566,10 +1566,20 @@ function correctDeltaY (delta) {
 }
 
 function generateColor () {
-    let c = HSVtoRGB(Math.random(), 1.0, 1.0);
+    // Instead of random HSV colors, we'll use fixed gold colors
+    let isLightGold = Math.random() > 0.5;
+    
+    let c = {
+        r: isLightGold ? 1.0 : 0.85, // Light gold: 255,215,0 | Dark gold: 218,165,32
+        g: isLightGold ? 0.84 : 0.65,
+        b: isLightGold ? 0.0 : 0.12
+    };
+    
+    // Reduce intensity similar to original code
     c.r *= 0.15;
     c.g *= 0.15;
     c.b *= 0.15;
+    
     return c;
 }
 
