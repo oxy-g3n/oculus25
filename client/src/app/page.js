@@ -10,8 +10,9 @@ export default function LandingPage(){
     return (<>
     <Analytics />
       <Navbar/>
+      
       <CustomHTMLPage/>
-    
+     
       
       <AboutPage />
       <Footer />

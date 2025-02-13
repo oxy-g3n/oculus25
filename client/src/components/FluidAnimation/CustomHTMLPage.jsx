@@ -4,6 +4,8 @@ export default function CustomHTMLPage() {
   return (
     <div className="relative w-full h-screen flex items-center justify-center bg-white">
       {/* Container for the iframe */}
+
+      
       <div className="absolute inset-0 w-full h-screen">
         <iframe
           src="/fluid-animation/index.html"
@@ -11,13 +13,14 @@ export default function CustomHTMLPage() {
           scrolling="yes"
         />
       </div>
-      
+
+      {/* <HeroSection /> */}
       {/* Centered image container */}
       <div className="relative z-50 w-96" style={{
           transform: 'translate(0px, 0px)' // Adjust these values: X = -50px (left), Y = 20px (down)
         }}>
         <img 
-          src="/assets/gold_gradient_full_transparent_cropped.png"
+          src="/assets/full_white_transparent.png"
           alt="Centered image"
           className="rounded-3xl"
         />

@@ -1663,21 +1663,26 @@ function startCircularAnimation() {
     let centerX = 0.5; // Center of canvas
     let centerY = 0.5;
     let angle = 0;
-    let radius = 0.18; // Fixed radius for the circular motion
-    let animationId;
+    let radius = 0.05; // Start with a smaller radius
+    let maxRadius = 0.4; // Maximum radius
+    let radiusGrowthRate = 0.00002; // Much slower growth rate (reduced by 5x)
     
     function animate() {
         circularSplat(radius, angle, centerX, centerY);
-        angle += 0.31; // Speed of rotation
-        animationId = requestAnimationFrame(animate);
+        angle += 0.2; // Speed of rotation
+        
+        // Gradually increase radius until maxRadius
+        if (radius < maxRadius) {
+            radius += radiusGrowthRate;
+        } else {
+            // Optional: reset to start over
+            radius = 0.05;
+        }
+        
+        requestAnimationFrame(animate);
     }
     
     animate();
-    
-    // Stop animation after 5 seconds
-    setTimeout(() => {
-        cancelAnimationFrame(animationId);
-    }, 5000);
 }
 
 // Update button

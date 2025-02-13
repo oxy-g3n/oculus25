@@ -24,35 +24,32 @@ SOFTWARE.
 
 'use strict';
 
-// Mobile promo section---------------------------------
+// Mobile promo section
 
-// const promoPopup = document.getElementsByClassName('promo')[0];
-// const promoPopupClose = document.getElementsByClassName('promo-close')[0];
+const promoPopup = document.getElementsByClassName('promo')[0];
+const promoPopupClose = document.getElementsByClassName('promo-close')[0];
 
-// if (isMobile()) {
-//     setTimeout(() => {
-//         promoPopup.style.display = 'table';
-//     }, 20000);
-// }
+if (isMobile()) {
+    setTimeout(() => {
+        promoPopup.style.display = 'table';
+    }, 20000);
+}
 
+promoPopupClose.addEventListener('click', e => {
+    promoPopup.style.display = 'none';
+});
 
-// promoPopupClose.addEventListener('click', e => {
-//     promoPopup.style.display = 'none';
-// });
+const appleLink = document.getElementById('apple_link');
+appleLink.addEventListener('click', e => {
+    ga('send', 'event', 'link promo', 'app');
+    window.open('https://apps.apple.com/us/app/fluid-simulation/id1443124993');
+});
 
-// const appleLink = document.getElementById('apple_link');
-// appleLink.addEventListener('click', e => {
-//     ga('send', 'event', 'link promo', 'app');
-//     window.open('https://apps.apple.com/us/app/fluid-simulation/id1443124993');
-// });
-
-// const googleLink = document.getElementById('google_link');
-// googleLink.addEventListener('click', e => {
-//     ga('send', 'event', 'link promo', 'app');
-//     window.open('https://play.google.com/store/apps/details?id=games.paveldogreat.fluidsimfree');
-// });
-//------------------------------------------------------
-
+const googleLink = document.getElementById('google_link');
+googleLink.addEventListener('click', e => {
+    ga('send', 'event', 'link promo', 'app');
+    window.open('https://play.google.com/store/apps/details?id=games.paveldogreat.fluidsimfree');
+});
 
 // Simulation section
 
@@ -61,7 +58,7 @@ resizeCanvas();
 
 let config = {
     SIM_RESOLUTION: 128,
-    DYE_RESOLUTION: 512,
+    DYE_RESOLUTION: 1024,
     CAPTURE_RESOLUTION: 512,
     DENSITY_DISSIPATION: 1,
     VELOCITY_DISSIPATION: 0.2,
@@ -115,7 +112,8 @@ if (!ext.supportLinearFiltering) {
     config.BLOOM = false;
     config.SUNRAYS = false;
 }
- startGUI();
+
+startGUI();
 
 function getWebGLContext (canvas) {
     const params = { alpha: true, depth: false, stencil: false, antialias: false, preserveDrawingBuffer: false };
@@ -223,6 +221,10 @@ function startGUI () {
     gui.add({ fun: () => {
         splatStack.push(parseInt(Math.random() * 20) + 5);
     } }, 'fun').name('Random splats');
+
+    gui.add({ fun: () => {
+        startCircleAnimation();
+    } }, 'fun').name('Start Animation');
 
     let bloomFolder = gui.addFolder('Bloom');
     bloomFolder.add(config, 'BLOOM').name('enabled').onFinishChange(updateKeywords);
@@ -1429,9 +1431,6 @@ function splatPointer (pointer) {
 function multipleSplats (amount) {
     for (let i = 0; i < amount; i++) {
         const color = generateColor();
-        color.r *= 10.0;
-        color.g *= 10.0;
-        color.b *= 10.0;
         const x = Math.random();
         const y = Math.random();
         const dx = 1000 * (Math.random() - 0.5);
@@ -1647,61 +1646,96 @@ function hashCode (s) {
     return hash;
 };
 
-function circularSplat(radius, angle, centerX, centerY) {
-    const x = centerX + radius * Math.cos(angle);
-    const y = centerY + radius * Math.sin(angle);
-    const color = generateColor();
-    color.r *= 10.0;
-    color.g *= 10.0;
-    color.b *= 10.0;
-    const dx = 1000 * Math.cos(angle + Math.PI/2);
-    const dy = 1000 * Math.sin(angle + Math.PI/2);
-    splat(x, y, dx, dy, color);
-}
-
-function startCircularAnimation() {
-    let centerX = 0.5; // Center of canvas
-    let centerY = 0.5;
-    let angle = 0;
-    let radius = 0.18; // Fixed radius for the circular motion
-    let animationId;
+function startCircleAnimation() {
+    const centerX = 0.5;
+    const centerY = 0.5;
+    const maxRadius = 0.25;
+    const duration = 6000;
+    let startTime = Date.now();
+    let animationFrame;
     
     function animate() {
-        circularSplat(radius, angle, centerX, centerY);
-        angle += 0.31; // Speed of rotation
-        animationId = requestAnimationFrame(animate);
+        const elapsed = Date.now() - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        // Increased precision with more frequent, smaller points
+        const totalRotations = 10;
+        const stepsPerFrame = 4; // More steps for smoother line
+        
+        for (let step = 0; step < stepsPerFrame; step++) {
+            const spiralProgress = Math.min(progress + (step / (stepsPerFrame * 20)), 1);
+            const angle = spiralProgress * Math.PI * 2 * totalRotations;
+            
+            // Smoother radius progression
+            const radius = (spiralProgress * maxRadius) * (angle / (Math.PI * 2 * totalRotations));
+            
+            const x = centerX + radius * Math.cos(angle);
+            const y = centerY + radius * Math.sin(angle);
+            
+            // Reduced intensity and smaller splats
+            const intensity = 0.2 - (spiralProgress * 0.1);
+            const color = {
+                r: intensity,
+                g: intensity,
+                b: intensity
+            };
+            
+            // Reduced speed and force for smaller splats
+            const speed = 400 * (1 - spiralProgress * 0.5);
+            const dx = (-Math.sin(angle) * speed);
+            const dy = (Math.cos(angle) * speed);
+            
+            // Main spiral point
+            splat(x, y, dx, dy, color);
+            
+            // Subtle detail points with very small radius
+            if (Math.random() > 0.85) {
+                const detailRadius = radius * 0.98;
+                const detailX = centerX + detailRadius * Math.cos(angle);
+                const detailY = centerY + detailRadius * Math.sin(angle);
+                const detailColor = {
+                    r: intensity * 0.5,
+                    g: intensity * 0.5,
+                    b: intensity * 0.5
+                };
+                // Even smaller detail splats
+                config.SPLAT_RADIUS = 0.1;
+                splat(detailX, detailY, dx * 0.2, dy * 0.2, detailColor);
+            }
+        }
+        
+        // Very subtle center glow with minimal impact
+        if (Math.random() > 0.95) {
+            const glowRadius = 0.01;
+            const glowAngle = Math.random() * Math.PI * 2;
+            const glowX = centerX + glowRadius * Math.cos(glowAngle);
+            const glowY = centerY + glowRadius * Math.sin(glowAngle);
+            const glowColor = {
+                r: 0.3,
+                g: 0.3,
+                b: 0.3
+            };
+            config.SPLAT_RADIUS = 0.08; // Smallest splat size for glow
+            splat(glowX, glowY, 
+                Math.cos(glowAngle) * 100,
+                Math.sin(glowAngle) * 100,
+                glowColor
+            );
+        }
+        
+        if (progress < 1) {
+            animationFrame = requestAnimationFrame(animate);
+        } else {
+            // Reset splat radius to default when animation ends
+            config.SPLAT_RADIUS = 0.25;
+        }
     }
     
-    animate();
+    // Cancel any existing animation
+    if (animationFrame) {
+        cancelAnimationFrame(animationFrame);
+    }
     
-    // Stop animation after 5 seconds
-    setTimeout(() => {
-        cancelAnimationFrame(animationId);
-    }, 5000);
+    // Start animation
+    animate();
 }
-
-// Update button
-const startButton = document.createElement('button');
-startButton.textContent = 'Start Circular Animation';
-startButton.style.position = 'fixed';
-startButton.style.left = '20px';
-startButton.style.top = '20px';
-startButton.style.zIndex = '1000';
-startButton.style.padding = '10px 20px';
-startButton.style.backgroundColor = '#333';
-startButton.style.color = 'white';
-startButton.style.border = 'none';
-startButton.style.borderRadius = '5px';
-startButton.style.cursor = 'pointer';
-
-startButton.addEventListener('mouseenter', () => {
-    startButton.style.backgroundColor = '#444';
-});
-
-startButton.addEventListener('mouseleave', () => {
-    startButton.style.backgroundColor = '#333';
-});
-
-startButton.addEventListener('click', startCircularAnimation);
-
-document.body.appendChild(startButton);
