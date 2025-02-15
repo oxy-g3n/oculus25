@@ -24,35 +24,32 @@ SOFTWARE.
 
 'use strict';
 
-// Mobile promo section---------------------------------
+// Mobile promo section
 
-// const promoPopup = document.getElementsByClassName('promo')[0];
-// const promoPopupClose = document.getElementsByClassName('promo-close')[0];
+const promoPopup = document.getElementsByClassName('promo')[0];
+const promoPopupClose = document.getElementsByClassName('promo-close')[0];
 
-// if (isMobile()) {
-//     setTimeout(() => {
-//         promoPopup.style.display = 'table';
-//     }, 20000);
-// }
+if (isMobile()) {
+    setTimeout(() => {
+        promoPopup.style.display = 'table';
+    }, 20000);
+}
 
+promoPopupClose.addEventListener('click', e => {
+    promoPopup.style.display = 'none';
+});
 
-// promoPopupClose.addEventListener('click', e => {
-//     promoPopup.style.display = 'none';
-// });
+const appleLink = document.getElementById('apple_link');
+appleLink.addEventListener('click', e => {
+    ga('send', 'event', 'link promo', 'app');
+    window.open('https://apps.apple.com/us/app/fluid-simulation/id1443124993');
+});
 
-// const appleLink = document.getElementById('apple_link');
-// appleLink.addEventListener('click', e => {
-//     ga('send', 'event', 'link promo', 'app');
-//     window.open('https://apps.apple.com/us/app/fluid-simulation/id1443124993');
-// });
-
-// const googleLink = document.getElementById('google_link');
-// googleLink.addEventListener('click', e => {
-//     ga('send', 'event', 'link promo', 'app');
-//     window.open('https://play.google.com/store/apps/details?id=games.paveldogreat.fluidsimfree');
-// });
-//------------------------------------------------------
-
+const googleLink = document.getElementById('google_link');
+googleLink.addEventListener('click', e => {
+    ga('send', 'event', 'link promo', 'app');
+    window.open('https://play.google.com/store/apps/details?id=games.paveldogreat.fluidsimfree');
+});
 
 // Simulation section
 
@@ -61,7 +58,7 @@ resizeCanvas();
 
 let config = {
     SIM_RESOLUTION: 128,
-    DYE_RESOLUTION: 512,
+    DYE_RESOLUTION: 1024,
     CAPTURE_RESOLUTION: 512,
     DENSITY_DISSIPATION: 1,
     VELOCITY_DISSIPATION: 0.2,
@@ -115,7 +112,8 @@ if (!ext.supportLinearFiltering) {
     config.BLOOM = false;
     config.SUNRAYS = false;
 }
- startGUI();
+
+startGUI();
 
 function getWebGLContext (canvas) {
     const params = { alpha: true, depth: false, stencil: false, antialias: false, preserveDrawingBuffer: false };
@@ -223,6 +221,10 @@ function startGUI () {
     gui.add({ fun: () => {
         splatStack.push(parseInt(Math.random() * 20) + 5);
     } }, 'fun').name('Random splats');
+
+    gui.add({ fun: () => {
+        startCircleAnimation();
+    } }, 'fun').name('Start Animation');
 
     let bloomFolder = gui.addFolder('Bloom');
     bloomFolder.add(config, 'BLOOM').name('enabled').onFinishChange(updateKeywords);
@@ -1647,61 +1649,92 @@ function hashCode (s) {
     return hash;
 };
 
-function circularSplat(radius, angle, centerX, centerY) {
-    const x = centerX + radius * Math.cos(angle);
-    const y = centerY + radius * Math.sin(angle);
-    const color = generateColor();
-    color.r *= 10.0;
-    color.g *= 10.0;
-    color.b *= 10.0;
-    const dx = 1000 * Math.cos(angle + Math.PI/2);
-    const dy = 1000 * Math.sin(angle + Math.PI/2);
-    splat(x, y, dx, dy, color);
-}
-
-function startCircularAnimation() {
-    let centerX = 0.5; // Center of canvas
-    let centerY = 0.5;
-    let angle = 0;
-    let radius = 0.18; // Fixed radius for the circular motion
-    let animationId;
+function startCircleAnimation() {
+    const centerX = 0.5;
+    const centerY = 0.5;
+    const maxRadius = 0.3; // Maximum radius of spiral
+    const duration = 6000; // Longer duration for smoother effect
+    let startTime = Date.now();
+    let animationFrame;
     
     function animate() {
-        circularSplat(radius, angle, centerX, centerY);
-        angle += 0.31; // Speed of rotation
-        animationId = requestAnimationFrame(animate);
+        const elapsed = Date.now() - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        // Single spiral arm with better control
+        const totalRotations = 8; // Number of spiral rotations
+        const stepsPerFrame = 3; // Number of points to draw per frame
+        
+        for (let step = 0; step < stepsPerFrame; step++) {
+            // Calculate current position in the spiral
+            const spiralProgress = Math.min(progress + (step / (stepsPerFrame * 20)), 1);
+            const angle = spiralProgress * Math.PI * 2 * totalRotations;
+            
+            // Radius gradually increases with angle
+            const radius = (spiralProgress * maxRadius) * (angle / (Math.PI * 2 * totalRotations));
+            
+            // Calculate position
+            const x = centerX + radius * Math.cos(angle);
+            const y = centerY + radius * Math.sin(angle);
+            
+            // Use white color with controlled intensity
+            const intensity = 0.8 - (spiralProgress * 0.3); // Fade out slightly as spiral grows
+            const color = {
+                r: intensity,
+                g: intensity,
+                b: intensity
+            };
+            
+            // Calculate velocities tangent to the spiral
+            const speed = 1000 * (1 - spiralProgress * 0.5); // Reduce speed as spiral grows
+            const dx = (-Math.sin(angle) * speed);
+            const dy = (Math.cos(angle) * speed);
+            
+            // Create smaller, more controlled splats
+            splat(x, y, dx, dy, color);
+            
+            // Add subtle inner particles
+            if (Math.random() > 0.8) {
+                const innerRadius = radius * 0.95;
+                const innerX = centerX + innerRadius * Math.cos(angle);
+                const innerY = centerY + innerRadius * Math.sin(angle);
+                const innerColor = {
+                    r: intensity * 0.7,
+                    g: intensity * 0.7,
+                    b: intensity * 0.7
+                };
+                splat(innerX, innerY, dx * 0.3, dy * 0.3, innerColor);
+            }
+        }
+        
+        // Add subtle center glow
+        if (Math.random() > 0.9) {
+            const glowRadius = 0.02;
+            const glowAngle = Math.random() * Math.PI * 2;
+            const glowX = centerX + glowRadius * Math.cos(glowAngle);
+            const glowY = centerY + glowRadius * Math.sin(glowAngle);
+            const glowColor = {
+                r: 0.5,
+                g: 0.5,
+                b: 0.5
+            };
+            splat(glowX, glowY, 
+                Math.cos(glowAngle) * 200,
+                Math.sin(glowAngle) * 200,
+                glowColor
+            );
+        }
+        
+        if (progress < 1) {
+            animationFrame = requestAnimationFrame(animate);
+        }
     }
     
-    animate();
+    // Cancel any existing animation
+    if (animationFrame) {
+        cancelAnimationFrame(animationFrame);
+    }
     
-    // Stop animation after 5 seconds
-    setTimeout(() => {
-        cancelAnimationFrame(animationId);
-    }, 5000);
+    // Start animation
+    animate();
 }
-
-// Update button
-const startButton = document.createElement('button');
-startButton.textContent = 'Start Circular Animation';
-startButton.style.position = 'fixed';
-startButton.style.left = '20px';
-startButton.style.top = '20px';
-startButton.style.zIndex = '1000';
-startButton.style.padding = '10px 20px';
-startButton.style.backgroundColor = '#333';
-startButton.style.color = 'white';
-startButton.style.border = 'none';
-startButton.style.borderRadius = '5px';
-startButton.style.cursor = 'pointer';
-
-startButton.addEventListener('mouseenter', () => {
-    startButton.style.backgroundColor = '#444';
-});
-
-startButton.addEventListener('mouseleave', () => {
-    startButton.style.backgroundColor = '#333';
-});
-
-startButton.addEventListener('click', startCircularAnimation);
-
-document.body.appendChild(startButton);

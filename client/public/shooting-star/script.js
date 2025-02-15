@@ -772,7 +772,7 @@ function $JJyr$export$easeInOutQuart(t, b, c, d) {
  */
 
 
-$JJyr$exports.easeInOutQuart = $JJyr$export$easeInOutQuart;
+$JJyr$exports.easeInOutQuint = $JJyr$export$easeInOutQuint;
 
 function $JJyr$export$easeInQuint(t, b, c, d) {
   return c * Math.pow(t / d, 5) + b;
@@ -1474,7 +1474,7 @@ function $m6Ky$var$_createClass(Constructor, protoProps, staticProps) {
   return Constructor;
 }
 
-var $m6Ky$var$TEXT = 'Oculus';
+var $m6Ky$var$TEXT = 'Oculus25';
 var $m6Ky$var$FONT_SIZE = 30;
 var $m6Ky$var$FONT_SIZE_SP = 24;
 var $m6Ky$var$FONT_SIZE_MIN = 20;
@@ -1614,6 +1614,9 @@ var $Focm$var$DELAY = 300;
 var $Focm$var$data = {
   play: {
     value: null
+  },
+  startCircle: {  // Add new button
+    value: null
   }
 };
 
@@ -1654,6 +1657,11 @@ function () {
 
     $Focm$var$data['play'].value = function () {
       _this.textStart();
+    };
+
+    // Add new circle animation button
+    $Focm$var$data['startCircle'].value = function () {
+      _this.circleAnimation();
     };
 
     controller.addData($Focm$var$data, {
@@ -1727,6 +1735,27 @@ function () {
 
           document.body.classList.add('o-start');
         }
+      });
+    }
+  }, {
+    key: "circleAnimation",
+    value: function circleAnimation() {
+      var _this = this;
+      var radius = 50;
+      var duration = 2000;
+      var period = Math.PI * 2;
+      
+      $Zk$export$animate(function (progress) {
+        var x = Math.cos(progress * period) * radius;
+        var y = Math.sin(progress * period) * radius;
+        
+        _this.shootingStar.draw({
+          clientX: x,
+          clientY: y
+        });
+      }, {
+        duration: duration,
+        isRoop: true // Make it loop continuously
       });
     }
   }]);

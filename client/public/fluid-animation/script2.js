@@ -24,35 +24,32 @@ SOFTWARE.
 
 'use strict';
 
-// Mobile promo section---------------------------------
+// Mobile promo section
 
-// const promoPopup = document.getElementsByClassName('promo')[0];
-// const promoPopupClose = document.getElementsByClassName('promo-close')[0];
+const promoPopup = document.getElementsByClassName('promo')[0];
+const promoPopupClose = document.getElementsByClassName('promo-close')[0];
 
-// if (isMobile()) {
-//     setTimeout(() => {
-//         promoPopup.style.display = 'table';
-//     }, 20000);
-// }
+if (isMobile()) {
+    setTimeout(() => {
+        promoPopup.style.display = 'table';
+    }, 20000);
+}
 
+promoPopupClose.addEventListener('click', e => {
+    promoPopup.style.display = 'none';
+});
 
-// promoPopupClose.addEventListener('click', e => {
-//     promoPopup.style.display = 'none';
-// });
+const appleLink = document.getElementById('apple_link');
+appleLink.addEventListener('click', e => {
+    ga('send', 'event', 'link promo', 'app');
+    window.open('https://apps.apple.com/us/app/fluid-simulation/id1443124993');
+});
 
-// const appleLink = document.getElementById('apple_link');
-// appleLink.addEventListener('click', e => {
-//     ga('send', 'event', 'link promo', 'app');
-//     window.open('https://apps.apple.com/us/app/fluid-simulation/id1443124993');
-// });
-
-// const googleLink = document.getElementById('google_link');
-// googleLink.addEventListener('click', e => {
-//     ga('send', 'event', 'link promo', 'app');
-//     window.open('https://play.google.com/store/apps/details?id=games.paveldogreat.fluidsimfree');
-// });
-//------------------------------------------------------
-
+const googleLink = document.getElementById('google_link');
+googleLink.addEventListener('click', e => {
+    ga('send', 'event', 'link promo', 'app');
+    window.open('https://play.google.com/store/apps/details?id=games.paveldogreat.fluidsimfree');
+});
 
 // Simulation section
 
@@ -61,7 +58,7 @@ resizeCanvas();
 
 let config = {
     SIM_RESOLUTION: 128,
-    DYE_RESOLUTION: 512,
+    DYE_RESOLUTION: 1024,
     CAPTURE_RESOLUTION: 512,
     DENSITY_DISSIPATION: 1,
     VELOCITY_DISSIPATION: 0.2,
@@ -115,7 +112,8 @@ if (!ext.supportLinearFiltering) {
     config.BLOOM = false;
     config.SUNRAYS = false;
 }
- startGUI();
+
+startGUI();
 
 function getWebGLContext (canvas) {
     const params = { alpha: true, depth: false, stencil: false, antialias: false, preserveDrawingBuffer: false };
@@ -223,6 +221,10 @@ function startGUI () {
     gui.add({ fun: () => {
         splatStack.push(parseInt(Math.random() * 20) + 5);
     } }, 'fun').name('Random splats');
+
+    gui.add({ fun: () => {
+        startCircleAnimation();
+    } }, 'fun').name('Start Animation');
 
     let bloomFolder = gui.addFolder('Bloom');
     bloomFolder.add(config, 'BLOOM').name('enabled').onFinishChange(updateKeywords);
@@ -1429,9 +1431,6 @@ function splatPointer (pointer) {
 function multipleSplats (amount) {
     for (let i = 0; i < amount; i++) {
         const color = generateColor();
-        color.r *= 10.0;
-        color.g *= 10.0;
-        color.b *= 10.0;
         const x = Math.random();
         const y = Math.random();
         const dx = 1000 * (Math.random() - 0.5);
@@ -1647,61 +1646,124 @@ function hashCode (s) {
     return hash;
 };
 
-function circularSplat(radius, angle, centerX, centerY) {
-    const x = centerX + radius * Math.cos(angle);
-    const y = centerY + radius * Math.sin(angle);
-    const color = generateColor();
-    color.r *= 10.0;
-    color.g *= 10.0;
-    color.b *= 10.0;
-    const dx = 1000 * Math.cos(angle + Math.PI/2);
-    const dy = 1000 * Math.sin(angle + Math.PI/2);
-    splat(x, y, dx, dy, color);
-}
-
-function startCircularAnimation() {
-    let centerX = 0.5; // Center of canvas
-    let centerY = 0.5;
-    let angle = 0;
-    let radius = 0.18; // Fixed radius for the circular motion
-    let animationId;
+function startCircleAnimation() {
+    const centerX = 0.5;
+    const centerY = 0.5;
+    const maxRadiusX = 0.35;
+    const maxRadiusY = 0.25;
+    const duration = 10000;
+    let startTime = Date.now();
+    let animationFrame;
     
     function animate() {
-        circularSplat(radius, angle, centerX, centerY);
-        angle += 0.31; // Speed of rotation
-        animationId = requestAnimationFrame(animate);
+        const elapsed = Date.now() - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        // Separate progress for initial burst and circular motion
+        const initialBurstDuration = 0.15; // 15% of animation for initial burst
+        const circularMotionProgress = Math.max(0, (progress - initialBurstDuration) / (1 - initialBurstDuration));
+        
+        // Smooth ease-in
+        const easeInProgress = Math.pow(progress, 1.2);
+        const stepsPerFrame = 3;
+        
+        for (let step = 0; step < stepsPerFrame; step++) {
+            const stepProgress = Math.min(easeInProgress + (step / (stepsPerFrame * 30)), 1);
+            
+            let x, y, dx, dy, intensity, radius;
+            
+            if (progress < initialBurstDuration) {
+                // Initial burst from center
+                const burstProgress = progress / initialBurstDuration;
+                const burstAngle = burstProgress * Math.PI * 4; // Two rotations during burst
+                radius = burstProgress * 0.15; // Small initial spiral
+                
+                x = centerX + radius * Math.cos(burstAngle);
+                y = centerY + radius * Math.sin(burstAngle);
+                
+                const speed = 150 * (1 - burstProgress);
+                dx = -Math.sin(burstAngle) * speed;
+                dy = Math.cos(burstAngle) * speed;
+                
+                intensity = 0.2 + burstProgress * 0.2;
+            } else {
+                // Circular motion around the circumference
+                const circleAngle = circularMotionProgress * Math.PI * 8; // 4 rotations
+                radius = maxRadiusX; // Fixed radius for circular motion
+                
+                // Add some variation to the circular path
+                const radiusVariation = 0.02 * Math.sin(circleAngle * 3);
+                const currentRadius = radius * (1 + radiusVariation);
+                
+                x = centerX + currentRadius * Math.cos(circleAngle);
+                y = centerY + currentRadius * Math.sin(circleAngle);
+                
+                // Calculate tangential velocity
+                const speed = 300 * (1 + 0.2 * Math.sin(circleAngle * 2));
+                dx = -Math.sin(circleAngle) * speed;
+                dy = Math.cos(circleAngle) * speed;
+                
+                intensity = 0.3 + 0.1 * Math.sin(circleAngle * 2);
+            }
+            
+            const color = {
+                r: intensity,
+                g: intensity,
+                b: intensity
+            };
+            
+            // Dynamic splat radius
+            const mainSplatRadius = 0.08 + 0.04 * Math.sin(stepProgress * Math.PI * 4);
+            config.SPLAT_RADIUS = mainSplatRadius;
+            
+            // Main point
+            splat(x, y, dx, dy, color);
+            
+            // Add trailing particles
+            if (Math.random() > 0.7) {
+                const trailAngle = Math.atan2(y - centerY, x - centerX) - 0.2;
+                const trailRadius = radius * (0.9 + Math.random() * 0.2);
+                const trailX = centerX + trailRadius * Math.cos(trailAngle);
+                const trailY = centerY + trailRadius * Math.sin(trailAngle);
+                
+                const trailColor = {
+                    r: intensity * 0.6,
+                    g: intensity * 0.6,
+                    b: intensity * 0.6
+                };
+                
+                config.SPLAT_RADIUS = mainSplatRadius * 0.5;
+                splat(trailX, trailY, dx * 0.3, dy * 0.3, trailColor);
+            }
+            
+            // Add occasional bursts
+            if (Math.random() > 0.9) {
+                const burstAngle = Math.atan2(y - centerY, x - centerX) + (Math.random() - 0.5);
+                const burstRadius = radius * (0.8 + Math.random() * 0.4);
+                const burstX = centerX + burstRadius * Math.cos(burstAngle);
+                const burstY = centerY + burstRadius * Math.sin(burstAngle);
+                
+                const burstColor = {
+                    r: intensity * 0.8,
+                    g: intensity * 0.8,
+                    b: intensity * 0.8
+                };
+                
+                config.SPLAT_RADIUS = mainSplatRadius * 0.4;
+                splat(burstX, burstY, dx * 0.2, dy * 0.2, burstColor);
+            }
+        }
+        
+        if (progress < 1) {
+            animationFrame = requestAnimationFrame(animate);
+        } else {
+            config.SPLAT_RADIUS = 0.25;
+        }
+    }
+    
+    if (animationFrame) {
+        cancelAnimationFrame(animationFrame);
     }
     
     animate();
-    
-    // Stop animation after 5 seconds
-    setTimeout(() => {
-        cancelAnimationFrame(animationId);
-    }, 5000);
 }
-
-// Update button
-const startButton = document.createElement('button');
-startButton.textContent = 'Start Circular Animation';
-startButton.style.position = 'fixed';
-startButton.style.left = '20px';
-startButton.style.top = '20px';
-startButton.style.zIndex = '1000';
-startButton.style.padding = '10px 20px';
-startButton.style.backgroundColor = '#333';
-startButton.style.color = 'white';
-startButton.style.border = 'none';
-startButton.style.borderRadius = '5px';
-startButton.style.cursor = 'pointer';
-
-startButton.addEventListener('mouseenter', () => {
-    startButton.style.backgroundColor = '#444';
-});
-
-startButton.addEventListener('mouseleave', () => {
-    startButton.style.backgroundColor = '#333';
-});
-
-startButton.addEventListener('click', startCircularAnimation);
-
-document.body.appendChild(startButton);

@@ -1664,20 +1664,14 @@ function startCircularAnimation() {
     let centerY = 0.5;
     let angle = 0;
     let radius = 0.18; // Fixed radius for the circular motion
-    let animationId;
     
     function animate() {
         circularSplat(radius, angle, centerX, centerY);
-        angle += 0.31; // Speed of rotation
-        animationId = requestAnimationFrame(animate);
+        angle += 0.33; // Speed of rotation
+        requestAnimationFrame(animate);
     }
     
     animate();
-    
-    // Stop animation after 5 seconds
-    setTimeout(() => {
-        cancelAnimationFrame(animationId);
-    }, 5000);
 }
 
 // Update button
