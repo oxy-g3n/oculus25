@@ -68,7 +68,7 @@ let config = {
     PRESSURE: 0.8,
     PRESSURE_ITERATIONS: 20,
     CURL: 30,
-    SPLAT_RADIUS: 0.25,
+    SPLAT_RADIUS: 0.05,
     SPLAT_FORCE: 6000,
     SHADING: true,
     COLORFUL: true,
@@ -115,7 +115,7 @@ if (!ext.supportLinearFiltering) {
     config.BLOOM = false;
     config.SUNRAYS = false;
 }
- startGUI();
+//  startGUI();
 
 function getWebGLContext (canvas) {
     const params = { alpha: true, depth: false, stencil: false, antialias: false, preserveDrawingBuffer: false };
@@ -1169,7 +1169,32 @@ function updateKeywords () {
 
 updateKeywords();
 initFramebuffers();
-multipleSplats(parseInt(Math.random() * 20) + 5);
+
+function randomSplatAnimation() {
+    // Generate random position
+    const currentX = 0.1 + Math.random() * 0.8;
+    const currentY = 0.1 + Math.random() * 0.8;
+    
+    // Create splat at random position
+    const color = generateColor();
+    color.r *= 10.0;
+    color.g *= 10.0;
+    color.b *= 10.0;
+    
+    // Stronger directional force with fixed angles
+    const angles = [0, Math.PI/4, Math.PI/2, 3*Math.PI/4, Math.PI, 5*Math.PI/4, 3*Math.PI/2, 7*Math.PI/4];
+    const angle = angles[Math.floor(Math.random() * angles.length)];
+    const force = 25; // Increased force for more immediate movement
+    const dx = force * Math.cos(angle);
+    const dy = force * Math.sin(angle);
+    
+    // Create a more concentrated splat
+    config.SPLAT_RADIUS = 0.045; // Temporarily reduce splat radius
+    splat(currentX, currentY, dx, dy, color);
+    config.SPLAT_RADIUS = 0.25; // Reset to default
+}
+
+setInterval(randomSplatAnimation, 1200);
 
 let lastUpdateTime = Date.now();
 let colorUpdateTimer = 0.0;
@@ -1647,61 +1672,25 @@ function hashCode (s) {
     return hash;
 };
 
-function circularSplat(radius, angle, centerX, centerY) {
-    const x = centerX + radius * Math.cos(angle);
-    const y = centerY + radius * Math.sin(angle);
-    const color = generateColor();
-    color.r *= 10.0;
-    color.g *= 10.0;
-    color.b *= 10.0;
-    const dx = 1000 * Math.cos(angle + Math.PI/2);
-    const dy = 1000 * Math.sin(angle + Math.PI/2);
-    splat(x, y, dx, dy, color);
-}
+// Text loading logic
+const interactionText = document.getElementById('interaction-text');
+let textHasAppeared = false;
 
-function startCircularAnimation() {
-    let centerX = 0.5; // Center of canvas
-    let centerY = 0.5;
-    let angle = 0;
-    let radius = 0.18; // Fixed radius for the circular motion
-    let animationId;
-    
-    function animate() {
-        circularSplat(radius, angle, centerX, centerY);
-        angle += 0.31; // Speed of rotation
-        animationId = requestAnimationFrame(animate);
+// Show text after delay
+setTimeout(() => {
+    interactionText.style.opacity = '0.5';
+    textHasAppeared = true;
+}, 5000);
+
+// Hide text on interaction
+function hideInteractionText() {
+    if (textHasAppeared) {
+        interactionText.style.opacity = '0';
+        setTimeout(() => {
+            interactionText.style.display = 'none';
+        }, 300);
     }
-    
-    animate();
-    
-    // Stop animation after 5 seconds
-    setTimeout(() => {
-        cancelAnimationFrame(animationId);
-    }, 5000);
 }
 
-// Update button
-const startButton = document.createElement('button');
-startButton.textContent = 'Start Circular Animation';
-startButton.style.position = 'fixed';
-startButton.style.left = '20px';
-startButton.style.top = '20px';
-startButton.style.zIndex = '1000';
-startButton.style.padding = '10px 20px';
-startButton.style.backgroundColor = '#333';
-startButton.style.color = 'white';
-startButton.style.border = 'none';
-startButton.style.borderRadius = '5px';
-startButton.style.cursor = 'pointer';
-
-startButton.addEventListener('mouseenter', () => {
-    startButton.style.backgroundColor = '#444';
-});
-
-startButton.addEventListener('mouseleave', () => {
-    startButton.style.backgroundColor = '#333';
-});
-
-startButton.addEventListener('click', startCircularAnimation);
-
-document.body.appendChild(startButton);
+canvas.addEventListener('mousedown', hideInteractionText);
+canvas.addEventListener('touchstart', hideInteractionText);

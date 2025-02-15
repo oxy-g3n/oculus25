@@ -21,204 +21,133 @@
         <meta property="og:url" content="https://paveldogreat.github.io/WebGL-Fluid-Simulation/">
         <meta property="og:image" content="https://paveldogreat.github.io/WebGL-Fluid-Simulation/logo.png">
 
+        <link rel="stylesheet" href="styles.css">
+
         <script type="text/javascript" src="dat.gui.min.js"></script>
-        <style>
-            @font-face {
-                font-family: 'iconfont';
-                src: url('iconfont.ttf') format('truetype');
-            }
-
-            * {
-                user-select: none;
-            }
-
-            html, body {
-                overflow: hidden;
-                background-color: #000;
-            }
-
-            body {
-                margin: 0;
-                position: fixed;
-                width: 100%;
-                height: 100%;
-            }
-
-            canvas {
-                width: 100%;
-                height: 100%;
-            }
-
-            .dg {
-                opacity: 0.9;
-            }
-
-            .dg .property-name {
-                overflow: visible;
-            }
-
-            .bigFont {
-                font-size: 150%;
-                color: #8C8C8C;
-            }
-
-            .cr.function.appBigFont {
-                font-size: 150%;
-                line-height: 27px;
-                color: #A5F8D3;
-                background-color: #023C40;
-            }
-
-            .cr.function.appBigFont .property-name {
-                float: none;
-            }
-
-            .cr.function.appBigFont .icon {
-                position: sticky;
-                bottom: 27px;
-            }
-
-            .icon {
-                font-family: 'iconfont';
-                font-size: 130%;
-                float: right;
-            }
-
-            .twitter:before {
-                content: 'a';
-            }
-
-            .github:before {
-                content: 'b';
-            }
-
-            .app:before {
-                content: 'c';
-            }
-
-            .discord:before {
-                content: 'd';
-            }
-
-            .promo {
-                display: none;
-                /* display: table; */
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                z-index: 1;
-                overflow: auto;
-                color: lightblue;
-                background-color: rgba(0,0,0,0.4);
-                animation: promo-appear-animation 0.35s ease-out;
-            }
-
-            .promo-middle {
-                display: table-cell;
-                vertical-align: middle;
-            }
-
-            .promo-content {
-                width: 80vw;
-                height: 80vh;
-                max-width: 80vh;
-                max-height: 80vw;
-                margin: auto;
-                padding: 0;
-                font-size: 2.8vmax;
-                font-family: Futura, "Trebuchet MS", Arial, sans-serif;
-                text-align: center;
-                background-image: url("promo_back.png");
-                background-position: center;
-                background-repeat: no-repeat;
-                background-size: cover;
-                border-radius: 15px;
-                box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-            }
-
-            .promo-header {
-                height: 10%;
-                padding: 2px 16px;
-            }
-
-            .promo-close {
-                width: 10%;
-                height: 100%;
-                text-align: left;
-                float: left;
-                font-size: 1.3em;
-                /* transition: 0.2s; */
-            }
-
-            .promo-close:hover {
-                /* transform: scale(1.25); */
-                cursor: pointer;
-            }
-
-            .promo-body {
-                padding: 8px 16px 16px 16px;
-                margin: auto;
-            }
-
-            .promo-body p {
-                margin-top: 0;
-                mix-blend-mode: color-dodge;
-            }
-
-            .link {
-                width: 100%;
-                display: inline-block;
-            }
-
-            .link img {
-                width: 100%;
-            }
-
-            @keyframes promo-appear-animation {
-                0% {
-                    transform: scale(2.0);
-                    opacity: 0;
-                }
-                100% {
-                    transform: scale(1.0);
-                    opacity: 1;
-                }
-            }
-        </style>
         <script>
             window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
             ga('create', 'UA-105392568-1', 'auto');
             ga('send', 'pageview');
+
+            window.addEventListener('load', () => {
+                const logoContainer = document.querySelector('.logo-container');
+                const canvas = document.querySelector('canvas');
+                const blackLogo = document.querySelector('.black-logo');
+                const whiteLogo = document.querySelector('.white-logo');
+
+                logoContainer.addEventListener('mousedown', (e) => {
+                    const rect = canvas.getBoundingClientRect();
+                    const newEvent = new MouseEvent('mousedown', {
+                        bubbles: true,
+                        cancelable: true,
+                        clientX: e.clientX,
+                        clientY: e.clientY,
+                        screenX: e.screenX,
+                        screenY: e.screenY,
+                        offsetX: e.clientX - rect.left,
+                        offsetY: e.clientY - rect.top
+                    });
+                    canvas.dispatchEvent(newEvent);
+                });
+
+                logoContainer.addEventListener('mousemove', (e) => {
+                    const rect = canvas.getBoundingClientRect();
+                    const newEvent = new MouseEvent('mousemove', {
+                        bubbles: true,
+                        cancelable: true,
+                        clientX: e.clientX,
+                        clientY: e.clientY,
+                        screenX: e.screenX,
+                        screenY: e.screenY,
+                        offsetX: e.clientX - rect.left,
+                        offsetY: e.clientY - rect.top
+                    });
+                    canvas.dispatchEvent(newEvent);
+                });
+
+                // Mobile tap and hold handling
+                let currentLogo = 'white';
+                let touchTimer = null;
+                
+                const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+                
+                if (isMobile) {
+                    // Set extremely fast transition duration and disable selection/context menu
+                    const disableInteractions = (element) => {
+                        element.style.transition = 'all 0.1s ease-out';
+                        element.style.webkitUserSelect = 'none';
+                        element.style.userSelect = 'none';
+                        element.style.webkitTouchCallout = 'none';
+                        element.style.contextMenu = 'none';
+                        element.addEventListener('contextmenu', (e) => e.preventDefault());
+                    };
+
+                    disableInteractions(blackLogo);
+                    disableInteractions(whiteLogo);
+                    disableInteractions(logoContainer);
+
+                    const toggleLogo = () => {
+                        if (currentLogo === 'white') {
+                            blackLogo.style.opacity = '1';
+                            blackLogo.style.transform = 'scale(1)';
+                            blackLogo.style.filter = 'blur(0)';
+                            
+                            whiteLogo.style.opacity = '0';
+                            whiteLogo.style.transform = 'scale(0.95)';
+                            whiteLogo.style.filter = 'blur(4px)';
+                            
+                            currentLogo = 'black';
+                        } else {
+                            blackLogo.style.opacity = '0';
+                            blackLogo.style.transform = 'scale(0.95)';
+                            blackLogo.style.filter = 'blur(4px)';
+                            
+                            whiteLogo.style.opacity = '1';
+                            whiteLogo.style.transform = 'scale(1)';
+                            whiteLogo.style.filter = 'blur(0)';
+                            
+                            currentLogo = 'white';
+                        }
+                    };
+
+                    // Handle tap with no delay
+                    logoContainer.addEventListener('click', toggleLogo);
+                    logoContainer.addEventListener('touchstart', toggleLogo);
+                }
+            });
+
+            window.addEventListener('DOMContentLoaded', () => {
+                const images = [
+                    '/assets/TAN_gold_transparent.png',
+                    '/assets/white_O.png'
+                ];
+                
+                images.forEach(src => {
+                    const img = new Image();
+                    img.src = src;
+                });
+            });
         </script>
         <script async src="https://www.google-analytics.com/analytics.js"></script>
     </head>
     <body>
         <canvas></canvas>
-
-        <!-- Mother of God, pls forgive me -->
-        <div class="promo">
-            <div class="promo-middle">
-                <div class="promo-content">
-                    <div class="promo-header">
-                        <span class="promo-close">&times;</span>
-                    </div>
-                    <div class="promo-body">
-                        <p>Try Fluid Simulation app!</p>
-                        <div class="links-container">
-                            <a class="link" id="apple_link" target="_blank">
-                                <img class="link-img" alt="Download on the App Store" src="app_badge.png"/>
-                            </a>
-                            <a class="link" id="google_link" target="_blank">
-                                <img class="link-img" alt="Get it on Google Play" src="gp_badge.png"/>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="logo-container">
+            <img 
+                src="/assets/TAN_gold_transparent.png"
+                alt="TAN logo"
+                class="logo-image black-logo"
+            />
+            <img 
+                src="/assets/white_O.png"
+                alt="White logo"
+                class="logo-image white-logo"
+            />
         </div>
-
+        <div id="interaction-text" class="interaction-text">
+            <span class="mobile-text"`>Drag me</span>
+            <span class="desktop-text">Drag me</span>
+        </div>
         <script src="./script.js"></script>
     </body>
 </html>
