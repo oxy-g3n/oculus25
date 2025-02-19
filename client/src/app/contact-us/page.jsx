@@ -24,18 +24,7 @@ const ContactPage = () => {
                             <ContactCard  />
                         </div>
                         <div className='w-[40%] max-md:hidden'>
-                            {/* <FloatPhone /> */}
-                            <Image
-                                src={ginne}
-                                width={450}
-                                height={450}
-                                alt="TAN gold logo"
-                                className={`transition-opacity duration-300 animate-float select-none`}
-                                quality={100}
-                                priority
-                                unoptimized={true}
-                        
-                            />
+                            <FloatPhone />
                         </div>
                     </div>
                     </div>
