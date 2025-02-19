@@ -6,10 +6,12 @@ import Center from '../../components/contact/Center';
 import PlaceIcon from '@mui/icons-material/Place';
 import FloatPhone from '../../components/contact/FloatPhone';
 import ContactCard from '../../components/contact/ContactCard';
+import Navbar from '../../components/navbar';
 
 const ContactPage = () => {
     return (
         <Center>
+            <Navbar alwaysShow={true} />
             <div className='h-full w-full flex flex-col items-center justify-center gap- p-8 md:px-24'>
                 <div className='w-full h-full flex flex-col items-center justify-center'>
                     <div className='h-screen max-md:h-full w-full flex flex-col items-center md:mt-16 justify-start gap-8 max-md:gap-5'>
