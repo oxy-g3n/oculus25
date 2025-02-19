@@ -2,12 +2,14 @@
 
 import { motion } from "framer-motion";
 import { FiBatteryCharging, FiWifi } from "react-icons/fi";
-// import logo from '../../../public/assets/O Phone.png'
 import logo from '../../../public/assets/gold_gradient_O.png'
+import logo2 from '../../../public/assets/TAN_gold_transparent.png'
+import Image from "next/image";
+import { useState } from 'react';
 
-const FloatPhone = () => {
+const Example = () => {
   return (
-    <section className="grid place-content-center">
+    <section className="grid place-content-center p-12">
       <FloatingPhone />
     </section>
   );
@@ -20,7 +22,7 @@ const FloatingPhone = () => {
         transformStyle: "preserve-3d",
         transform: "rotateY(-30deg) rotateX(15deg)",
       }}
-      className="rounded-[24px] bg-primary-purple"
+      className="rounded-[24px] bg-amber-500"
     >
       <motion.div
         initial={{
@@ -56,44 +58,49 @@ const HeaderBar = () => {
   );
 };
 
-const Screen = () => {
+const LogoTransition = () => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleHover = () => {
+    setIsHovered(!isHovered);
+  };
+
   return (
-    <div className="relative z-0 grid h-full w-full place-content-center overflow-hidden rounded-[20px] bg-white">
-      {/* Example logo from logoispum */}
-      {/* <svg
-        width="50"
-        height="39"
-        viewBox="0 0 50 39"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="fill-primary-purple"
-      >
-        <path
-          d="M16.4992 2H37.5808L22.0816 24.9729H1L16.4992 2Z"
-          stopColor="#000000"
-        ></path>
-        <path
-          d="M17.4224 27.102L11.4192 36H33.5008L49 13.0271H32.7024L23.2064 27.102H17.4224Z"
-          stopColor="#000000"
-        ></path>
-      </svg> */}
-
-      <div className="relative flex items-center justify-center">
-        <img 
-          src={logo} 
-          alt="logo" 
-          className="w-32 h-32 object-contain relative z-10" 
-        />
-      </div>
-
-      <button className="absolute bottom-4 left-4 right-4 z-10 rounded-lg border-[1px] bg-white py-2 text-sm font-medium text-primary-purple backdrop-blur">
-        Oculus 2024
-      </button>
-
-      {/* <div className="absolute -left-32 -top-32 h-64 w-64 rounded-full bg-primary-purple" /> */}
-      <div className="absolute -bottom-72 left-[50%] h-96 w-96 -translate-x-[50%] rounded-full bg-primary-purple" />
+    <div 
+      className="relative"
+      onMouseEnter={handleHover}
+      onMouseLeave={handleHover}
+    >
+      <Image
+        src={logo}
+        width={150}
+        height={150}
+        alt="Gold gradient O logo"
+        className={`relative translate-x-1 translate-y-1 bottom-10 left-0 transition-opacity duration-300 ${isHovered ? 'opacity-0' : 'opacity-100'}`}
+      />
+      <Image
+        src={logo2}
+        width={150}
+        height={150}
+        alt="TAN gold logo"
+        className={`absolute top-0 left-0 transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
+      />
     </div>
   );
 };
 
-export default FloatPhone;
+const Screen = () => {
+  return (
+    <div className="relative z-0 grid h-full w-full place-content-center overflow-hidden rounded-[20px] bg-white">
+      <LogoTransition />
+      
+      <button className="absolute bottom-4 left-4 right-4 z-10 rounded-lg border-[1px] bg-white py-2 text-sm font-medium text-[#EED45E] backdrop-blur">
+        Oculus 2025
+      </button>
+
+      <div className="absolute -bottom-72 left-[50%] h-96 w-96 -translate-x-[50%] rounded-full bg-gradient-to-r from-[#EED45E] via-yellow-400 to-[#EED45E]" />
+    </div>
+  );
+};
+
+export default Example;

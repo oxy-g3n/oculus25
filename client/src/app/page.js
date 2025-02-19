@@ -1,6 +1,5 @@
 "use client";
 import { Analytics } from "@vercel/analytics/react"
-
 import AboutPage from "../components/about";
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
@@ -13,7 +12,6 @@ export default function LandingPage(){
       
       <CustomHTMLPage/>
      
-      
       <AboutPage />
       <Footer />
       

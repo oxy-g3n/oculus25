@@ -155,7 +155,7 @@ const LinkBox = ({ Icon, text, href }) => {
                 style={{
                     clipPath: BOTTOM_RIGHT_CLIP,
                 }}
-                className="absolute inset-0 grid place-content-center bg-purple-900 text-white"
+                className="absolute inset-0 grid place-content-center bg-[#D4B84B] text-white"
             >
                 {/* <Icon className="text-xl sm:text-3xl md:text-4xl" /> */}
                 <div className="w-full flex flex-col items-center gap-2">
@@ -254,7 +254,7 @@ const TextBox = ({ Icon, text, href }) => {
                 style={{
                     clipPath: BOTTOM_RIGHT_CLIP,
                 }}
-                className="absolute inset-0 grid place-content-center bg-purple-900 text-white"
+                className="absolute inset-0 grid place-content-center bg-[#D4B84B] text-white"
             >
                 {/* <Icon className="text-xl sm:text-3xl md:text-4xl" /> */}
                 <div className="w-full flex flex-col items-center gap-2">
