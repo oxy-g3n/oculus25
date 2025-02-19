@@ -6,6 +6,8 @@ import Center from '../../components/contact/Center';
 import PlaceIcon from '@mui/icons-material/Place';
 import FloatPhone from '../../components/contact/FloatPhone';
 import ContactCard from '../../components/contact/ContactCard';
+import ginne from '../../../public/assets/pngwing.com.png'
+import Image from 'next/image';
 
 const ContactPage = () => {
     return (
@@ -24,7 +26,18 @@ const ContactPage = () => {
                             <ContactCard  />
                         </div>
                         <div className='w-[40%] max-md:hidden'>
-                            <FloatPhone />
+                            {/* <FloatPhone /> */}
+                            <Image
+                                src={ginne}
+                                width={450}
+                                height={450}
+                                alt="TAN gold logo"
+                                className={`transition-opacity duration-300 animate-float select-none`}
+                                quality={100}
+                                priority
+                                unoptimized={true}
+                        
+                            />
                         </div>
                     </div>
                     </div>

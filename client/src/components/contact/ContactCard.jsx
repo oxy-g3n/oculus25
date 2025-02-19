@@ -62,14 +62,14 @@ const Card = ({ title, subtitle, Icon }) => {
 
     return (
         <div
-            className="w-full p-4 md:p-6 rounded-lg border-[1px] border-slate-300 relative overflow-hidden group bg-white cursor-pointer 
-            hover:shadow-xl hover:border-[#EED45E] hover:-translate-y-1 transition-all duration-300 ease-out"
+            className="w-full h-30 p-4 md:p-6 rounded-lg border-[1px] border-slate-300 relative overflow-hidden group bg-white cursor-pointer 
+            hover:shadow-xl hover:border-[#3DACF2] hover:-translate-y-1 transition-all duration-300 ease-out"
             onClick={() => copyToClipboard(subtitle.replace(/\s/g, ''))}
         >
             <div className={`absolute inset-0 bg-gradient-to-r ${
                 copied 
                 ? "from-green-500 to-green-800" 
-                : "from-[#EED45E] via-[#D4B84B] to-[#EED45E]"
+                : "from-[#3DACF2] via-[#1a5585] to-[#3DACF2]"
             } translate-y-[100%] group-hover:translate-y-[0%] transition-transform duration-500`} />
             
             <div className="absolute inset-0 opacity-0 group-hover:opacity-30">
@@ -83,33 +83,33 @@ const Card = ({ title, subtitle, Icon }) => {
             <Icon className={`absolute z-10 -top-12 -right-12 text-9xl text-slate-100 ${
                 copied 
                 ? "group-hover:text-green-300/50" 
-                : "group-hover:text-[#EED45E]/50"
+                : "group-hover:text-[#3DACF2]/50"
             } group-hover:rotate-12 transition-all duration-500 group-hover:scale-110`} />
             
             <div className="relative z-10 flex flex-col gap-2">
                 <div className="flex items-center gap-3">
                     {!copied ? (
-                        <Icon className="mb-1 text-2xl md:text-3xl text-[#EED45E] group-hover:text-white transition-colors duration-300 group-hover:rotate-6" />
+                        <Icon className="mb-1 text-2xl md:text-3xl text-[#3DACF2] group-hover:text-white transition-colors duration-300 group-hover:rotate-6" />
                     ) : (
                         <CheckCircleIcon className="mb-1 text-2xl md:text-3xl text-green-600 group-hover:text-white transition-colors duration-300 animate-bounce" />
                     )}
                     {copied ? (
-                        <h3 className="font-medium text-base md:text-lg text-green-600 group-hover:text-white relative z-10 duration-300">
+                        <h3 className="font-bold text-base md:text-lg text-green-600 group-hover:text-white relative z-10 duration-300">
                             Phone Number Copied!
                         </h3>
                     ) : (
-                        <h3 className="font-medium text-lg md:text-xl text-slate-950 group-hover:text-white relative z-10 duration-300 group-hover:translate-x-1 transition-transform line-clamp-2">
+                        <h3 className="font-bold text-lg md:text-xl text-slate-950 group-hover:text-white relative z-10 duration-300 group-hover:translate-x-1 transition-transform line-clamp-2">
                             {title}
                         </h3>
                     )}
                 </div>
                 
                 {copied ? (
-                    <p className="text-slate-400 group-hover:text-[#EED45E] relative z-10 duration-300 opacity-0">
+                    <p className="text-slate-400 group-hover:text-[#3DACF2] relative z-10 duration-300 opacity-0">
                         {subtitle}
                     </p>
                 ) : (
-                    <p className="text-slate-500 group-hover:text-[#EED45E] relative z-10 duration-300 font-medium pl-8 md:pl-10 text-sm md:text-base group-hover:translate-x-1 transition-transform">
+                    <p className="text-slate-500 group-hover:text-[#3DACF2] relative z-10 duration-300 font-bold pl-8 md:pl-10 text-sm md:text-base group-hover:translate-x-1 transition-transform">
                         {subtitle}
                     </p>
                 )}
