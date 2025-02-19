@@ -10,6 +10,8 @@ import ContactCard from '../../components/contact/ContactCard';
 const ContactPage = () => {
     return (
         <Center>
+            <div className="fixed inset-0 w-full h-screen">
+        </div>
             <div className='h-full w-full flex flex-col items-center justify-center gap- p-8 md:px-24'>
                 <div className='w-full h-full flex flex-col items-center justify-center'>
                     <div className='h-screen max-md:h-full w-full flex flex-col items-center md:mt-16 justify-start gap-8 max-md:gap-5'>
