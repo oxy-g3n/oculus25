@@ -8,7 +8,7 @@ import CustomHTMLPage from "../components/FluidAnimation/CustomHTMLPage"
 export default function LandingPage(){
     return (<>
     <Analytics />
-      <Navbar/>
+      <Navbar alwaysShow={false}/>
       
       <CustomHTMLPage/>
      

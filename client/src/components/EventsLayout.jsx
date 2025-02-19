@@ -1,81 +1,9 @@
 "use client";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import eventsData from "../data/eventsData";
 
-const events = [
-  {
-    id: "cube-open",
-    name: "Cube Open",
-    type: "FUN",
-    date: "2025-03-02",
-    location: "008 Hall, S.P.I.T.",
-    time: "10:00 AM",
-    description:
-      "Mumbai's biggest speedcubing competition. Multiple categories, amazing prizes, and a chance to break records!",
-    color: "from-yellow-400/75 to-orange-500/75",
-    formUrl: "/events/cube-open",
-  },
-  {
-    id: "carnival",
-    name: "Carnival",
-    type: "CULTURAL",
-    date: "2025-03-01",
-    location: "College Ground",
-    time: "Whole Day",
-    description:
-      "Experience the magic of our cultural carnival with music, dance, and endless entertainment!",
-    color: "from-purple-400/75 to-indigo-500/75",
-    formUrl: "/events/carnival",
-  },
-  {
-    id: "esports",
-    name: "Esports",
-    type: "FUN",
-    date: "2025-03-03",
-    location: "Lab Complex",
-    time: "9:00 AM",
-    description:
-      "Compete in various gaming tournaments and prove your skills in the digital arena!",
-    color: "from-blue-400/75 to-blue-600/75",
-    formUrl: "/events/esports",
-  },
-  {
-    id: "techrace",
-    name: "TechRace",
-    type: "PRE",
-    date: "2025-02-28",
-    location: "Mumbai",
-    time: "4 hours",
-    description:
-      "Crack mind-bending clues, solve thrilling mysteries, and race across the city for a ₹75,000 prize pool! ",
-    color: "from-green-400/75 to-emerald-600/75",
-    formUrl: "/events/techrace",
-  },
-  {
-    id: "funzone",
-    name: "Funzone",
-    type: "FUN",
-    date: "2025-03-01",
-    location: "College Campus",
-    time: "All Day",
-    description:
-      "A zone full of exciting games, activities, and entertainment for everyone!",
-    color: "from-pink-400/75 to-purple-600/75",
-    formUrl: "/events/funzone",
-  },
-  {
-    id: "sargam",
-    name: "Sargam",
-    type: "CULTURAL",
-    date: "2025-03-02",
-    location: "Auditorium",
-    time: "6:00 PM",
-    description:
-      "A musical extravaganza featuring the best talents from across colleges!",
-    color: "from-orange-400/75 to-red-500/75",
-    formUrl: "/events/sargam",
-  },
-];
+const events = eventsData;
 
 export default function EventsComponent() {
   const [selectedType, setSelectedType] = useState("All");
@@ -91,26 +19,37 @@ export default function EventsComponent() {
   };
 
   return (
-    <div className="w-full min-h-screen p-8">
+    <div className="w-full min-h-screen bg-black/50 p-4 md:p-8">
+      {/* Title */}
+      <motion.h1 
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="text-4xl md:text-5xl font-bold text-center mb-8 text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600 font-arabic"
+      >
+        Events
+      </motion.h1>
+
       {/* Filter Buttons */}
-      <div className="flex justify-center gap-4 mb-16">
+      <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-8 md:mb-16">
         {["All", "PRE", "TECHNICAL", "FUN", "CULTURAL"].map((type) => (
-          <button
+          <motion.button
             key={type}
             onClick={() => setSelectedType(type)}
-            className={`pointer-events-auto px-6 py-2 rounded-full transition-all duration-300 ${
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className={`pointer-events-auto px-4 md:px-6 py-2 rounded-full transition-all duration-300 text-sm md:text-base border-2 ${
               selectedType === type
-                ? "bg-purple-500 text-white"
-                : "bg-purple-500/20 text-purple-300 hover:bg-purple-500/30"
+                ? "bg-yellow-500 border-yellow-600 text-black"
+                : "bg-black border-yellow-600/50 text-yellow-500 hover:border-yellow-500"
             }`}
           >
             {type === "PRE" ? "Pre-Events" : type}
-          </button>
+          </motion.button>
         ))}
       </div>
 
       {/* Events Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 max-w-7xl mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-8 max-w-7xl mx-auto">
         {filteredEvents.map((event) => (
           <motion.div
             key={event.id}
@@ -127,40 +66,54 @@ export default function EventsComponent() {
               onClick={() => handleEventClick(event.formUrl)}
             >
               {/* Front of the card */}
-              <div
-                className={`absolute inset-0 backface-hidden rounded-2xl bg-gradient-to-br ${event.color} p-1 `}
-              >
-                <div className="h-full w-full rounded-xl flex flex-col items-center justify-center p-6 relative">
-                  <h3 className="text-2xl font-bold text-white mb-2">
-                    {event.name}
-                  </h3>
-                  <p className="text-white/70 text-sm">{event.type}</p>
-                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/50 text-sm">
-                    Hover to see details
+              <div className="absolute inset-0 backface-hidden rounded-2xl overflow-hidden border-2 border-yellow-600/30">
+                <div className="relative h-full w-full">
+                  <img 
+                    src={event.frontImage} 
+                    alt={event.name}
+                    className="h-full w-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent">
+                    <div className="absolute bottom-0 w-full p-6">
+                      <h3 className="text-2xl font-bold text-yellow-500 mb-2">
+                        {event.name}
+                      </h3>
+                      <p className="text-yellow-400/70 text-sm">{event.type}</p>
+                      <div className="mt-4 text-yellow-400/50 text-sm">
+                        Tap to see details
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
 
               {/* Back of the card */}
-              <div className="absolute inset-0 backface-hidden rounded-2xl bg-black/90 p-6 rotate-y-180 border-2 border-purple-500/30">
-                <div className="h-full flex flex-col justify-center items-center text-center">
-                  <h3 className="text-xl font-bold text-white mb-3">
-                    {event.name}
-                  </h3>
-                  <p className="text-white/70 text-sm mb-2">
-                    {event.date} | {event.time}
-                  </p>
-                  <p className="text-white/70 text-sm mb-4">{event.location}</p>
-                  <p className="text-white/90 text-sm mb-4">
-                    {event.description}
-                  </p>
-                  <motion.button
-                    className="px-4 py-2 bg-purple-500 text-white rounded-full text-sm hover:bg-purple-600 transition-colors"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    Register Now
-                  </motion.button>
+              <div className="absolute inset-0 backface-hidden rounded-2xl overflow-hidden rotate-y-180 border-2 border-yellow-600/30">
+                <img 
+                  src={event.backImage} 
+                  alt={`${event.name} details`}
+                  className="h-full w-full object-cover"
+                />
+                <div className="absolute inset-0 bg-black/85 p-6">
+                  <div className="h-full flex flex-col justify-center items-center text-center">
+                    <h3 className="text-xl font-bold text-yellow-500 mb-3">
+                      {event.name}
+                    </h3>
+                    <p className="text-yellow-400/70 text-sm mb-2">
+                      {event.date} | {event.time}
+                    </p>
+                    <p className="text-yellow-400/70 text-sm mb-4">{event.location}</p>
+                    <p className="text-yellow-400/90 text-sm mb-4">
+                      {event.description}
+                    </p>
+                    <motion.button
+                      className="px-4 py-2 bg-yellow-500 text-black rounded-full text-sm hover:bg-yellow-600 transition-colors font-semibold"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      Register Now
+                    </motion.button>
+                  </div>
                 </div>
               </div>
             </motion.div>
