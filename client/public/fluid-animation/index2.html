@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Cache-Control" content="no-cache" />
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+    />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+
+    <link rel="apple-touch-icon" href="logo.png" />
+    <link rel="icon" href="logo.png" />
+
+    <title>WebGL Fluid Simulation</title>
+    <meta
+      name="description"
+      content="A WebGL fluid simulation that works in mobile browsers."
+    />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Webgl Fluid Simulation" />
+    <meta
+      property="og:description"
+      content="A WebGL fluid simulation that works in mobile browsers."
+    />
+    <meta
+      property="og:url"
+      content="https://paveldogreat.github.io/WebGL-Fluid-Simulation/"
+    />
+    <meta
+      property="og:image"
+      content="https://paveldogreat.github.io/WebGL-Fluid-Simulation/logo.png"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <script type="text/javascript" src="dat.gui.min.js"></script>
+    <script>
+      window.ga =
+        window.ga ||
+        function () {
+          (ga.q = ga.q || []).push(arguments);
+        };
+      ga.l = +new Date();
+      ga("create", "UA-105392568-1", "auto");
+      ga("send", "pageview");
+
+      window.addEventListener("load", () => {
+        const logoContainer = document.querySelector(".logo-container");
+        const canvas = document.querySelector("canvas");
+        const blackLogo = document.querySelector(".black-logo");
+        const whiteLogo = document.querySelector(".white-logo");
+
+        logoContainer.addEventListener("mousedown", (e) => {
+          const rect = canvas.getBoundingClientRect();
+          const newEvent = new MouseEvent("mousedown", {
+            bubbles: true,
+            cancelable: true,
+            clientX: e.clientX,
+            clientY: e.clientY,
+            screenX: e.screenX,
+            screenY: e.screenY,
+            offsetX: e.clientX - rect.left,
+            offsetY: e.clientY - rect.top,
+          });
+          canvas.dispatchEvent(newEvent);
+        });
+
+        logoContainer.addEventListener("mousemove", (e) => {
+          const rect = canvas.getBoundingClientRect();
+          const newEvent = new MouseEvent("mousemove", {
+            bubbles: true,
+            cancelable: true,
+            clientX: e.clientX,
+            clientY: e.clientY,
+            screenX: e.screenX,
+            screenY: e.screenY,
+            offsetX: e.clientX - rect.left,
+            offsetY: e.clientY - rect.top,
+          });
+          canvas.dispatchEvent(newEvent);
+        });
+
+        // Mobile tap and hold handling
+        let currentLogo = "white";
+        let touchTimer = null;
+
+        const isMobile =
+          /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+            navigator.userAgent
+          );
+
+        if (isMobile) {
+          // Set extremely fast transition duration and disable selection/context menu
+          const disableInteractions = (element) => {
+            element.style.transition = "all 0.1s ease-out";
+            element.style.webkitUserSelect = "none";
+            element.style.userSelect = "none";
+            element.style.webkitTouchCallout = "none";
+            element.style.contextMenu = "none";
+            element.addEventListener("contextmenu", (e) => e.preventDefault());
+          };
+
+          disableInteractions(blackLogo);
+          disableInteractions(whiteLogo);
+          disableInteractions(logoContainer);
+
+          const toggleLogo = () => {
+            if (currentLogo === "white") {
+              blackLogo.style.opacity = "1";
+              blackLogo.style.transform = "scale(1)";
+              blackLogo.style.filter = "blur(0)";
+
+              whiteLogo.style.opacity = "0";
+              whiteLogo.style.transform = "scale(0.95)";
+              whiteLogo.style.filter = "blur(4px)";
+
+              currentLogo = "black";
+            } else {
+              blackLogo.style.opacity = "0";
+              blackLogo.style.transform = "scale(0.95)";
+              blackLogo.style.filter = "blur(4px)";
+
+              whiteLogo.style.opacity = "1";
+              whiteLogo.style.transform = "scale(1)";
+              whiteLogo.style.filter = "blur(0)";
+
+              currentLogo = "white";
+            }
+          };
+
+          // Handle tap with no delay
+          logoContainer.addEventListener("click", toggleLogo);
+          logoContainer.addEventListener("touchstart", toggleLogo);
+        }
+      });
+
+      window.addEventListener("DOMContentLoaded", () => {
+        const images = [
+          "/assets/TAN_gold_transparent.png",
+          "/assets/white_O.png",
+        ];
+
+        images.forEach((src) => {
+          const img = new Image();
+          img.src = src;
+        });
+      });
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+  </head>
+  <body>
+    <canvas></canvas>
+    <!-- <div class="logo-container">
+            <img 
+                src="/assets/TAN_gold_transparent.png"
+                alt="TAN logo"
+                class="logo-image black-logo"
+            />
+            <img 
+                src="/assets/white_O.png"
+                alt="White logo"
+                class="logo-image white-logo"
+            />
+        </div>
+        <div id="interaction-text" class="interaction-text">
+            <span class="mobile-text"`>Drag me</span>
+            <span class="desktop-text">Drag me</span>
+        </div> -->
+    <script src="./script.js"></script>
+  </body>
+</html>
