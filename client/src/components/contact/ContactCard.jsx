@@ -5,7 +5,6 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 const ContactCard = ({ text, number }) => {
     return (
         <div className="flex flex-col items-center gap-6 w-full p-4">
-            {/* Director Card - Full width on mobile, half width on desktop */}
             <div className="w-full lg:w-1/2 flex">
                 <Card
                     title="Vivek (Director) "
