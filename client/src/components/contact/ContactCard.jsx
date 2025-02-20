@@ -1,48 +1,55 @@
 import React, { useState } from "react";
 import { FiUser } from "react-icons/fi";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { motion } from "framer-motion";
 
 const ContactCard = ({ text, number }) => {
     return (
-        <div className="flex flex-col items-center gap-6 w-full p-4">
-            <div className="w-full lg:w-1/2 flex">
+        <div className="flex flex-col items-center gap-6 w-full p-4 md:p-6">
+            <div className="w-full">
                 <Card
                     title="Vivek (Director) "
                     subtitle="+91 89287 31857"
                     Icon={FiUser}
+                    isMain={true}
                 />
             </div>
             
-            {/* Other cards - Stack in columns on mobile, 2 per row on desktop */}
-            <div className="grid grid-cols-1 md:grid-cols-2 w-full gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 w-full gap-4 md:gap-6">
                 <Card
-                    title="Sphurti Asawa (General Secretary Stcu)"
+                    title="Sphurti Asawa"
                     subtitle="+91 88284 22842"
+                    description="General Secretary Stcu"
                     Icon={FiUser}
                 />
                 <Card
-                    title="Arya Patkar (Finance Secretary Stcu)"
+                    title="Arya Patkar"
                     subtitle="+91 84199 19062"
+                    description="Finance Secretary Stcu"
                     Icon={FiUser}
                 />
                 <Card
-                    title="Mandar Dumbre (Technical Secretary Stcu)"
+                    title="Mandar Dumbre"
                     subtitle="+91 93728 43787"
+                    description="Technical Secretary Stcu"
                     Icon={FiUser}
                 />
                 <Card
-                    title="Aishwarya Bichave (Ladies' Reprensentative)"
+                    title="Aishwarya Bichave"
                     subtitle="+91 85910 69045"
+                    description="Ladies' Representative"
                     Icon={FiUser}
                 />
                 <Card
-                    title="Soumorup Chakrabarti (Cultural Secretary Stcu)"
+                    title="Soumorup Chakrabarti"
                     subtitle="+91 88280 90474"
+                    description="Cultural Secretary Stcu"
                     Icon={FiUser}
                 />
                 <Card
-                    title="Samrith Shetty (Cultural Secretary Stcu)"
+                    title="Samrith Shetty"
                     subtitle="+91 93222 41530"
+                    description="Cultural Secretary Stcu"
                     Icon={FiUser}
                 />
             </div>
@@ -50,70 +57,68 @@ const ContactCard = ({ text, number }) => {
     );
 };
 
-const Card = ({ title, subtitle, Icon }) => {
+const Card = ({ title, subtitle, description, Icon, isMain }) => {
     const [copied, setCopied] = useState(false);
 
     const copyToClipboard = (text) => {
         navigator.clipboard.writeText(text);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 1000); // Revert after 1 second
+        setCopied(true);    
+        setTimeout(() => setCopied(false), 1500);
     };
 
     return (
-        <div
-            className="w-full h-30 p-4 md:p-6 rounded-lg border-[1px] border-slate-300 relative overflow-hidden group bg-white cursor-pointer 
-            hover:shadow-xl hover:border-[#3DACF2] hover:-translate-y-1 transition-all duration-300 ease-out"
+        <motion.div
+            className={`relative group cursor-pointer ${isMain ? 'bg-gradient-to-tr from-amber-950/40 to-purple-900/40' : 'bg-black/60'} 
+                backdrop-blur-sm rounded-lg border border-white/10 overflow-hidden
+                hover:border-white/20 transition-all duration-300`}
             onClick={() => copyToClipboard(subtitle.replace(/\s/g, ''))}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
         >
-            <div className={`absolute inset-0 bg-gradient-to-r ${
-                copied 
-                ? "from-green-500 to-green-800" 
-                : "from-[#3DACF2] via-[#1a5585] to-[#3DACF2]"
-            } translate-y-[100%] group-hover:translate-y-[0%] transition-transform duration-500`} />
+            <motion.div
+                className="absolute inset-0 bg-gradient-to-tr from-amber-200/20 to-purple-300/20 opacity-0 group-hover:opacity-100 transition-all duration-500"
+            />
             
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-30">
-                <div className="absolute inset-0 transform -skew-x-12">
-                    <div className="w-1/2 h-full bg-gradient-to-r from-transparent via-genie-glow to-transparent animate-genie-shine" />
+            <div className="relative z-10 p-4 md:p-5">
+                <div className="flex items-start gap-3">
+                    <div className={`p-2 rounded-full ${isMain ? 'bg-amber-200/20' : 'bg-white/10'} 
+                        group-hover:bg-amber-200/20 transition-colors duration-300`}>
+                        {!copied ? (
+                            <Icon className={`text-xl md:text-2xl ${isMain ? 'text-amber-200' : 'text-white/80'} 
+                                group-hover:text-amber-200 transition-colors duration-300`} />
+                        ) : (
+                            <CheckCircleIcon className="text-xl md:text-2xl text-amber-200 animate-bounce" />
+                        )}
+                    </div>
+                    
+                    <div className="flex flex-col">
+                        <h3 className={`font-['Aref_Ruqaa_Ink'] text-lg md:text-xl text-white 
+                            group-hover:text-amber-200 transition-colors duration-300 
+                            group-hover:tracking-wider ${copied ? 'text-amber-200' : ''}`}>
+                            {copied ? 'Phone Number Copied!' : title}
+                        </h3>
+                        {description && !copied && (
+                            <p className="text-white/60 text-sm mt-0.5 group-hover:text-white/80 transition-colors duration-300">
+                                {description}
+                            </p>
+                        )}
+                        {!copied && (
+                            <p className="text-white/70 group-hover:text-amber-200/90 transition-colors duration-300 
+                                text-sm md:text-base mt-1 font-['Aref_Ruqaa_Ink']">
+                                {subtitle}
+                            </p>
+                        )}
+                    </div>
                 </div>
             </div>
-
-            <div className="absolute top-0 left-0 w-full h-full bg-white/5 group-hover:animate-shimmer" />
-
-            <Icon className={`absolute z-10 -top-12 -right-12 text-9xl text-slate-100 ${
-                copied 
-                ? "group-hover:text-green-300/50" 
-                : "group-hover:text-[#3DACF2]/50"
-            } group-hover:rotate-12 transition-all duration-500 group-hover:scale-110`} />
             
-            <div className="relative z-10 flex flex-col gap-2">
-                <div className="flex items-center gap-3">
-                    {!copied ? (
-                        <Icon className="mb-1 text-2xl md:text-3xl text-[#3DACF2] group-hover:text-white transition-colors duration-300 group-hover:rotate-6" />
-                    ) : (
-                        <CheckCircleIcon className="mb-1 text-2xl md:text-3xl text-green-600 group-hover:text-white transition-colors duration-300 animate-bounce" />
-                    )}
-                    {copied ? (
-                        <h3 className="font-bold text-base md:text-lg text-green-600 group-hover:text-white relative z-10 duration-300">
-                            Phone Number Copied!
-                        </h3>
-                    ) : (
-                        <h3 className="font-bold text-lg md:text-xl text-slate-950 group-hover:text-white relative z-10 duration-300 group-hover:translate-x-1 transition-transform line-clamp-2">
-                            {title}
-                        </h3>
-                    )}
-                </div>
-                
-                {copied ? (
-                    <p className="text-slate-400 group-hover:text-[#3DACF2] relative z-10 duration-300 opacity-0">
-                        {subtitle}
-                    </p>
-                ) : (
-                    <p className="text-slate-500 group-hover:text-[#3DACF2] relative z-10 duration-300 font-bold pl-8 md:pl-10 text-sm md:text-base group-hover:translate-x-1 transition-transform">
-                        {subtitle}
-                    </p>
-                )}
-            </div>
-        </div>
+            <motion.div
+                className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-amber-200/0 via-amber-200/70 to-amber-200/0"
+                initial={{ width: "0%" }}
+                animate={{ width: copied ? "100%" : "0%" }}
+                transition={{ duration: 0.5 }}
+            />
+        </motion.div>
     );
 };
 

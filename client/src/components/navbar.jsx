@@ -71,14 +71,7 @@ export default function Navbar({ alwaysShow = false }) {
         e.preventDefault();
         setClickedItem(href);
         
-        // Wait for animations to complete
-        await new Promise(resolve => setTimeout(resolve, 500));
-        
-        // Close menu and reset clicked state
-        setOpen(false);
-        setClickedItem(null);
-        
-        // Navigate to the page
+        // Navigate immediately without delay
         window.location.href = href;
     };
 
