@@ -5,6 +5,17 @@ export default {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  safelist: [
+    'bg-gradient-to-br',
+    {
+      pattern: /from-(yellow|purple|blue|green|pink|orange)-400/,
+      variants: ['hover', 'focus', '/75'],
+    },
+    {
+      pattern: /to-(orange|indigo|blue|emerald|purple|red)-[45]00/,
+      variants: ['hover', 'focus', '/75'],
+    },
+  ],
   theme: {
     extend: {
       colors: {

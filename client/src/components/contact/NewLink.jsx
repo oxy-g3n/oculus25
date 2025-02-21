@@ -15,10 +15,11 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import XIcon from '@mui/icons-material/X';
 import PlaceIcon from '@mui/icons-material/Place';
+import { motion } from "framer-motion";
 
 export const NewLink = () => {
     return (
-        <div className="px-4 py-12">
+        <div className="p-4 md:p-6">
             <ClipPathLinks />
         </div>
     );
@@ -26,30 +27,27 @@ export const NewLink = () => {
 
 const ClipPathLinks = () => {
     return (
-        <div className="flex md:flex-row flex-col justify-center">
-            <div className="grid grid-cols-1 md:w-1/2 w-full divide-y divide-white border border-white z-[1001]">
+        <div className="flex md:flex-row flex-col justify-center gap-6">
+            <div className="grid grid-cols-1 w-full divide-y divide-white/30">
                 <iframe
                     src='https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d30157.16831844859!2d72.836115!3d19.123178!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c9d90e067ba9%3A0x16268e5d6bca2e6a!2sBharatiya%20Vidya%20Bhavan&#39;s%20Sardar%20Patel%20Institute%20of%20Technology%20(SPIT)!5e0!3m2!1sen!2sin!4v1710524261737!5m2!1sen!2sin'
-                    className='w-full h-full'
-                    style={{ borderRadius: '4px' }}
+                    className='w-full h-[300px] rounded-lg'
                     allowFullScreen
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade">
                 </iframe>
             </div>
-            <div className="divide-y divide-white border border-white">
-                <div className="grid grid-cols-1 divide-x divide-white text-white">
+            <div className="divide-y divide-white/30 w-full">
+                <div className="grid grid-cols-1 text-white">
                     <TextBox Icon={SiGoogle} text={'Location'} href="https://www.google.com/maps?ll=19.123178,72.836115&z=13&t=m&hl=en&gl=IN&mapclient=embed&cid=1596119649840934506" />
-                    {/* <TextBox Icon={SiShopify} text={'Prathamesh Paradkar'} href="#" /> */}
                 </div>
-                <div className="grid grid-cols-3 divide-x divide-white text-white">
+                <div className="grid grid-cols-3 divide-x divide-white/30 text-white">
                     <LinkBox Icon={InstagramIcon} text={'o.c.u.l.u.s_s.p.i.t'} href="#" />
                     <LinkBox Icon={LinkedInIcon} text={'Oculus S.P.I.T.'} href="#" />
                     <LinkBox Icon={XIcon} text={'OculusSeesAll'} href="#" />
                 </div>
-                <div className="grid grid-cols-1 divide-x divide-white text-white">
+                <div className="grid grid-cols-1 text-white">
                     <TextBox Icon={SiGoogle} text={'Email us at:'} href="#" />
-                    {/* <TextBox Icon={SiShopify} text={'Nishant Chandeliya'} href="#" /> */}
                 </div>
             </div>
         </div>
@@ -79,62 +77,9 @@ const EXIT_KEYFRAMES = {
 const LinkBox = ({ Icon, text, href }) => {
     const [scope, animate] = useAnimate();
 
-    const getNearestSide = (e) => {
-        const box = e.target.getBoundingClientRect();
-
-        const proximityToLeft = {
-            proximity: Math.abs(box.left - e.clientX),
-            side: "left",
-        };
-        const proximityToRight = {
-            proximity: Math.abs(box.right - e.clientX),
-            side: "right",
-        };
-        const proximityToTop = {
-            proximity: Math.abs(box.top - e.clientY),
-            side: "top",
-        };
-        const proximityToBottom = {
-            proximity: Math.abs(box.bottom - e.clientY),
-            side: "bottom",
-        };
-
-        const sortedProximity = [
-            proximityToLeft,
-            proximityToRight,
-            proximityToTop,
-            proximityToBottom,
-        ].sort((a, b) => a.proximity - b.proximity);
-
-        return sortedProximity[0].side;
-    };
-
-    const handleMouseEnter = (e) => {
-        const side = getNearestSide(e);
-
-        animate(scope.current, {
-            clipPath: ENTRANCE_KEYFRAMES[side],
-        });
-    };
-
-    const handleMouseLeave = (e) => {
-        const side = getNearestSide(e);
-
-        animate(scope.current, {
-            clipPath: EXIT_KEYFRAMES[side],
-        });
-    };
-
     return (
         <a
-            // href={href}
-            onMouseEnter={(e) => {
-                handleMouseEnter(e);
-            }}
-            onMouseLeave={(e) => {
-                handleMouseLeave(e);
-            }}
-            className="cursor-pointer relative grid h-20 w-full place-content-center sm:h-28 md:h-36"
+            className="cursor-pointer relative grid h-20 w-full place-content-center sm:h-28 md:h-32 group"
             onClick={() => {
                 if (text === 'o.c.u.l.u.s_s.p.i.t') {
                     window.open("https://www.instagram.com/o.c.u.l.u.s_s.p.i.t/", "_blank");
@@ -145,127 +90,59 @@ const LinkBox = ({ Icon, text, href }) => {
                 else {
                     window.open("https://twitter.com/oculusseesall?s=11&t=31V3U_6dN4dxqr_7A3vyaA", "_blank");
                 }
-                }
-            }
+            }}
         >
-            {text === 'OculusSeesAll' ? (<Icon className="!text-2xl sm:!text-4xl lg:!text-[38px]" />) : (<Icon className="!text-2xl sm:!text-4xl lg:!text-5xl" />)}
-
-            <div
-                ref={scope}
-                style={{
-                    clipPath: BOTTOM_RIGHT_CLIP,
+            <motion.div
+                whileHover={{ 
+                    scale: 1.1,
+                    filter: "brightness(1.3)",
                 }}
-                className="absolute inset-0 grid place-content-center bg-[#D4B84B] text-white"
+                whileTap={{ scale: 0.95 }}
+                className="relative"
             >
-                {/* <Icon className="text-xl sm:text-3xl md:text-4xl" /> */}
-                <div className="w-full flex flex-col items-center gap-2">
-                    {/* <Icon className="!text-2xl sm:!text-4xl lg:!text-5xl" /> */}
-                    <span>
-                        {text}
-                    </span>
-                </div>
-            </div>
+                <Icon className="!text-2xl sm:!text-3xl lg:!text-4xl text-amber-300 transition-all duration-300" />
+                <motion.div
+                    animate={{
+                        opacity: [0.5, 1, 0.5],
+                        scale: [1, 1.2, 1],
+                    }}
+                    transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                    }}
+                    className="absolute inset-0 rounded-full bg-amber-300/30 blur-md -z-10"
+                />
+            </motion.div>
         </a>
     );
 };
 
 const TextBox = ({ Icon, text, href }) => {
-    const [scope, animate] = useAnimate();
-
-    const getNearestSide = (e) => {
-        const box = e.target.getBoundingClientRect();
-
-        const proximityToLeft = {
-            proximity: Math.abs(box.left - e.clientX),
-            side: "left",
-        };
-        const proximityToRight = {
-            proximity: Math.abs(box.right - e.clientX),
-            side: "right",
-        };
-        const proximityToTop = {
-            proximity: Math.abs(box.top - e.clientY),
-            side: "top",
-        };
-        const proximityToBottom = {
-            proximity: Math.abs(box.bottom - e.clientY),
-            side: "bottom",
-        };
-
-        const sortedProximity = [
-            proximityToLeft,
-            proximityToRight,
-            proximityToTop,
-            proximityToBottom,
-        ].sort((a, b) => a.proximity - b.proximity);
-
-        return sortedProximity[0].side;
-    };
-
-    const handleMouseEnter = (e) => {
-        const side = getNearestSide(e);
-
-        animate(scope.current, {
-            clipPath: ENTRANCE_KEYFRAMES[side],
-        });
-    };
-
-    const handleMouseLeave = (e) => {
-        const side = getNearestSide(e);
-
-        animate(scope.current, {
-            clipPath: EXIT_KEYFRAMES[side],
-        });
-    };
-
     return (
         <a
-            // href={href}
-            onMouseEnter={(e) => {
-                handleMouseEnter(e);
-            }}
-            onMouseLeave={(e) => {
-                handleMouseLeave(e);
-            }}
             onClick={() => {
                 if (text === 'Location') {
                     window.open(href, "_blank");
                 }
                 else {
-                    // send email
                     window.location.href = `mailto:oculus_thefest@spit.ac.in`
                 }
             }}
             className="cursor-pointer relative grid h-20 w-full text-center font-semibold place-content-center sm:h-28 md:h-36"
         >
-            {/* <Icon className="text-xl sm:text-3xl lg:text-4xl" /> */}
-            <div className="w-full flex flex-col items-center sm:gap-2">
-                <span className={`text-2xl x2s:text-lg x1s:text-base font-bold ${text === 'Location' ? ' flex items-center gap-1' : ''}`}>
-                   {/* {text === 'Location' && <PlaceIcon sx={{ fontSize: "30px" }} />}  */}
-                   {text}
+            <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-full flex flex-col items-center sm:gap-2"
+            >
+                <span className={`text-2xl x2s:text-lg x1s:text-base font-bold text-amber-300 ${text === 'Location' ? ' flex items-center gap-1' : ''}`}>
+                    {text}
                 </span>
-                <span className={`x2s:text-sm x1s:text-xs ${text === 'Location' ? "px-2" : ""}`}>
+                <span className={`x2s:text-sm x1s:text-xs text-white/80 ${text === 'Location' ? "px-2" : ""}`}>
                     {text !== 'Location' ? "oculus_thefest@spit.ac.in" : "Bhavans Campus, Old D N Nagar, Munshi Nagar, Andheri West, Mumbai, Maharashtra 400058"}
                 </span>
-            </div>
-
-            <div
-                ref={scope}
-                style={{
-                    clipPath: BOTTOM_RIGHT_CLIP,
-                }}
-                className="absolute inset-0 grid place-content-center bg-[#D4B84B] text-white"
-            >
-                {/* <Icon className="text-xl sm:text-3xl md:text-4xl" /> */}
-                <div className="w-full flex flex-col items-center gap-2">
-                    <span  className={`text-2xl x2s:text-lg x1s:text-base`}>
-                        {text}
-                    </span>
-                    <span className="px-2 x2s:text-sm x1s:text-xs" >
-                        {text !== 'Location' ? "oculus_thefest@spit.ac.in" : "Bhavans Campus, Old D N Nagar, Munshi Nagar, Andheri West, Mumbai, Maharashtra 400058"}
-                    </span>
-                </div>
-            </div>
+            </motion.div>
         </a>
     );
 };

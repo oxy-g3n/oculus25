@@ -1,78 +1,119 @@
 'use client'
 
-import React from 'react';
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import Navbar from "../../components/navbar";
+import backImage from "../../../public/assets/navbar_back.jpg";
+import logo from "../../../public/assets/full_white_transparent.png"; // Make sure this path is correct
+import { motion } from "framer-motion";
 import { NewLink } from '../../components/contact/NewLink';
-import Center from '../../components/contact/Center';
-import PlaceIcon from '@mui/icons-material/Place';
-import FloatPhone from '../../components/contact/FloatPhone';
 import ContactCard from '../../components/contact/ContactCard';
-import ginne from '../../../public/assets/pngwing.com.png'
-import Image from 'next/image';
+import aladinJasmine from "../../../public/assets/new_aladin.png";
 
-const ContactPage = () => {
-    return (
-        <Center>
-            <div className="fixed inset-0 w-full h-screen">
+export default function ContactPage() {
+    return (<>
+        <Navbar alwaysShow={true}/>
+        <div className="fixed top-4 md:top-8 left-4 md:left-8 z-50">
+            <Link href="/">
+                <Image 
+                    src={logo} 
+                    alt="logo" 
+                    width={200} 
+                    height={55}
+                    className="w-[120px] sm:w-[150px] md:w-[180px] h-auto"
+                />
+            </Link>
         </div>
-            <div className='h-full w-full flex flex-col items-center justify-center gap- p-8 md:px-24'>
-                <div className='w-full h-full flex flex-col items-center justify-center'>
-                    <div className='h-screen max-md:h-full w-full flex flex-col items-center md:mt-16 justify-start gap-8 max-md:gap-5'>
-                    <div className='text-white text-5xl max-md:text-4xl font-bold grad w-full text-left max-md:mt-16'>
-                        Contact Us
-                    </div>
-                    <div className='w-full flex items-center justify-between gap-4 '>
-                        <div className="py-8 max-md:py-0 w-[60%] max-md:w-full md:p-4 rounded-xl flex items-center justify-between gap-4">
-                            {/* <NewLink /> */}
-                            <ContactCard  />
-                        </div>
-                        <div className='w-[40%] max-md:hidden'>
-                            {/* <FloatPhone /> */}
-                            <Image
-                                src={ginne}
-                                width={450}
-                                height={450}
-                                alt="TAN gold logo"
-                                className={`transition-opacity duration-300 animate-float select-none`}
-                                quality={100}
-                                priority
-                                unoptimized={true}
-                        
-                            />
-                        </div>
-                    </div>
-                    </div>
-                    {/* <div style={{ backdropFilter: "blur(10px)" }} className="w-full bg-opacity-[0.075] border-[0.25px] border-slate-600 bg-white p-4 rounded-xl flex items-center justify-between gap-4">
-                        <div className='w-1/2'>
-                            <iframe
-                                src='https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d30157.16831844859!2d72.836115!3d19.123178!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c9d90e067ba9%3A0x16268e5d6bca2e6a!2sBharatiya%20Vidya%20Bhavan&#39;s%20Sardar%20Patel%20Institute%20of%20Technology%20(SPIT)!5e0!3m2!1sen!2sin!4v1710524261737!5m2!1sen!2sin'
-                                className='w-full h-[450px]'
-                                style={{ borderRadius: '4px' }}
-                                allowFullScreen
-                                loading="lazy"
-                                referrerPolicy="no-referrer-when-downgrade">
-                            </iframe>
-                        </div>
-                        <div className='w-1/2 h-full flex flex-col items-center justify-center gap-4 p-4'>
-                            <div className='text-white w-full h-full flex items-center justify-center gap-0.5 text-5xl font-bold'>
-                                <span>
-                                    <PlaceIcon sx={{ color: "white", fontSize: '55px' }} />
-                                </span>
-                                <span>
-                                    Location
-                                </span>
-                            </div>
-                            <div className='w-full h-[1px] bg-white mb-4'>
-                            </div>
-                            <div className='text-white font-semibold text-center'>
-                                Bhavans Campus, Old D N Nagar, Munshi Nagar, Andheri West, Mumbai, Maharashtra 400058
-                            </div>
-                        </div>
-                    </div> */}
-                    <NewLink />
-                </div>
+        
+        <motion.div 
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 1 }}
+            className="w-full min-h-screen relative overflow-x-hidden"
+        >
+            <div className="w-full h-screen fixed inset-0">
+                <motion.div 
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 1.2, ease: "easeOut" }}
+                    className="relative w-full h-full"
+                >
+                    <Image 
+                        src={backImage} 
+                        alt="background" 
+                        fill 
+                        className="object-cover"
+                        priority
+                    />
+                    <div className="absolute inset-0 bg-black/70"></div>
+                </motion.div>
             </div>
-        </Center>
-    );
-};
+            
+            <motion.div 
+                initial={{ x: 0, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ delay: 0.5, duration: 0.8 }}
+                className="relative z-10 text-white p-4 sm:p-6 md:p-12 mt-16 sm:mt-20 md:mt-32"
+            >
+                <div className="w-full max-w-3xl pl-4 sm:pl-6 md:pl-8 lg:pl-12">
+                    <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight font-['Aref_Ruqaa_Ink'] mb-8 sm:mb-10 md:mb-12">
+                        Contact Us
+                    </h1>
+                    
+                    <div className='w-full space-y-6 sm:space-y-8 md:space-y-12'>
+                        <motion.div 
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.8, duration: 0.6 }}
+                            className=""
+                        >
+                            <ContactCard />
+                        </motion.div>
+                        
+                        <motion.div 
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 1.2, duration: 0.6 }}
+                            className="bg-black/30 backdrop-blur-sm rounded-lg md:rounded-xl border border-white/30"
+                        >
+                            <NewLink />
+                        </motion.div>
+                    </div>
+                </div>
 
-export default ContactPage;
+                <motion.div
+                    initial={{ 
+                        opacity: 0, 
+                        scale: 0.3,
+                        x: '-100vw',
+                        y: '-50vh',
+                        rotate: -15
+                    }}
+                    animate={{ 
+                        opacity: 1,
+                        scale: 1,
+                        x: 0,
+                        y: [0, -10, 0],
+                        rotate: [-2, 2, -2]
+                    }}
+                    transition={{ 
+                        opacity: { duration: 1, ease: "easeOut" },
+                        scale: { duration: 1.2, ease: "easeOut" },
+                        x: { duration: 1.5, ease: "easeOut" },
+                        y: { repeat: Infinity, duration: 4, ease: "easeInOut", delay: 1.5 },
+                        rotate: { repeat: Infinity, duration: 6, ease: "easeInOut", delay: 1.5 }
+                    }}
+                    className="fixed right-[0.1%] top-[30%] -translate-y-1/2 z-0 hidden lg:block"
+                >
+                    <Image
+                        src={aladinJasmine}
+                        alt="Aladdin and Jasmine"
+                        width={700}
+                        height={700}
+                        className="w-[700px] h-auto opacity-90 mix-blend-soft-light contrast-[90%] brightness-[85%]"
+                    />
+                </motion.div>
+            </motion.div>
+        </motion.div>
+    </>)
+}
