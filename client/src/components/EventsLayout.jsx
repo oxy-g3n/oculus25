@@ -1,6 +1,6 @@
 "use client";
-import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 const events = [
   {
@@ -159,6 +159,7 @@ export default function EventsComponent() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
+                    {/* <Link href = ""></Link> */}
                     Register Now
                   </motion.button>
                 </div>
