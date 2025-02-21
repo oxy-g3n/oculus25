@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Navbar from "../../components/navbar";
-import backImage from "../../../public/assets/navbar_back.jpg";
+import backImage from "../../../public/assets/navbar_back_new.jpg";
 import logo from "../../../public/assets/full_white_transparent.png"; // Make sure this path is correct
 import { motion } from "framer-motion";
 import { NewLink } from '../../components/contact/NewLink';
@@ -45,7 +45,7 @@ export default function ContactPage() {
                         className="object-cover"
                         priority
                     />
-                    <div className="absolute inset-0 bg-black/70"></div>
+                    <div className="absolute inset-0 bg-black/30"></div>
                 </motion.div>
             </div>
             
