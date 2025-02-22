@@ -8,9 +8,11 @@ const eventsData = [
     time: "10:00 AM",
     description:
       "Mumbai's biggest speedcubing competition. Multiple categories, amazing prizes, and a chance to break records!",
-    frontImage: "/images/events/cube-open-front.jpg",
+    frontImage: "/assets/events/cube-open-front.png",//replace this asset too as soon as we get the correct one
     backImage: "/images/events/cube-open-back.jpg",
     formUrl: "/events/cube-open",
+    month: "March",
+    bg_img: "/assets/cube-open.png", //for debugging, delete this later
   },
   {
     id: "carnival",
@@ -24,6 +26,7 @@ const eventsData = [
     frontImage: "/images/events/carnival-front.jpg",
     backImage: "/images/events/carnival-back.jpg",
     formUrl: "/events/carnival",
+    month: "March",
   },
   {
     id: "esports",
@@ -37,6 +40,7 @@ const eventsData = [
     frontImage: "/images/events/esports-front.jpg",
     backImage: "/images/events/esports-back.jpg",
     formUrl: "/events/esports",
+    month: "March",
   },
   {
     id: "techrace",
@@ -50,6 +54,7 @@ const eventsData = [
     frontImage: "/images/events/techrace-front.jpg",
     backImage: "/images/events/techrace-back.jpg",
     formUrl: "/events/techrace",
+    month: "February",
   },
   {
     id: "funzone",
@@ -63,6 +68,7 @@ const eventsData = [
     frontImage: "/images/events/funzone-front.jpg",
     backImage: "/images/events/funzone-back.jpg",
     formUrl: "/events/funzone",
+    month: "March",
   },
   {
     id: "sargam",
@@ -76,6 +82,7 @@ const eventsData = [
     frontImage: "/images/events/sargam-front.jpg",
     backImage: "/images/events/sargam-back.jpg",
     formUrl: "/events/sargam",
+    month: "March",
   },
 ];
 
