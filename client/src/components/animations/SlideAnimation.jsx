@@ -48,14 +48,14 @@ export const SlideAnimation = ({ children, isOpen }) => {
                     exit="exit"
                     className="fixed top-0 left-0 w-full h-full z-[1001] overflow-hidden"
                     style={{
-                        backgroundImage: "url('/assets/navbar_back.jpg')",
+                        backgroundImage: "url('/assets/navbar_back_new.jpg')",
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
                         backgroundRepeat: 'no-repeat'
                     }}
                 >
                     {/* Black overlay */}
-                    <div className="absolute inset-0 bg-black bg-opacity-60" />
+                    <div className="absolute inset-0 bg-black bg-opacity-30" />
                     
                     {/* Logo Container - Top left position */}
                     <div className="absolute top-6 left-6 z-20">
@@ -63,8 +63,8 @@ export const SlideAnimation = ({ children, isOpen }) => {
                             <Image
                                 src="/assets/full_white_transparent.png"
                                 alt="Oculus Logo"
-                                width={200}
-                                height={55}
+                                width={150}
+                                height={37}
                                 className="w-auto h-auto"
                                 priority
                             />
