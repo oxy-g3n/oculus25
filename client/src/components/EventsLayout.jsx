@@ -1,5 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
+import { useState } from "react";
 import eventsData from "../data/eventsData";
 
 const events = eventsData;
@@ -16,6 +17,12 @@ export default function EventsComponent() {
   const handleEventClick = (formUrl) => {
     window.location.href = formUrl;
   };
+
+  const handleClick = (id) =>{
+    setTimeout(() => {
+      window.location.href = `/event/${id}`;
+  }, 600); 
+  }
 
   return (
     <div className="w-full min-h-screen bg-black/50 p-4 md:p-8">

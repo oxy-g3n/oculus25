@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { FiUser } from "react-icons/fi";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { motion } from "framer-motion";
+import { useState } from "react";
+import { FiUser } from "react-icons/fi";
 
 const ContactCard = ({ text, number }) => {
     return (
         <div className="flex flex-col items-center gap-6 w-full p-4 md:p-6">
-            <div className="w-full">
+            <div className="w-full border-2 border-transparent hover:border-yellow-600 hover:shadow-lg hover:shadow-yellow-600/50 transition-all duration-300">
                 <Card
                     title="Vivek (Director) "
                     subtitle="+91 89287 31857"
