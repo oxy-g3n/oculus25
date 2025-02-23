@@ -48,14 +48,13 @@ export const SlideAnimation = ({ children, isOpen }) => {
                     exit="exit"
                     className="fixed top-0 left-0 w-full h-full z-[1001] overflow-hidden"
                     style={{
-                        backgroundImage: "url('/assets/navbar_back_new.jpg')",
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                        backgroundRepeat: 'no-repeat'
+                        "--bg-overlay": "rgba(0, 0, 0, 0.7)",
+                        "--bg-blend-mode": "multiply",
+                        "--bg-opacity": "1",
+                        "--bg-filter": "brightness(0.7) contrast(1.1)"
                     }}
                 >
-                    {/* Black overlay */}
-                    <div className="absolute inset-0 bg-black bg-opacity-30" />
+                    <div className="page-background" />
                     
                     {/* Logo Container - Top left position */}
                     <div className="absolute top-6 left-6 z-20">

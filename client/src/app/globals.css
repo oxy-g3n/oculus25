@@ -8,6 +8,16 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --bg-image: url(/assets/navbar_back.jpg);
+  --bg-overlay: rgba(0, 0, 0, 0.3);
+  --bg-blend-mode: normal;
+  --bg-opacity: 1;
+  --bg-filter: none;
+  background-image: url(/assets/navbar_back.jpg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  min-height: 100vh;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,7 +29,7 @@
 
 body {
   color: var(--foreground);
-  background: var(--background);
+  background: transparent;
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -81,4 +91,25 @@ body {
   100% {
     transform: translateY(0px);
   }
+}
+
+.page-background {
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  background-image: var(--bg-image);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+.page-background::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: var(--bg-overlay);
+  opacity: var(--bg-opacity);
+  mix-blend-mode: var(--bg-blend-mode);
+  filter: var(--bg-filter);
 }
