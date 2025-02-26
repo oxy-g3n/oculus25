@@ -21,12 +21,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        {/* Add preload directives for critical assets */}
-        <link 
-          rel="preload" 
-          href="/assets/navbar_back.jpg" 
-          as="image" 
-        />
+        {/* Remove navbar_back.jpg preload, keep only essential assets */}
         <link 
           rel="preload" 
           href="/assets/full_white_transparent.png" 

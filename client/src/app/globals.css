@@ -8,15 +8,10 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --bg-image: url(/assets/navbar_back.jpg);
   --bg-overlay: rgba(0, 0, 0, 0.3);
   --bg-blend-mode: normal;
   --bg-opacity: 1;
   --bg-filter: none;
-  background-image: url(/assets/navbar_back.jpg);
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
   min-height: 100vh;
 }
 
