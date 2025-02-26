@@ -3,38 +3,48 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import Navbar from "../../components/navbar";
-// import backImage from "../../../public/assets/navbar_back_new.jpg";
-import logo from "../../../public/assets/full_white_transparent.png"; // Make sure this path is correct
+import backImage from "../../../public/assets/navbar_back.jpg";
+import logo from "../../../public/assets/full_white_transparent.png";
 import { motion } from "framer-motion";
 import { NewLink } from '../../components/contact/NewLink';
 import ContactCard from '../../components/contact/ContactCard';
 import aladinJasmine from "../../../public/assets/new_aladin.png";
 
 export default function ContactPage() {
-    return (
-        <div 
-            style={{
-                "--bg-overlay": "rgba(0, 0, 0, 0.7)",
-                "--bg-blend-mode": "normal",
-                "--bg-opacity": "1",
-                "--bg-filter": "none"
-            }}
-            className="min-h-screen relative"
+    return (<>
+        <div className="fixed top-4 md:top-8 left-4 md:left-8 z-50">
+            <Link href="/">
+                <Image 
+                    src={logo} 
+                    alt="logo" 
+                    width={200} 
+                    height={55}
+                    className="w-[120px] sm:w-[150px] md:w-[180px] h-auto"
+                />
+            </Link>
+        </div>
+        
+        <motion.div 
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 1 }}
+            className="w-full min-h-screen relative overflow-x-hidden"
         >
-            <div className="page-background" />
-            <Navbar alwaysShow={true}/>
-            
-            <div className="fixed top-4 md:top-8 left-4 md:left-8 z-50">
-                <Link href="/">
+            <div className="w-full h-screen fixed inset-0">
+                <motion.div 
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 1.2, ease: "easeOut" }}
+                    className="relative w-full h-full"
+                >
                     <Image 
-                        src={logo} 
-                        alt="logo" 
-                        width={200} 
-                        height={55}
-                        className="w-[120px] sm:w-[150px] md:w-[180px] h-auto"
+                        src={backImage} 
+                        alt="background" 
+                        fill 
+                        className="object-cover"
+                        priority
                     />
-                </Link>
+                    <div className="absolute inset-0 bg-black/70"></div>
+                </motion.div>
             </div>
             
             <motion.div 
@@ -102,6 +112,6 @@ export default function ContactPage() {
                     />
                 </motion.div>
             </motion.div>
-        </div>
-    );
+        </motion.div>
+    </>)
 }

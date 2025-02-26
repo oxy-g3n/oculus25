@@ -20,6 +20,19 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        {/* Add preload directives for critical assets */}
+        <link 
+          rel="preload" 
+          href="/assets/navbar_back.jpg" 
+          as="image" 
+        />
+        <link 
+          rel="preload" 
+          href="/assets/full_white_transparent.png" 
+          as="image" 
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

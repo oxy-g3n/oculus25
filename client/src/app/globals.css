@@ -93,23 +93,48 @@ body {
   }
 }
 
-.page-background {
-  position: fixed;
-  inset: 0;
-  z-index: -10;
-  background-image: var(--bg-image);
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
+@keyframes textShine {
+  0% {
+    background-position: 0% 50%;
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.2);
+  }
+  100% {
+    background-position: 100% 50%;
+    filter: brightness(1);
+  }
 }
 
-.page-background::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-color: var(--bg-overlay);
-  opacity: var(--bg-opacity);
-  mix-blend-mode: var(--bg-blend-mode);
-  filter: var(--bg-filter);
+.grad {
+  background: linear-gradient(to right,
+      #B8860B 0%,    /* Dark golden */
+      #FFD700 15%,   /* Pure gold */
+      #FFDF00 30%,   /* Golden yellow */
+      #FFF7BC 45%,   /* Light gold */
+      #FFE55C 60%,   /* Bright gold */
+      #DAA520 75%,   /* Goldenrod */
+      #B8860B 100%); /* Dark golden */
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 500% auto;
+  animation: textShine 5s ease-in-out infinite alternate;
+  text-shadow: 
+    0 0 10px rgba(255, 215, 0, 0.3),
+    0 0 20px rgba(255, 215, 0, 0.2);
+}
+
+.grad-border {
+  background: linear-gradient(to right,
+      #B8860B 0%,    /* Dark golden */
+      #FFD700 15%,   /* Pure gold */
+      #FFDF00 30%,   /* Golden yellow */
+      #FFF7BC 45%,   /* Light gold */
+      #FFE55C 60%,   /* Bright gold */
+      #DAA520 75%,   /* Goldenrod */
+      #B8860B 100%); /* Dark golden */
+  background-size: 500% auto;
+  animation: textShine 5s ease-in-out infinite alternate;
 }

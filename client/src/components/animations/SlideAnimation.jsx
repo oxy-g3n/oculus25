@@ -54,7 +54,8 @@ export const SlideAnimation = ({ children, isOpen }) => {
                         "--bg-filter": "brightness(0.7) contrast(1.1)"
                     }}
                 >
-                    <div className="page-background" />
+                    {/* Black overlay */}
+                    <div className="absolute inset-0 bg-black bg-opacity-45" />
                     
                     {/* Logo Container - Top left position */}
                     <div className="absolute top-6 left-6 z-20">
