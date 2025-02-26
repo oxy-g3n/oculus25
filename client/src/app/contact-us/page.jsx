@@ -3,9 +3,8 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import Navbar from "../../components/navbar";
 import backImage from "../../../public/assets/navbar_back.jpg";
-import logo from "../../../public/assets/full_white_transparent.png"; // Make sure this path is correct
+import logo from "../../../public/assets/full_white_transparent.png";
 import { motion } from "framer-motion";
 import { NewLink } from '../../components/contact/NewLink';
 import ContactCard from '../../components/contact/ContactCard';
@@ -13,7 +12,6 @@ import aladinJasmine from "../../../public/assets/new_aladin.png";
 
 export default function ContactPage() {
     return (<>
-        <Navbar alwaysShow={true}/>
         <div className="fixed top-4 md:top-8 left-4 md:left-8 z-50">
             <Link href="/">
                 <Image 

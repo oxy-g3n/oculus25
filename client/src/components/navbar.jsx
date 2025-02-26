@@ -5,7 +5,7 @@ import { SlideAnimation } from "./animations/SlideAnimation";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
-export default function Navbar({ alwaysShow = false }) {
+export default function Navbar({ alwaysShow = false, onNavigate }) {
     const [open, setOpen] = useState(false);
     const [showNav, setShowNav] = useState(false);
     const [clickedItem, setClickedItem] = useState(null);
@@ -67,12 +67,18 @@ export default function Navbar({ alwaysShow = false }) {
         }
     };
 
-    const handleItemClick = async (e, href) => {
+    const handleItemClick = (e, href) => {
         e.preventDefault();
         setClickedItem(href);
         
-        // Navigate immediately without delay
-        window.location.href = href;
+        // Extract the route from href
+        const route = href === '/' ? 'home' : href.slice(1);
+        
+        // Call the navigation handler
+        onNavigate(route);
+        
+        // Close the menu
+        setOpen(false);
     };
 
     return (
