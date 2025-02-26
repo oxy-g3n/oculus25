@@ -9,6 +9,7 @@ export default function Navbar({ alwaysShow = false, onNavigate }) {
     const [open, setOpen] = useState(false);
     const [showNav, setShowNav] = useState(false);
     const [clickedItem, setClickedItem] = useState(null);
+    const [isAnimating, setIsAnimating] = useState(false);
 
     // Handle scroll visibility - only for landing page
     useEffect(() => {
@@ -67,18 +68,30 @@ export default function Navbar({ alwaysShow = false, onNavigate }) {
         }
     };
 
-    const handleItemClick = (e, href) => {
+    const handleItemClick = async (e, href) => {
         e.preventDefault();
+        if (isAnimating) return; // Prevent multiple clicks during animation
+        
+        setIsAnimating(true);
         setClickedItem(href);
         
         // Extract the route from href
         const route = href === '/' ? 'home' : href.slice(1);
         
-        // Call the navigation handler
-        onNavigate(route);
+        // Wait for click animation to complete
+        await new Promise(resolve => setTimeout(resolve, 400));
         
         // Close the menu
         setOpen(false);
+        
+        // Call the navigation handler
+        onNavigate(route);
+        
+        // Reset animation state
+        setTimeout(() => {
+            setClickedItem(null);
+            setIsAnimating(false);
+        }, 500);
     };
 
     return (
@@ -188,11 +201,11 @@ export default function Navbar({ alwaysShow = false, onNavigate }) {
                                 transition={{ delay: index * 0.1 }}
                                 className="relative w-64 md:w-80 group"
                             >
-                                <Link
-                                    href={item.href}
-                                    className={`block relative text-3xl md:text-4xl text-white font-['Aref_Ruqaa_Ink'] group-hover:text-amber-300 group-hover:drop-shadow-[0_0_8px_rgba(251,191,36,0.5)] transition-all duration-300
+                                <button
+                                    className={`block relative w-full text-3xl md:text-4xl text-white font-['Aref_Ruqaa_Ink'] group-hover:text-amber-300 group-hover:drop-shadow-[0_0_8px_rgba(251,191,36,0.5)] transition-all duration-300
                                         ${clickedItem === item.href ? 'scale-95 opacity-50' : ''}`}
                                     onClick={(e) => handleItemClick(e, item.href)}
+                                    disabled={isAnimating}
                                 >
                                     <motion.div 
                                         className="absolute inset-0 bg-gradient-to-r from-black/30 via-black/20 to-black/30 opacity-0 group-hover:opacity-100 transition-all duration-300 -z-10 rounded-lg"
@@ -221,7 +234,7 @@ export default function Navbar({ alwaysShow = false, onNavigate }) {
                                             }}
                                         />
                                     )}
-                                </Link>
+                                </button>
                             </motion.div>
                         ))}
                     </div>

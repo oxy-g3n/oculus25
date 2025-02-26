@@ -1,17 +1,15 @@
 "use client";
 import { Analytics } from "@vercel/analytics/react"
 import { useState, useEffect } from 'react';
-import AboutPage from "../components/about";
-import Footer from "../components/footer";
 import Navbar from "../components/navbar";
-import CustomHTMLPage from "../components/FluidAnimation/CustomHTMLPage";
 import EventsComponent from "../components/EventsLayout";
 import ContactPage from "./contact-us/page";
 import SponsorsPage from "./sponsors/page";
 import SchedulePage from "./schedule/page";
 import LoadingState from "../components/LoadingState";
+import LandingPageContent from "./(landing)/page";
 
-export default function LandingPage() {
+export default function RootPage() {
     const [currentPage, setCurrentPage] = useState('home');
     const [isLoading, setIsLoading] = useState(true);
 
@@ -47,13 +45,7 @@ export default function LandingPage() {
     const renderPage = () => {
         switch(currentPage) {
             case 'home':
-                return (
-                    <>
-                        <CustomHTMLPage />
-                        <AboutPage />
-                        <Footer />
-                    </>
-                );
+                return <LandingPageContent />;
             case 'events':
                 return <EventsComponent />;
             case 'sponsors':
