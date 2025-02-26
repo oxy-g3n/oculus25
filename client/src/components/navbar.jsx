@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { SlideAnimation } from "./animations/SlideAnimation";
 import Image from "next/image";

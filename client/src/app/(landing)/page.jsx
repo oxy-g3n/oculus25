@@ -1,14 +1,18 @@
 'use client';
 
-import CustomHTMLPage from "../../components/FluidAnimation/CustomHTMLPage";
-import AboutPage from "../../components/about";
+import Fluid_animation from "../../components/FluidAnimation/Fluid_animation";
+import AboutPage from "./components/about";
+import ArabianNights from "./components/arabian_nights";
+import Aftermovie from "./components/aftermovie";
 import Footer from "../../components/footer";
 
 export default function LandingPageContent() {
     return (
         <>
-            <CustomHTMLPage />
+            <Fluid_animation />
             <AboutPage />
+            <ArabianNights />
+            <Aftermovie />
             <Footer />
         </>
     );

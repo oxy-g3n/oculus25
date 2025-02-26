@@ -55,7 +55,7 @@ export const SlideAnimation = ({ children, isOpen }) => {
                     }}
                 >
                     {/* Black overlay */}
-                    <div className="absolute inset-0 bg-black bg-opacity-60" />
+                    <div className="absolute inset-0 bg-black bg-opacity-45" />
                     
                     {/* Logo Container - Top left position */}
                     <div className="absolute top-6 left-6 z-20">

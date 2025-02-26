@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react';
 
-export default function CustomHTMLPage() {
+export default function Fluid_animation() {
 const [iframeLoaded, setIframeLoaded] = useState(false);
 
   return (
