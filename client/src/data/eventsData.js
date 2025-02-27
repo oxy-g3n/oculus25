@@ -1,8 +1,34 @@
 const eventsData = [
   {
+    id: "techrace",
+    name: "TechRace",
+    type: "Pre - Event",
+    date: "2025-02-28",
+    location: "Mumbai",
+    time: "4 hours",
+    description:
+      "Crack mind-bending clues, solve thrilling mysteries, and race across the city for a ₹75,000 prize pool! ",
+    frontImage: "/images/events/techrace-front.png",
+    backImage: "/images/events/techrace-back.png",
+    formUrl: "/events/techrace",
+  },
+  {
+    id: "sargam",
+    name: "Sargam",
+    type: "Cultural",
+    date: "2025-03-02",
+    location: "Auditorium",
+    time: "6:00 PM",
+    description:
+      "A musical extravaganza featuring the best talents from across colleges!",
+    frontImage: "/images/events/sargam-front.png",
+    backImage: "/images/events/sargam-back.png",
+    formUrl: "/events/sargam",
+  },
+  {
     id: "cube-open",
     name: "Cube Open",
-    type: "FUN",
+    type: "Fun",
     date: "2025-03-02",
     location: "008 Hall, S.P.I.T.",
     time: "10:00 AM",
@@ -15,7 +41,7 @@ const eventsData = [
   {
     id: "carnival",
     name: "Carnival",
-    type: "CULTURAL",
+    type: "Cultural",
     date: "2025-03-01",
     location: "College Ground",
     time: "Whole Day",
@@ -28,7 +54,7 @@ const eventsData = [
   {
     id: "esports",
     name: "Esports",
-    type: "FUN",
+    type: "Fun",
     date: "2025-03-03",
     location: "Lab Complex",
     time: "9:00 AM",
@@ -38,23 +64,11 @@ const eventsData = [
     backImage: "/images/events/esports-back.jpg",
     formUrl: "/events/esports",
   },
-  {
-    id: "techrace",
-    name: "TechRace",
-    type: "PRE",
-    date: "2025-02-28",
-    location: "Mumbai",
-    time: "4 hours",
-    description:
-      "Crack mind-bending clues, solve thrilling mysteries, and race across the city for a ₹75,000 prize pool! ",
-    frontImage: "/images/events/techrace-front.jpg",
-    backImage: "/images/events/techrace-back.jpg",
-    formUrl: "/events/techrace",
-  },
+
   {
     id: "funzone",
     name: "Funzone",
-    type: "FUN",
+    type: "Fun",
     date: "2025-03-01",
     location: "College Campus",
     time: "All Day",
@@ -63,19 +77,6 @@ const eventsData = [
     frontImage: "/images/events/funzone-front.jpg",
     backImage: "/images/events/funzone-back.jpg",
     formUrl: "/events/funzone",
-  },
-  {
-    id: "sargam",
-    name: "Sargam",
-    type: "CULTURAL",
-    date: "2025-03-02",
-    location: "Auditorium",
-    time: "6:00 PM",
-    description:
-      "A musical extravaganza featuring the best talents from across colleges!",
-    frontImage: "/images/events/sargam-front.jpg",
-    backImage: "/images/events/sargam-back.jpg",
-    formUrl: "/events/sargam",
   },
 ];
 
