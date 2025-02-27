@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import logo from "../../../public/assets/full_white_transparent.png"; // Make sure this path is correct
 import backImage from "../../../public/assets/navbar_back_new.jpg";
 import aladinJasmine from "../../../public/assets/new_aladin.png";
