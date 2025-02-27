@@ -2,17 +2,14 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import Link from "next/link";
-import logo from "../../../public/assets/full_white_transparent.png"; // Make sure this path is correct
-import backImage from "../../../public/assets/navbar_back_new.jpg";
+import logo from "../../../public/assets/full_white_transparent.png";
+import backImage from "../../../public/assets/navbar_back.jpg";
 import aladinJasmine from "../../../public/assets/new_aladin.png";
 import ContactCard from '../../components/contact/ContactCard';
 import { NewLink } from '../../components/contact/NewLink';
-import Navbar from "../../components/navbar";
 
 export default function ContactPage() {
     return (<>
-        <Navbar alwaysShow={true}/>
         <div className="fixed top-4 md:top-8 left-4 md:left-8 z-50">
             <Link href="/">
                 <Image 
@@ -44,7 +41,7 @@ export default function ContactPage() {
                         className="object-cover"
                         priority
                     />
-                    <div className="absolute inset-0 bg-black/30"></div>
+                    <div className="absolute inset-0 bg-black/70"></div>
                 </motion.div>
             </div>
             

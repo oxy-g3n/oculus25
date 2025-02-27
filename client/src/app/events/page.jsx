@@ -1,6 +1,6 @@
-import EventsComponent from "../../components/EventsLayout";
 import React from "react";
 import Navbar from "../../components/navbar";
+import EventsLayout from "../../components/EventsLayout";
 
 export default function EventsPage() {
   return (
@@ -17,7 +17,7 @@ export default function EventsPage() {
 
       {/* Content */}
       <div className="relative z-10 pointer-events-none">
-        <EventsComponent />
+        <EventsLayout />
       </div>
     </div>
   );

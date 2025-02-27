@@ -20,6 +20,14 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        {/* Remove navbar_back.jpg preload, keep only essential assets */}
+        <link 
+          rel="preload" 
+          href="/assets/full_white_transparent.png" 
+          as="image" 
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
