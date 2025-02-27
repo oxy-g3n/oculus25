@@ -10,7 +10,6 @@ export default function Navbar({ alwaysShow = false, onNavigate }) {
     const [clickedItem, setClickedItem] = useState(null);
     const [isAnimating, setIsAnimating] = useState(false);
 
-    // Handle scroll visibility - only for landing page
     useEffect(() => {
         if (alwaysShow) {
             setShowNav(true);
