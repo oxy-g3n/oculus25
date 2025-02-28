@@ -3,7 +3,7 @@
 import { Analytics } from "@vercel/analytics/react";
 import { useState, useEffect } from 'react';
 import Navbar from "../components/navbar";
-import EventsComponent from "../components/EventsLayout";
+import EventsPage from "./events/page";
 import ContactPage from "./contact-us/page";
 import SponsorsPage from "./sponsors/page";
 import SchedulePage from "./schedule/page";
@@ -18,8 +18,8 @@ const LandingPageContent = () => {
     return (
         <>
             <Fluid_animation />
-            <AboutPage />
             <ArabianNights />
+            <AboutPage />
             <Aftermovie />
             <Footer />
         </>
@@ -29,6 +29,7 @@ const LandingPageContent = () => {
 export default function RootPage() {
     const [currentPage, setCurrentPage] = useState('home');
     const [isLoading, setIsLoading] = useState(true);
+    const [key, setKey] = useState(0); // Add a key to force remount
 
     useEffect(() => {
         // Handle initial route
@@ -56,21 +57,26 @@ export default function RootPage() {
         
         // Update the page and hide loading
         setCurrentPage(route);
+        // Increment key to force remount of components
+        setKey(prevKey => prevKey + 1);
         setIsLoading(false);
     };
 
     const renderPage = () => {
+        // Use key to force remount of components
+        const pageProps = { key };
+        
         switch(currentPage) {
             case 'home':
-                return <LandingPageContent />;
+                return <LandingPageContent {...pageProps} />;
             case 'events':
-                return <EventsComponent />;
+                return <EventsPage {...pageProps} />;
             case 'sponsors':
-                return <SponsorsPage />;
+                return <SponsorsPage {...pageProps} />;
             case 'schedule':
-                return <SchedulePage />;
+                return <SchedulePage {...pageProps} />;
             case 'contact-us':
-                return <ContactPage />;
+                return <ContactPage {...pageProps} />;
             default:
                 return <div>404 - Page Not Found</div>;
         }
