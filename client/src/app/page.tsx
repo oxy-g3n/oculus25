@@ -1,5 +1,6 @@
-"use client";
-import { Analytics } from "@vercel/analytics/react"
+'use client';
+
+import { Analytics } from "@vercel/analytics/react";
 import { useState, useEffect } from 'react';
 import Navbar from "../components/navbar";
 import EventsComponent from "../components/EventsLayout";
@@ -7,7 +8,23 @@ import ContactPage from "./contact-us/page";
 import SponsorsPage from "./sponsors/page";
 import SchedulePage from "./schedule/page";
 import LoadingState from "../components/LoadingState";
-import LandingPageContent from "./(landing)/page";
+import Fluid_animation from "../components/FluidAnimation/Fluid_animation";
+import AboutPage from "./(landing)/components/about";
+import ArabianNights from "./(landing)/components/arabian_nights";
+import Aftermovie from "./(landing)/components/aftermovie";
+import Footer from "../components/footer";
+
+const LandingPageContent = () => {
+    return (
+        <>
+            <Fluid_animation />
+            <AboutPage />
+            <ArabianNights />
+            <Aftermovie />
+            <Footer />
+        </>
+    );
+};
 
 export default function RootPage() {
     const [currentPage, setCurrentPage] = useState('home');
@@ -26,7 +43,7 @@ export default function RootPage() {
         return () => clearTimeout(timer);
     }, []);
 
-    const handleNavigate = async (route) => {
+    const handleNavigate = async (route: string) => {
         // Show loading state
         setIsLoading(true);
         
@@ -73,4 +90,4 @@ export default function RootPage() {
             {renderPage()}
         </>
     );
-}
+} 
