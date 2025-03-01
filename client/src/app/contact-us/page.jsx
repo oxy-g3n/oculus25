@@ -1,15 +1,13 @@
 'use client'
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import backImage from "../../../public/assets/navbar_back.jpg";
 import logo from "../../../public/assets/full_white_transparent.png";
-import { motion } from "framer-motion";
 import { NewLink } from '../../components/contact/NewLink';
 import ContactCard from '../../components/contact/ContactCard';
 import aladinJasmine from "../../../public/assets/new_aladin.png";
-import ContactCard from '../../components/contact/ContactCard';
-import { NewLink } from '../../components/contact/NewLink';
 import Navbar from "../../components/navbar";
 
 export default function ContactPage() {
