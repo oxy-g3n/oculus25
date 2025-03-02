@@ -10,7 +10,7 @@ import { NewLink } from '../../components/contact/NewLink';
 import ContactCard from '../../components/contact/ContactCard';
 import aladinJasmine from "../../../public/assets/new_aladin.png";
 // import chirag from "../../../../../../../swaraj31/Downloads/aladdin_oculus25/chirag.jpg"
-import chirag from "../../../public/assets/chirag~2.jpg"
+// import chirag from "../../../public/assets/chirag~2.jpg"
 import logo2 from "../../../public/assets/white_O_cropped.png"
 
 export default function ContactPage() {

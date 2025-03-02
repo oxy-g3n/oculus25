@@ -1,29 +1,78 @@
 'use client';
 
 import { Analytics } from "@vercel/analytics/react";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import Navbar from "../components/navbar";
 import EventsPage from "./events/page";
 import ContactPage from "./contact-us/page";
 import SponsorsPage from "./sponsors/page";
 import SchedulePage from "./schedule/page";
 import LoadingState from "../components/LoadingState";
-import Fluid_animation from "../components/FluidAnimation/Fluid_animation";
-import AboutPage from "./(landing)/components/about";
-import ArabianNights from "./(landing)/components/arabian_nights";
-import Aftermovie from "./(landing)/components/aftermovie";
 import Footer from "../components/footer";
 
+// Import landing page components with error handling
 const LandingPageContent = () => {
     return (
-        <>
-            <Fluid_animation />
-            <ArabianNights />
-            <AboutPage />
-            <Aftermovie />
-            <Footer />
-        </>
+        <Suspense fallback={<LoadingState />}>
+            <div className="relative">
+                {/* Dynamically import Fluid_animation to prevent SSR issues */}
+                <DynamicFluidAnimation />
+                <DynamicArabianNights />
+                <DynamicAboutPage />
+                <DynamicAftermovie />
+                <Footer />
+            </div>
+        </Suspense>
     );
+};
+
+// Dynamically import components to prevent SSR issues
+const DynamicFluidAnimation = () => {
+    const [Component, setComponent] = useState(null);
+    
+    useEffect(() => {
+        import("../components/FluidAnimation/Fluid_animation").then((mod) => {
+            setComponent(() => mod.default);
+        });
+    }, []);
+    
+    return Component ? <Component /> : <div className="w-full h-screen bg-black"></div>;
+};
+
+const DynamicArabianNights = () => {
+    const [Component, setComponent] = useState(null);
+    
+    useEffect(() => {
+        import("./(landing)/components/arabian_nights").then((mod) => {
+            setComponent(() => mod.default);
+        });
+    }, []);
+    
+    return Component ? <Component /> : null;
+};
+
+const DynamicAboutPage = () => {
+    const [Component, setComponent] = useState(null);
+    
+    useEffect(() => {
+        import("./(landing)/components/about").then((mod) => {
+            setComponent(() => mod.default);
+        });
+    }, []);
+    
+    return Component ? <Component /> : null;
+};
+
+const DynamicAftermovie = () => {
+    const [Component, setComponent] = useState(null);
+    
+    useEffect(() => {
+        import("./(landing)/components/aftermovie").then((mod) => {
+            setComponent(() => mod.default);
+        });
+    }, []);
+    
+    return Component ? <Component /> : null;
 };
 
 export default function RootPage() {
@@ -63,22 +112,35 @@ export default function RootPage() {
     };
 
     const renderPage = () => {
-        // Use key to force remount of components
-        const pageProps = { key };
-        
-        switch(currentPage) {
-            case 'home':
-                return <LandingPageContent {...pageProps} />;
-            case 'events':
-                return <EventsPage {...pageProps} />;
-            case 'sponsors':
-                return <SponsorsPage {...pageProps} />;
-            case 'schedule':
-                return <SchedulePage {...pageProps} />;
-            case 'contact-us':
-                return <ContactPage {...pageProps} />;
-            default:
-                return <div>404 - Page Not Found</div>;
+        // Pass key directly to components instead of including it in props
+        try {
+            switch(currentPage) {
+                case 'home':
+                    return <LandingPageContent key={key} />;
+                case 'events':
+                    return <EventsPage key={key} />;
+                case 'sponsors':
+                    return <SponsorsPage key={key} />;
+                case 'schedule':
+                    return <SchedulePage key={key} />;
+                case 'contact-us':
+                    return <ContactPage key={key} />;
+                default:
+                    return <div>404 - Page Not Found</div>;
+            }
+        } catch (error) {
+            console.error("Error rendering page:", error);
+            return <div className="flex items-center justify-center h-screen bg-black text-white">
+                <div className="text-center">
+                    <h2 className="text-2xl font-bold mb-4">Something went wrong</h2>
+                    <button 
+                        onClick={() => handleNavigate('home')}
+                        className="px-4 py-2 bg-amber-500 text-black rounded-md hover:bg-amber-600"
+                    >
+                        Return to Home
+                    </button>
+                </div>
+            </div>;
         }
     };
 
@@ -93,7 +155,9 @@ export default function RootPage() {
                 alwaysShow={currentPage !== 'home'}
                 onNavigate={handleNavigate}
             />
-            {renderPage()}
+            <Suspense fallback={<LoadingState />}>
+                {renderPage()}
+            </Suspense>
         </>
     );
 } 
