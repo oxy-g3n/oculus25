@@ -132,7 +132,8 @@ export default function ContactPage() {
                         y: { repeat: Infinity, duration: 4, ease: "easeInOut", delay: 1.5 },
                         rotate: { repeat: Infinity, duration: 6, ease: "easeInOut", delay: 1.5 }
                     }}
-                    className="fixed right-[20.1%] top-[30%] -translate-y-1/2 z-0 hidden lg:block select-none"
+                    className="fixed lg:right-[20%] right-0 lg:top-[30%] top-[30%] lg:-translate-y-1/2 -translate-y-1/2 z-0 hidden lg:block select-none"
+
                 >
                     <Image
                         src={logo2}
