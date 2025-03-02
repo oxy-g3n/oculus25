@@ -1,14 +1,9 @@
 'use client'
 
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import backImage from "../../../public/assets/navbar_back.jpg";
-import logo from "../../../public/assets/full_white_transparent.png";
 import { motion } from "framer-motion";
-import { NewLink } from '../../components/contact/NewLink';
-import ContactCard from '../../components/contact/ContactCard';
-import aladinJasmine from "../../../public/assets/new_aladin.png";
+import Image from "next/image";
+import Link from "next/link";
+import logo from "../../../public/assets/full_white_transparent.png";
 // import chirag from "../../../../../../../swaraj31/Downloads/aladdin_oculus25/chirag.jpg"
 // import chirag from "../../../public/assets/chirag~2.jpg"
 import logo2 from "../../../public/assets/white_O_cropped.png"
@@ -103,7 +98,7 @@ export default function ContactPage() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 1.2, duration: 0.6 }}
-                            className="bg-black/30 backdrop-blur-sm rounded-lg md:rounded-xl border border-white/30"
+                            className="bg-black/30 backdrop-blur-sm rounded-lg md:rounded-xl border border-white/30 hover:border-yellow-500"
                         >
                             <NewLink />
                         </motion.div>

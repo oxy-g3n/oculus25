@@ -1,8 +1,8 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import EventCard from "./EventCard";
-import eventsData from "../data/eventsData.js";
 import { AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
+import eventsData from "../data/eventsData.js";
+import EventCard from "./EventCard";
 
 const EventsLayout = () => {
   const [selected, setSelected] = useState("All");
