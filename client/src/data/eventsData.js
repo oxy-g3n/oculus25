@@ -8,8 +8,8 @@ const eventsData = [
     time: "4 hours",
     description:
       "Crack mind-bending clues, solve thrilling mysteries, and race across the city for a ₹75,000 prize pool! ",
-    frontImage: "/images/events/techrace-front.png",
-    backImage: "/images/events/techrace-back.png",
+    frontImage: "/assets/events/techrace/techrace-front.png",
+    backImage: "/assets/events/techrace/techrace-back.png",
     formUrl: "/events/techrace",
     month: "February",
     colorTheme: {
@@ -26,8 +26,8 @@ const eventsData = [
     time: "6:00 PM",
     description:
       "A musical extravaganza featuring the best talents from across colleges!",
-    frontImage: "/images/events/sargam-front.png",
-    backImage: "/images/events/sargam-back.png",
+    frontImage: "/assets/events/sargam/sargam-front.png",
+    backImage: "/assets/events/sargam/sargam-back.png",
     formUrl: "/events/sargam",
     month: "March",
     colorTheme: {
@@ -44,8 +44,8 @@ const eventsData = [
     time: "10:00 AM",
     description:
       "Mumbai's biggest speedcubing competition. Multiple categories, amazing prizes, and a chance to break records!",
-    frontImage: "/images/events/cube-open-front.png",//replace this asset too as soon as we get the correct one
-    backImage: "/images/events/cube-open-back.jpg",
+    frontImage: "/assets/events/cube-open/cube-open-front.png",//replace this asset too as soon as we get the correct one
+    backImage: "/assets/events/cube-open/cube-open-back.jpg",
     formUrl: "/events/cube-open",
     month: "March",
     bg_img: "/images/cube-open-web.png", //for debugging, delete this later
@@ -63,8 +63,8 @@ const eventsData = [
     time: "Whole Day",
     description:
       "Experience the magic of our cultural carnival with music, dance, and endless entertainment!",
-    frontImage: "/images/events/carnival-front.jpg",
-    backImage: "/images/events/carnival-back.jpg",
+    frontImage: "/assets/events/carnival/carnival-front.jpg",
+    backImage: "/assets/events/carnival/carnival-back.jpg",
     formUrl: "/events/carnival",
     month: "March",
     colorTheme: {
@@ -81,8 +81,8 @@ const eventsData = [
     time: "9:00 AM",
     description:
       "Compete in various gaming tournaments and prove your skills in the digital arena!",
-    frontImage: "/images/events/esports-front.jpg",
-    backImage: "/images/events/esports-back.jpg",
+    frontImage: "/assets/events/esports/esports-front.jpg",
+    backImage: "/assets/events/esports/esports-back.jpg",
     formUrl: "/events/esports",
     month: "March",
     colorTheme: {
@@ -100,8 +100,8 @@ const eventsData = [
     time: "All Day",
     description:
       "A zone full of exciting games, activities, and entertainment for everyone!",
-    frontImage: "/images/events/funzone-front.jpg",
-    backImage: "/images/events/funzone-back.jpg",
+    frontImage: "/assets/events/funzone/funzone-front.jpg",
+    backImage: "/assets/events/funzone/funzone-back.jpg",
     formUrl: "/events/funzone",
     month: "March",
     colorTheme: {

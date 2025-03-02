@@ -1,9 +1,9 @@
 "use client"
 
+import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import events from '../../../data/eventsData';
-import Link from 'next/link';
 
 const EventDetailsPage = () => {
   const router = useRouter();
@@ -71,7 +71,7 @@ const EventDetailsPage = () => {
             <div className='w-full h-[350px] overflow-hidden'>
                 <img
                 className='w-full h- object-cover bg-no-repeat -mt-40 left-0 z-10'
-                src={`/images/events/${event.id}-web.png`}
+                src={`/assets/events/${event.id}/${event.id}-web.png`}
                 alt={event.name}
                 />
             </div>
@@ -151,6 +151,7 @@ const EventDetailsPage = () => {
                     <div 
                         className='w-full text-white z-20 lg:max-w-[60%] text-md font-semibold mt-4 p-6 rounded-lg'
                         style={{ 
+                            width: 'calc(55%)',
                             backgroundColor: 'rgba(0,0,0,0.5)',
                             borderLeft: `4px solid ${primaryColor}`,
                             boxShadow: `0 4px 20px rgba(0,0,0,0.3), 0 0 10px ${primaryColor}40`,
