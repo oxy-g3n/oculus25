@@ -2,43 +2,15 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import Link from "next/link";
-import logo from "../../../public/assets/full_white_transparent.png";
+import { useState, useEffect } from 'react';
 // import chirag from "../../../../../../../swaraj31/Downloads/aladdin_oculus25/chirag.jpg"
 // import chirag from "../../../public/assets/chirag~2.jpg"
 import logo2 from "../../../public/assets/white_O_cropped.png"
+import ContactCard from "../../components/contact/ContactCard";
+import { NewLink } from "../../components/contact/NewLink";
 
 export default function ContactPage() {
-    const [isVisible, setIsVisible] = useState(true);
-
-    useEffect(() => {
-        const handleScroll = () => {
-            if (window.scrollY > 50) { // Adjust the scroll threshold as needed
-                setIsVisible(false);
-            } else {
-                setIsVisible(true);
-            }
-        };
-
-        window.addEventListener('scroll', handleScroll);
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, []);
-
     return (<>
-        <div className={`fixed top-4 md:top-8 left-4 md:left-8 z-50 transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-            <Link href="/">
-                <Image 
-                    src={logo} 
-                    alt="logo" 
-                    width={200} 
-                    height={55}
-                    className="w-[120px] sm:w-[150px] md:w-[180px] h-auto"
-                />
-            </Link>
-        </div>
-        
         <motion.div 
             initial={{ opacity: 1 }}
             animate={{ opacity: 1 }}

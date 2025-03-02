@@ -2,13 +2,13 @@
 
 import { Analytics } from "@vercel/analytics/react";
 import { useState, useEffect, Suspense } from 'react';
-import Navbar from "../components/navbar";
 import EventsPage from "./events/page";
 import ContactPage from "./contact-us/page";
 import SponsorsPage from "./sponsors/page";
 import SchedulePage from "./schedule/page";
 import LoadingState from "../components/LoadingState";
 import Footer from "../components/footer";
+import { usePathname } from 'next/navigation';
 
 // Import landing page components with error handling
 const LandingPageContent = () => {
@@ -79,10 +79,11 @@ export default function RootPage() {
     const [currentPage, setCurrentPage] = useState('home');
     const [isLoading, setIsLoading] = useState(true);
     const [key, setKey] = useState(0); // Add a key to force remount
+    const pathname = usePathname();
 
     useEffect(() => {
-        // Handle initial route
-        const path = window.location.pathname.slice(1) || 'home';
+        // Handle route changes based on pathname
+        const path = pathname === '/' ? 'home' : pathname.slice(1);
         setCurrentPage(path);
         
         // Ensure loading shows for at least 1 second
@@ -91,25 +92,7 @@ export default function RootPage() {
         }, 1000);
 
         return () => clearTimeout(timer);
-    }, []);
-
-    const handleNavigate = async (route: string) => {
-        // Show loading state
-        setIsLoading(true);
-        
-        // Update the URL without a page reload
-        const newPath = route === 'home' ? '/' : `/${route}`;
-        window.history.pushState({}, '', newPath);
-        
-        // Wait for at least 1 second
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        
-        // Update the page and hide loading
-        setCurrentPage(route);
-        // Increment key to force remount of components
-        setKey(prevKey => prevKey + 1);
-        setIsLoading(false);
-    };
+    }, [pathname]);
 
     const renderPage = () => {
         // Pass key directly to components instead of including it in props
@@ -134,7 +117,6 @@ export default function RootPage() {
                 <div className="text-center">
                     <h2 className="text-2xl font-bold mb-4">Something went wrong</h2>
                     <button 
-                        onClick={() => handleNavigate('home')}
                         className="px-4 py-2 bg-amber-500 text-black rounded-md hover:bg-amber-600"
                     >
                         Return to Home
@@ -151,10 +133,6 @@ export default function RootPage() {
     return (
         <>
             <Analytics />
-            <Navbar 
-                alwaysShow={currentPage !== 'home'}
-                onNavigate={handleNavigate}
-            />
             <Suspense fallback={<LoadingState />}>
                 {renderPage()}
             </Suspense>

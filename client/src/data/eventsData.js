@@ -11,6 +11,11 @@ const eventsData = [
     frontImage: "/images/events/techrace-front.png",
     backImage: "/images/events/techrace-back.png",
     formUrl: "/events/techrace",
+    month: "February",
+    colorTheme: {
+      primary: "#D4AF37", // Gold
+      secondary: "#8B4513" // Saddle Brown
+    }
   },
   {
     id: "sargam",
@@ -24,6 +29,11 @@ const eventsData = [
     frontImage: "/images/events/sargam-front.png",
     backImage: "/images/events/sargam-back.png",
     formUrl: "/events/sargam",
+    month: "March",
+    colorTheme: {
+      primary: "#9370DB", // Medium Purple
+      secondary: "#4B0082" // Indigo
+    }
   },
   {
     id: "cube-open",
@@ -39,6 +49,10 @@ const eventsData = [
     formUrl: "/events/cube-open",
     month: "March",
     bg_img: "/images/cube-open-web.png", //for debugging, delete this later
+    colorTheme: {
+      primary: "#1E90FF", // Dodger Blue
+      secondary: "#191970" // Midnight Blue
+    }
   },
   {
     id: "carnival",
@@ -53,6 +67,10 @@ const eventsData = [
     backImage: "/images/events/carnival-back.jpg",
     formUrl: "/events/carnival",
     month: "March",
+    colorTheme: {
+      primary: "#FF4500", // Orange Red
+      secondary: "#8B0000" // Dark Red
+    }
   },
   {
     id: "esports",
@@ -67,6 +85,10 @@ const eventsData = [
     backImage: "/images/events/esports-back.jpg",
     formUrl: "/events/esports",
     month: "March",
+    colorTheme: {
+      primary: "#32CD32", // Lime Green
+      secondary: "#006400" // Dark Green
+    }
   },
 
   {
@@ -82,6 +104,10 @@ const eventsData = [
     backImage: "/images/events/funzone-back.jpg",
     formUrl: "/events/funzone",
     month: "March",
+    colorTheme: {
+      primary: "#FF69B4", // Hot Pink
+      secondary: "#8B008B" // Dark Magenta
+    }
   },
 ];
 
