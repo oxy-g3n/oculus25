@@ -100,14 +100,13 @@ export default function ContactPage() {
                         rotate: { repeat: Infinity, duration: 6, ease: "easeInOut", delay: 1.5 }
                     }}
                     className="fixed lg:right-[20%] right-0 lg:top-[30%] top-[30%] lg:-translate-y-1/2 -translate-y-1/2 z-0 hidden lg:block select-none"
-
                 >
                     <Image
                         src={logo2}
                         alt="Aladdin and Jasmine"
                         width={400} 
                         height={400}
-                        className="w-[400px] h-auto opacity-100 mix-blend-soft-light contrast-[190%] brightness-[185%]"
+                        className="w-[400px] h-auto opacity-100 mix-blend-soft-light contrast-[190%] brightness-[195%]"
                     />
                 </motion.div>
             </motion.div>
