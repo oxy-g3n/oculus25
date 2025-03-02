@@ -4,14 +4,31 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import logo from "../../../public/assets/full_white_transparent.png";
-import backImage from "../../../public/assets/navbar_back.jpg";
-import aladinJasmine from "../../../public/assets/new_aladin.png";
+// import chirag from "../../../../../../../swaraj31/Downloads/aladdin_oculus25/chirag.jpg"
+import logo2 from "../../../public/assets/white_O_cropped.png";
 import ContactCard from '../../components/contact/ContactCard';
 import { NewLink } from '../../components/contact/NewLink';
 
 export default function ContactPage() {
+    const [isVisible, setIsVisible] = useState(true);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 50) { // Adjust the scroll threshold as needed
+                setIsVisible(false);
+            } else {
+                setIsVisible(true);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
     return (<>
-        <div className="fixed top-4 md:top-8 left-4 md:left-8 z-50">
+        <div className={`fixed top-4 md:top-8 left-4 md:left-8 z-50 transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
             <Link href="/">
                 <Image 
                     src={logo} 
@@ -26,7 +43,7 @@ export default function ContactPage() {
         <motion.div 
             initial={{ opacity: 1 }}
             animate={{ opacity: 1 }}
-            className="w-full min-h-screen relative overflow-x-hidden"
+            className="w-full min-h-screen relative overflow-x-hidden select-none"
         >
             <div className="w-full h-screen fixed inset-0">
                 <motion.div 
@@ -35,14 +52,25 @@ export default function ContactPage() {
                     transition={{ duration: 1.2, ease: "easeOut" }}
                     className="relative w-full h-full"
                 >
-                    <Image 
-                        src={backImage} 
+                    {/* <Image 
+                        src={chirag} 
                         alt="background" 
                         fill 
-                        className="object-cover"
+                        // className="object-cover"
                         priority
-                    />
-                    <div className="absolute inset-0 bg-black/70"></div>
+                    /> */}
+
+                    <div className="fixed inset-0 w-full h-screen">
+                            <iframe
+                            src="/fluid-animation/index2.html"
+                            className="w-full h-full border-none"
+                            scrolling="no"
+                            />
+                        </div>
+                    <div className="fixed inset-0 w-full h-screen">
+                   
+      </div>
+                    <div className="absolute inset-0 bg-black/30"></div>
                 </motion.div>
             </div>
             
@@ -100,14 +128,15 @@ export default function ContactPage() {
                         y: { repeat: Infinity, duration: 4, ease: "easeInOut", delay: 1.5 },
                         rotate: { repeat: Infinity, duration: 6, ease: "easeInOut", delay: 1.5 }
                     }}
-                    className="fixed right-[0.1%] top-[30%] -translate-y-1/2 z-0 hidden lg:block"
+                    className="fixed lg:right-[20%] right-0 lg:top-[30%] top-[30%] lg:-translate-y-1/2 -translate-y-1/2 z-0 hidden lg:block select-none"
+
                 >
                     <Image
-                        src={aladinJasmine}
+                        src={logo2}
                         alt="Aladdin and Jasmine"
-                        width={700}
-                        height={700}
-                        className="w-[700px] h-auto opacity-90 mix-blend-soft-light contrast-[90%] brightness-[85%]"
+                        width={400} 
+                        height={400}
+                        className="w-[400px] h-auto opacity-100 mix-blend-soft-light contrast-[190%] brightness-[185%]"
                     />
                 </motion.div>
             </motion.div>
