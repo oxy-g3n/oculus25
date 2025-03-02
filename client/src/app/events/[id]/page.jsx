@@ -1,7 +1,7 @@
 "use client"
 
 import { useParams } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import events from '../../../data/eventsData';
 
 const EventDetailsPage = () => {
@@ -9,6 +9,35 @@ const EventDetailsPage = () => {
   const id = params?.id;
   const event = events.find((event) => event.id === id);
   const [selected, setSelected] = useState('Summary');
+  //Carousel useStates
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [carouselImages, setCarouselImages] = useState([]);
+
+//   functions to handle the carousel
+   // Generate random Lorem Picsum images for the carousel --> replace with code to fetch images from our soon to be added carousel images folder
+   useEffect(() => {
+    const imageIds = [237, 244, 338, 433, 823, 1024, 1025];
+    const images = imageIds.map(id => `https://picsum.photos/id/${id}/800/600`);
+    setCarouselImages(images);
+  }, []);
+
+  // Auto-advance carousel
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [carouselImages.length]);
+
+  // Function to go to next slide
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
+  };
+
+  // Function to go to previous slide
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + carouselImages.length) % carouselImages.length);
+  };
 
   return (
     <>
@@ -16,8 +45,8 @@ const EventDetailsPage = () => {
         <div className='w-full min-h-screen relative pb-12'>
             <div className='w-full h-[350px] overflow-hidden'>
                 <img
-                className='w-full h-full object-cover bg-no-repeat'
-                src={event.bg_img}
+                className='w-full h- object-cover bg-no-repeat -mt-20 left-0 z-10'
+                src={`/images/events/${event.id}-web.png`}
                 alt={event.name}
                 />
             </div>
@@ -67,9 +96,64 @@ const EventDetailsPage = () => {
                     >
                         FAQs
                     </button>
-                    <div className='w-full text-white z-20 lg:max-w-[70%] text-md font-semibold'>
-                        {selected == "Summary" ? event.description : ""}
+
+                    <div className='w-full text-white z-20 lg:max-w-[60%] text-md font-semibold'>
+                        {selected === "Summary" && event.description}
+                        {selected === "Rules" && (event.rules || "Rules")}
+                        {selected === "FAQs" && (event.faqs || "FAQs")}
                     </div>
+                    
+                    {/* carousel baby! */}
+                    <div className='-translate-y-[275px] lg:w-1/2 h-80 relative rounded-2xl overflow-hidden mt-6 lg:mt-0 mx-4 lg:mx-0 max-w-[400px] max-h-[300px] shadow-xl'>
+                        <div className='relative w-full h-full'>
+                            {carouselImages.map((image, index) => (
+                                <div 
+                                    key={index} 
+                                    className={`absolute top-0 left-0 w-full h-full transition-opacity duration-500 ${
+                                        index === currentSlide ? 'opacity-100' : 'opacity-0'
+                                    }`}
+                                >
+                                    <img 
+                                        src={image} 
+                                        alt={`Carousel image ${index + 1}`} 
+                                        className='w-full h-full object-cover rounded-2xl'
+                                    />
+                                </div>
+                            ))}
+                            
+                            {/* Carousel controls */}
+                            <button 
+                                onClick={prevSlide}
+                                className='absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors z-10'
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                                </svg>
+                            </button>
+                            <button 
+                                onClick={nextSlide}
+                                className='absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors z-10'
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                                </svg>
+                            </button>
+                            
+                            {/* Dots indicators */}
+                            <div className='absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 z-10'>
+                                {carouselImages.map((_, index) => (
+                                    <button 
+                                        key={index}
+                                        onClick={() => setCurrentSlide(index)}
+                                        className={`w-3 h-3 rounded-full transition-colors ${
+                                            index === currentSlide ? 'bg-yellow-500' : 'bg-white/50'
+                                        }`}
+                                    ></button>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>

@@ -34,11 +34,11 @@ const eventsData = [
     time: "10:00 AM",
     description:
       "Mumbai's biggest speedcubing competition. Multiple categories, amazing prizes, and a chance to break records!",
-    frontImage: "/assets/events/cube-open-front.png",//replace this asset too as soon as we get the correct one
+    frontImage: "/images/events/cube-open-front.png",//replace this asset too as soon as we get the correct one
     backImage: "/images/events/cube-open-back.jpg",
     formUrl: "/events/cube-open",
     month: "March",
-    bg_img: "/assets/cube-open.png", //for debugging, delete this later
+    bg_img: "/images/cube-open-web.png", //for debugging, delete this later
   },
   {
     id: "carnival",
