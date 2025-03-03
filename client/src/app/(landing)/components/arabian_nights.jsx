@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 export default function ArabianNights() {
     // Fallback image for when event images don't exist yet
@@ -88,6 +88,14 @@ export default function ArabianNights() {
         wob: 0
     });
 
+    // Add scroll position state and ref for the container
+    const [scrollProgress, setScrollProgress] = useState(0);
+    const [isDragging, setIsDragging] = useState(false);
+    const [startDragX, setStartDragX] = useState(0);
+    const [startScrollLeft, setStartScrollLeft] = useState(0);
+    const scrollContainerRef = useRef(null);
+    const scrollbarRef = useRef(null);
+
     // Setup image cycling effect
     useEffect(() => {
         const interval = setInterval(() => {
@@ -113,8 +121,80 @@ export default function ArabianNights() {
         e.target.src = fallbackImage;
     };
 
+    // Handle scroll in the container
+    const handleScroll = () => {
+        if (!scrollContainerRef.current) return;
+        
+        const container = scrollContainerRef.current;
+        const scrollableWidth = container.scrollWidth - container.clientWidth;
+        const progress = (container.scrollLeft / scrollableWidth) * 100;
+        setScrollProgress(progress);
+    };
+
+    // Handle scrollbar interactions
+    const startDragging = (e) => {
+        e.preventDefault();
+        if (!scrollContainerRef.current || !scrollbarRef.current) return;
+
+        setIsDragging(true);
+        setStartDragX(e.clientX);
+        setStartScrollLeft(scrollContainerRef.current.scrollLeft);
+    };
+
+    const stopDragging = () => {
+        setIsDragging(false);
+    };
+
+    const drag = useCallback((e) => {
+        if (!isDragging || !scrollContainerRef.current || !scrollbarRef.current) return;
+
+        e.preventDefault();
+        const container = scrollContainerRef.current;
+        const scrollbar = scrollbarRef.current;
+        
+        const scrollbarRect = scrollbar.getBoundingClientRect();
+        const scrollableWidth = container.scrollWidth - container.clientWidth;
+        
+        const deltaX = e.clientX - startDragX;
+        const scrollbarRatio = scrollableWidth / scrollbarRect.width;
+        
+        container.scrollLeft = startScrollLeft + (deltaX * scrollbarRatio);
+    }, [isDragging, startDragX, startScrollLeft]);
+
+    // Add and remove event listeners
+    useEffect(() => {
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('mouseup', stopDragging);
+        document.addEventListener('mouseleave', stopDragging);
+
+        return () => {
+            document.removeEventListener('mousemove', drag);
+            document.removeEventListener('mouseup', stopDragging);
+            document.removeEventListener('mouseleave', stopDragging);
+        };
+    }, [drag]);
+
+    // Handle track click
+    const handleTrackClick = (e) => {
+        if (!scrollContainerRef.current || e.target !== e.currentTarget) return;
+
+        const container = scrollContainerRef.current;
+        const scrollbar = e.currentTarget;
+        const rect = scrollbar.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const scrollPercentage = clickX / rect.width;
+        
+        const scrollableWidth = container.scrollWidth - container.clientWidth;
+        const newScrollPosition = scrollableWidth * scrollPercentage;
+        
+        container.scrollTo({
+            left: newScrollPosition,
+            behavior: 'smooth'
+        });
+    };
+
     return (
-        <section className="flex flex-col items-center justify-center min-h-screen py-8 md:py-0 md:h-screen bg-black overflow-hidden relative">
+        <section className="flex flex-col items-center justify-center h-screen bg-black overflow-hidden relative">
             {/* Fluid animation background */}
             <iframe
                 src="/fluid-animation/index2.html"
@@ -145,11 +225,11 @@ export default function ArabianNights() {
                 }}
             /> */}
             
-            <div className="relative z-10 flex flex-col items-center w-full px-4">
-                <h2 className="text-3xl md:text-5xl font-bold grad font-['Aref_Ruqaa_Ink'] mb-2 pb-4 md:mb-6 px-2 text-center">
+            <div className="relative z-10 flex flex-col items-center w-full px-4 h-full">
+                <h2 className="text-3xl md:text-5xl font-bold grad font-['Aref_Ruqaa_Ink'] mb-2 md:mb-4 px-2 text-center">
                     Arabian Nights
                 </h2>
-                <div className="max-w-4xl text-center px-2 md:px-4 mb-6 md:mb-8">
+                <div className="max-w-4xl text-center px-2 md:px-4 mb-4 md:mb-6">
                     <p className="text-base md:text-xl font-['Noto_Naskh_Arabic'] leading-relaxed text-amber-200">
                         Experience the magic and mystery of the Arabian Nights at Oculus 2025.
                         Where technology meets tradition in a spectacular fusion of culture and innovation.
@@ -157,8 +237,12 @@ export default function ArabianNights() {
                 </div>
 
                 {/* Image Scroller Container */}
-                <div className="w-full h-[60vh] md:h-[70vh] max-w-[95vw] mx-auto">
-                    <div className="h-full overflow-x-auto scrollbar-hide">
+                <div className="w-full flex-1 max-w-[95vw] mx-auto min-h-0">
+                    <div 
+                        ref={scrollContainerRef}
+                        className="h-full overflow-x-auto scrollbar-hide" 
+                        onScroll={handleScroll}
+                    >
                         <div className="flex gap-4 md:gap-8 p-2 md:p-4 min-w-max h-full">
                             {eventSets.map((event) => (
                                 <div
@@ -196,8 +280,27 @@ export default function ArabianNights() {
                     </div>
                 </div>
                 
+                {/* Scrollbar for desktop */}
+                <div 
+                    ref={scrollbarRef}
+                    className="hidden md:block w-full max-w-[95vw] mt-4 mb-2 select-none"
+                    onClick={handleTrackClick}
+                >
+                    <div className="h-2 bg-amber-900/30 rounded-full relative">
+                        <div 
+                            className={`absolute h-full bg-amber-400 rounded-full transition-colors duration-200 
+                                ${isDragging ? 'cursor-grabbing bg-amber-300' : 'cursor-grab hover:bg-amber-300'}`}
+                            style={{
+                                width: '20%',
+                                left: `${Math.min(scrollProgress, 80)}%`,
+                            }}
+                            onMouseDown={startDragging}
+                        />
+                    </div>
+                </div>
+
                 {/* Scroll hint - Desktop only */}
-                <div className="hidden md:flex mt-4 text-amber-300 items-center">
+                <div className="hidden md:flex mt-2 mb-4 text-amber-300 items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
