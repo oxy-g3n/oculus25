@@ -93,6 +93,21 @@
             this.DOM.nextCtrl.addEventListener('click', () => this.navigate('next'));
             this.DOM.prevCtrl.addEventListener('click', () => this.navigate('prev'));
             
+            // Add event listeners for slide links
+            this.DOM.slides.forEach((slide, index) => {
+                const link = slide.querySelector('.slide__link');
+                if (link) {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        if (index === this.slidesTotal - 1) {
+                            // On last slide, let the link handle navigation
+                            return;
+                        }
+                        this.navigate('next');
+                    });
+                }
+            });
+            
             window.addEventListener('resize', debounce(() => {
                 this.rect = this.DOM.el.getBoundingClientRect();
                 this.updateFrame();
