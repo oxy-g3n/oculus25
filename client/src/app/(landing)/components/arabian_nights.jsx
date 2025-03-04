@@ -19,7 +19,7 @@ export default function ArabianNights() {
             id: "carnival",
             title: "Carnival",
             description: "A spectacular fashion event showcasing style and creativity.",
-            image: "/assets/events/carnival/image1.jpg"
+            image: "/assets/events/carnival/image1.png"
         },
         {
             id: "pronite",
