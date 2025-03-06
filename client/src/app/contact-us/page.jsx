@@ -25,7 +25,7 @@ export default function ContactPage() {
                 >
                     {/* <Image 
                         src={chirag} 
-                        alt="background" 
+                        alt="backgrou" 
                         fill 
                         // className="object-cover"
                         priority
