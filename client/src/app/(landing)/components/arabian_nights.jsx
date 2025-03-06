@@ -13,7 +13,7 @@ export default function ArabianNights() {
             id: "aej",
             title: "Aelaan-E-Jung",
             description: "The ultimate dance competition where rhythm meets tradition.",
-            image: "/assets/events/aej/image1.jpg"
+            image: "/assets/events/aej/image1.png"
         },
         {
             id: "carnival",
@@ -25,13 +25,13 @@ export default function ArabianNights() {
             id: "pronite",
             title: "Pronite",
             description: "Mesmerizing performances by renowned artists and bands.",
-            image: "/assets/events/pronite/image1.jpg"
+            image: "/assets/events/pronite/image1.png"
         },
         {
             id: "wob",
             title: "War of Branches",
             description: "A cultural showdown between college branches through music and dance.",
-            image: "/assets/events/wob/image1.jpg"
+            image: "/assets/events/wob/image1.png"
         },
         // {
         //     id: "ipl",

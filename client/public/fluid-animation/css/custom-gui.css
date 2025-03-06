@@ -1,0 +1,33 @@
+/* Custom styles for dat.gui controls */
+
+/* Position the controls at the top middle of the screen */
+.dg.ac {
+  position: fixed !important;
+  top: 10px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  right: auto !important;
+  z-index: 1000 !important;
+}
+
+/* Style for the main container */
+.dg.main {
+  margin-right: 0 !important;
+  float: none !important;
+}
+
+/* Style for the close button */
+.dg .close-button {
+  width: 100% !important;
+}
+
+/* Ensure the controls are visible */
+.dg.a {
+  float: none !important;
+  margin-right: 0 !important;
+}
+
+/* Adjust the width to match the default */
+.dg.main.a {
+  width: 245px !important;
+} 
