@@ -5,10 +5,8 @@ export const metadata = {
 
 export default function PlaygroundLayout({ children }) {
   return (
-    <html lang="en">
-      <body className="overflow-hidden">
-        {children}
-      </body>
-    </html>
+    <div className="overflow-hidden">
+      {children}
+    </div>
   );
 } 
