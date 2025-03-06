@@ -13,16 +13,14 @@ import { usePathname } from 'next/navigation';
 // Import landing page components with error handling
 const LandingPageContent = () => {
     return (
-        <Suspense fallback={<LoadingState />}>
-            <div className="relative">
-                {/* Dynamically import Fluid_animation to prevent SSR issues */}
-                <DynamicFluidAnimation />
-                <DynamicArabianNights />
-                <DynamicAboutPage />
-                <DynamicAftermovie />
-                <Footer />
-            </div>
-        </Suspense>
+        <div className="relative">
+            {/* Dynamically import Fluid_animation to prevent SSR issues */}
+            <DynamicFluidAnimation />
+            <DynamicArabianNights />
+            <DynamicAboutPage />
+            <DynamicAftermovie />
+            <Footer />
+        </div>
     );
 };
 
@@ -77,37 +75,27 @@ const DynamicAftermovie = () => {
 
 export default function RootPage() {
     const [currentPage, setCurrentPage] = useState('home');
-    const [isLoading, setIsLoading] = useState(true);
-    const [key, setKey] = useState(0); // Add a key to force remount
     const pathname = usePathname();
 
     useEffect(() => {
         // Handle route changes based on pathname
         const path = pathname === '/' ? 'home' : pathname.slice(1);
         setCurrentPage(path);
-        
-        // Ensure loading shows for at least 1 second
-        const timer = setTimeout(() => {
-            setIsLoading(false);
-        }, 1000);
-
-        return () => clearTimeout(timer);
     }, [pathname]);
 
     const renderPage = () => {
-        // Pass key directly to components instead of including it in props
         try {
             switch(currentPage) {
                 case 'home':
-                    return <LandingPageContent key={key} />;
+                    return <LandingPageContent />;
                 case 'events':
-                    return <EventsPage key={key} />;
+                    return <EventsPage />;
                 case 'sponsors':
-                    return <SponsorsPage key={key} />;
+                    return <SponsorsPage />;
                 case 'schedule':
-                    return <SchedulePage key={key} />;
+                    return <SchedulePage />;
                 case 'contact-us':
-                    return <ContactPage key={key} />;
+                    return <ContactPage />;
                 default:
                     return <div>404 - Page Not Found</div>;
             }
@@ -125,10 +113,6 @@ export default function RootPage() {
             </div>;
         }
     };
-
-    if (isLoading) {
-        return <LoadingState />;
-    }
 
     return (
         <>

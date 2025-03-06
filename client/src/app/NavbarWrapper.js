@@ -1,15 +1,15 @@
 'use client';
 
 import { useNavbar } from './NavbarContext';
+import { useNavigation } from './NavigationContext';
 import Navbar from '../components/navbar';
-import { useRouter, usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 
 export default function NavbarWrapper() {
   const { showNavbar } = useNavbar();
-  const router = useRouter();
+  const { navigateTo } = useNavigation();
   const pathname = usePathname();
-  const [isNavigating, setIsNavigating] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
   // Handle visibility based on path and scroll
@@ -38,18 +38,10 @@ export default function NavbarWrapper() {
     }
   }, [pathname]);
 
-  // Handle navigation
+  // Handle navigation with loading state
   const handleNavigate = (route) => {
-    setIsNavigating(true);
-    
-    // Update the URL without a page reload
     const newPath = route === 'home' ? '/' : `/${route}`;
-    router.push(newPath);
-    
-    // Reset navigation state
-    setTimeout(() => {
-      setIsNavigating(false);
-    }, 1000);
+    navigateTo(newPath);
   };
 
   // Determine if we should show the navbar

@@ -8,31 +8,34 @@ export default function LoadingState() {
       exit={{ opacity: 0 }}
       className="fixed inset-0 flex items-center justify-center bg-black z-50"
     >
-      <motion.div 
-        animate={{ 
-          scale: [1, 1.2, 1],
-          rotate: [0, 360]
-        }}
-        transition={{ 
-          duration: 2,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-        className="relative"
-      >
-        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-amber-500"></div>
-        <motion.div 
-          animate={{ opacity: [0.5, 1, 0.5] }}
+      <div className="flex flex-col items-center">
+        {/* Minimalist rotating loading spinner */}
+        <div className="relative w-16 h-16">
+          {/* Main rotating ring */}
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ 
+              duration: 1.5,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+            className="w-full h-full rounded-full border-2 border-amber-500/20 border-t-amber-500"
+          />
+        </div>
+        
+        {/* OCULUS text */}
+        <motion.div
+          animate={{ opacity: [0.6, 1, 0.6] }}
           transition={{ 
-            duration: 1.5,
+            duration: 2,
             repeat: Infinity,
             ease: "easeInOut"
           }}
-          className="absolute inset-0 flex items-center justify-center"
+          className="mt-4 text-amber-500 font-light tracking-widest text-xs"
         >
-          <div className="w-24 h-24 rounded-full bg-amber-500/20 backdrop-blur-sm"></div>
+          OCULUS
         </motion.div>
-      </motion.div>
+      </div>
     </motion.div>
   );
 } 
