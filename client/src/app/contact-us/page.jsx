@@ -40,7 +40,7 @@ export default function ContactPage() {
                         </div>
                     <div className="fixed inset-0 w-full h-screen">
                    
-      </div>
+                    </div>
                     <div className="absolute inset-0 bg-black/30"></div>
                 </motion.div>
             </div>
