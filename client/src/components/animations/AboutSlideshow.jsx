@@ -1,10 +1,19 @@
 "use client";
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function AboutSlideshow() {
     const iframeRef = useRef(null);
+    const [isMounted, setIsMounted] = useState(false);
+
+    // Set mounted state on client
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
 
     useEffect(() => {
+        // Skip during SSR
+        if (!isMounted) return;
+
         // Ensure iframe loads properly
         const iframe = iframeRef.current;
         if (iframe) {
@@ -243,18 +252,25 @@ export default function AboutSlideshow() {
                 }
             };
         }
-    }, []);
+    }, [isMounted]);
 
     return (
         <div className="w-full h-screen relative overflow-hidden">
-            <iframe 
-                ref={iframeRef}
-                src="/oculus24-stills/index.html"
-                className="w-full h-full border-0 transition-opacity duration-500"
-                style={{ opacity: 0 }}
-                title="Oculus Slideshow"
-                loading="lazy"
-            />
+            {isMounted ? (
+                <iframe 
+                    ref={iframeRef}
+                    src="/oculus24-stills/index.html"
+                    className="w-full h-full border-0 transition-opacity duration-500"
+                    style={{ opacity: 0 }}
+                    title="Oculus Slideshow"
+                    loading="lazy"
+                />
+            ) : (
+                // Placeholder during server-side rendering
+                <div className="w-full h-full bg-black flex items-center justify-center">
+                    <div className="text-amber-500 text-2xl">Loading Slideshow...</div>
+                </div>
+            )}
         </div>
     );
 } 

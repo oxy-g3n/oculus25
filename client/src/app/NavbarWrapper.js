@@ -14,6 +14,9 @@ export default function NavbarWrapper() {
 
   // Handle visibility based on path and scroll
   useEffect(() => {
+    // Skip during SSR
+    if (typeof window === 'undefined') return;
+    
     const isHomePage = pathname === '/' || pathname === '';
     
     if (isHomePage) {

@@ -1,8 +1,16 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
 
 export default function Aftermovie() {
+    const [isMounted, setIsMounted] = useState(false);
+
+    // Set mounted state on client
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
+
     return (
         <section className="relative h-screen flex items-center justify-center bg-black">
             <motion.div 
@@ -15,13 +23,20 @@ export default function Aftermovie() {
                     Oculus 2023 Aftermovie
                 </h2>
                 <div className="relative aspect-video w-full">
-                    <iframe
-                        className="absolute inset-0 w-full h-full rounded-lg shadow-2xl"
-                        src="https://www.youtube.com/embed/W8asaoyvgNY"
-                        title="Oculus 2024 Aftermovie"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                    />
+                    {isMounted ? (
+                        <iframe
+                            className="absolute inset-0 w-full h-full rounded-lg shadow-2xl"
+                            src="https://www.youtube.com/embed/W8asaoyvgNY"
+                            title="Oculus 2024 Aftermovie"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                        />
+                    ) : (
+                        // Placeholder during server-side rendering
+                        <div className="absolute inset-0 w-full h-full rounded-lg shadow-2xl bg-black/50 flex items-center justify-center">
+                            <div className="text-amber-500 text-xl">Loading Video...</div>
+                        </div>
+                    )}
                 </div>
             </motion.div>
         </section>

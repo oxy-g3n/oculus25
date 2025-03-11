@@ -2,6 +2,7 @@
 
 import { Analytics } from "@vercel/analytics/react";
 import { useState, useEffect, Suspense } from 'react';
+import dynamic from 'next/dynamic';
 import EventsPage from "./events/page";
 import ContactPage from "./contact-us/page";
 import SponsorsPage from "./sponsors/page";
@@ -24,54 +25,26 @@ const LandingPageContent = () => {
     );
 };
 
-// Dynamically import components to prevent SSR issues
-const DynamicFluidAnimation = () => {
-    const [Component, setComponent] = useState(null);
-    
-    useEffect(() => {
-        import("../components/FluidAnimation/Fluid_animation").then((mod) => {
-            setComponent(() => mod.default);
-        });
-    }, []);
-    
-    return Component ? <Component /> : <div className="w-full h-screen bg-black"></div>;
-};
+// Use Next.js dynamic import with ssr: false to prevent hydration errors
+const DynamicFluidAnimation = dynamic(
+    () => import("../components/FluidAnimation/Fluid_animation"),
+    { ssr: false }
+);
 
-const DynamicArabianNights = () => {
-    const [Component, setComponent] = useState(null);
-    
-    useEffect(() => {
-        import("./(landing)/components/arabian_nights").then((mod) => {
-            setComponent(() => mod.default);
-        });
-    }, []);
-    
-    return Component ? <Component /> : null;
-};
+const DynamicArabianNights = dynamic(
+    () => import("./(landing)/components/arabian_nights"),
+    { ssr: false }
+);
 
-const DynamicAboutPage = () => {
-    const [Component, setComponent] = useState(null);
-    
-    useEffect(() => {
-        import("./(landing)/components/about").then((mod) => {
-            setComponent(() => mod.default);
-        });
-    }, []);
-    
-    return Component ? <Component /> : null;
-};
+const DynamicAboutPage = dynamic(
+    () => import("./(landing)/components/about"),
+    { ssr: false }
+);
 
-const DynamicAftermovie = () => {
-    const [Component, setComponent] = useState(null);
-    
-    useEffect(() => {
-        import("./(landing)/components/aftermovie").then((mod) => {
-            setComponent(() => mod.default);
-        });
-    }, []);
-    
-    return Component ? <Component /> : null;
-};
+const DynamicAftermovie = dynamic(
+    () => import("./(landing)/components/aftermovie"),
+    { ssr: false }
+);
 
 export default function RootPage() {
     const [currentPage, setCurrentPage] = useState('home');
