@@ -18,6 +18,24 @@ const eventsData = [
     }
   },
   {
+    id: "ipl",
+    name: "IPL Auction",
+    type: "Fun",
+    date: "2025-03-03",
+    location: "Lab Complex",
+    time: "9:00 AM",
+    description:
+      "Compete in various gaming tournaments and prove your skills in the digital arena!",
+    frontImage: "/assets/events/ipl/ipl-front.png",
+    backImage: "/assets/events/ipl/ipl-back.png",
+    formUrl: "/events/ipl",
+    month: "March",
+    colorTheme: {
+      primary: "#32CD32", // Lime Green
+      secondary: "#006400" // Dark Green
+    }
+  },
+  {
     id: "sargam",
     name: "Sargam",
     type: "Cultural",
@@ -36,24 +54,43 @@ const eventsData = [
     }
   },
   {
-    id: "cube-open",
-    name: "Cube Open",
-    type: "Fun",
+    id: "aej",
+    name: "Aelaan-E-Jang",
+    type: "Cultural",
     date: "2025-03-02",
-    location: "008 Hall, S.P.I.T.",
-    time: "10:00 AM",
+    location: "Auditorium",
+    time: "6:00 PM",
     description:
-      "Mumbai's biggest speedcubing competition. Multiple categories, amazing prizes, and a chance to break records!",
-    frontImage: "/assets/events/cube-open/cube-open-front.png",//replace this asset too as soon as we get the correct one
-    backImage: "/assets/events/cube-open/cube-open-back.jpg",
-    formUrl: "/events/cube-open",
+      "A musical extravaganza featuring the best talents from across colleges!",
+    frontImage: "/assets/events/aej/aej-front.png",
+    backImage: "/assets/events/aej/aej-back.png",
+    formUrl: "/events/aej",
     month: "March",
-    bg_img: "/images/cube-open-web.png", //for debugging, delete this later
     colorTheme: {
-      primary: "#1E90FF", // Dodger Blue
-      secondary: "#191970" // Midnight Blue
+      primary: "#9370DB", // Medium Purple
+      secondary: "#4B0082" // Indigo
     }
   },
+
+  // {
+  //   id: "cube-open",
+  //   name: "Cube Open",
+  //   type: "Fun",
+  //   date: "2025-03-02",
+  //   location: "008 Hall, S.P.I.T.",
+  //   time: "10:00 AM",
+  //   description:
+  //     "Mumbai's biggest speedcubing competition. Multiple categories, amazing prizes, and a chance to break records!",
+  //   frontImage: "/assets/events/cube-open/cube-open-front.png",//replace this asset too as soon as we get the correct one
+  //   backImage: "/assets/events/cube-open/cube-open-back.jpg",
+  //   formUrl: "/events/cube-open",
+  //   month: "March",
+  //   bg_img: "/images/cube-open-web.png", //for debugging, delete this later
+  //   colorTheme: {
+  //     primary: "#1E90FF", // Dodger Blue
+  //     secondary: "#191970" // Midnight Blue
+  //   }
+  // },
   {
     id: "carnival",
     name: "Carnival",
@@ -109,6 +146,7 @@ const eventsData = [
       secondary: "#8B008B" // Dark Magenta
     }
   },
+  
 ];
 
 export default eventsData;
