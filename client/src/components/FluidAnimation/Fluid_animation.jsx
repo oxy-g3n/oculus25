@@ -2,7 +2,6 @@
 import { useState, useEffect } from 'react';
 
 export default function Fluid_animation() {
-  const [iframeLoaded, setIframeLoaded] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 
   // Only render the iframe on the client side
@@ -15,11 +14,8 @@ export default function Fluid_animation() {
       {isMounted ? (
         <iframe
           src="/fluid-animation/index.html"
-          className={`w-full h-full border-none transition-opacity duration-300 ${
-            iframeLoaded ? 'opacity-100' : 'opacity-0'
-          }`}
+          className="w-full h-full border-none"
           scrolling="yes"
-          onLoad={() => setIframeLoaded(true)}
         />
       ) : (
         // Placeholder with same dimensions while server-side rendering
