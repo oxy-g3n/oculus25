@@ -51,7 +51,7 @@ export default function ArabianNights() {
             id: "techrace",
             title: "Techrace",
             description: "An exhilarating treasure hunt across the mystical city of Mumbai.",
-            image: "/assets/events/techrace/image1.png"
+            image: "/assets/events/techrace/banner.png"
         },
         // {
         //     id: "vsm",
