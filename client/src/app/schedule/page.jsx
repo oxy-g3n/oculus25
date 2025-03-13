@@ -33,126 +33,126 @@ export default function SchedulePage() {
     const scheduleData = {
         '20': [
             {
-                id: 'opening',
-                title: 'Opening Ceremony',
+                id: 'inaugration',
+                title: 'Inaugration',
                 time: '10:00 AM - 12:00 PM',
                 venue: 'Main Auditorium',
-                description: 'The grand opening of Oculus 2025 with special performances and guest speakers.',
+                description: 'The grand opening ceremony of Oculus 2025.',
                 banner: '/assets/events/opening/banner.png',
                 color: 'from-purple-600 to-indigo-600'
             },
             {
-                id: 'aej-prelims',
-                title: 'Aelaan-E-Jung Preliminaries',
+                id: 'tedx',
+                title: 'TEDx',
                 time: '2:00 PM - 5:00 PM',
-                venue: 'Dance Arena',
-                description: 'Preliminary rounds of the ultimate dance competition.',
-                banner: '/assets/events/aej/image1.png',
+                venue: 'Main Auditorium',
+                description: 'TEDxSPIT - A platform for sharing ideas and experiences that spark conversations and inspire change.',
+                banner: '/assets/events/tedx/banner.png',
                 color: 'from-amber-600 to-orange-600'
             },
             {
-                id: 'tech-workshop',
-                title: 'Tech Workshop',
-                time: '3:30 PM - 6:30 PM',
-                venue: 'Innovation Lab',
-                description: 'Hands-on workshop on emerging technologies and innovations.',
-                banner: '/assets/events/workshop/banner.png',
+                id: 'wob',
+                title: 'W.O.B',
+                time: '6:00 PM - 9:00 PM',
+                venue: 'Main Stage',
+                description: 'War of Branches - The ultimate showdown between college branches.',
+                banner: '/assets/events/wob/image1.png',
                 color: 'from-blue-600 to-cyan-600'
             }
         ],
         '21': [
             {
-                id: 'techrace-start',
-                title: 'Techrace Kickoff',
-                time: '9:00 AM - 10:30 AM',
-                venue: 'College Campus',
-                description: 'The beginning of the exhilarating treasure hunt across Mumbai.',
-                banner: '/assets/events/techrace/banner.png',
-                color: 'from-green-600 to-emerald-600'
-            },
-            {
-                id: 'wob-prelims',
-                title: 'War of Branches Preliminaries',
-                time: '12:00 PM - 3:00 PM',
-                venue: 'Cultural Center',
-                description: 'Branch representatives showcase their talents in the preliminary round.',
-                banner: '/assets/events/wob/image1.png',
-                color: 'from-red-600 to-rose-600'
-            },
-            {
-                id: 'carnival-day1',
-                title: 'Carnival Day 1',
+                id: 'carnival',
+                title: 'Carnival',
                 time: '4:00 PM - 8:00 PM',
                 venue: 'College Grounds',
-                description: 'First day of the spectacular fashion and cultural carnival.',
+                description: 'A spectacular carnival featuring various fun activities and performances.',
                 banner: '/assets/events/carnival/image1.png',
                 color: 'from-pink-600 to-fuchsia-600'
+            },
+            {
+                id: 'battle-of-bands',
+                title: 'Battle of Bands',
+                time: '6:00 PM - 10:00 PM',
+                venue: 'Amphitheater',
+                description: 'Musical battle between talented bands showcasing their best performances.',
+                banner: '/assets/events/battle-of-bands/banner.png',
+                color: 'from-violet-600 to-purple-600'
             }
         ],
         '22': [
             {
-                id: 'hackathon',
-                title: 'Hackathon',
-                time: '9:00 AM - 9:00 PM',
-                venue: 'Computer Labs',
-                description: '12-hour coding marathon to solve real-world problems.',
-                banner: '/assets/events/hackathon/banner.png',
-                color: 'from-teal-600 to-cyan-600'
+                id: 'ipl',
+                title: 'IPL',
+                time: '10:00 AM - 4:00 PM',
+                venue: 'Sports Ground',
+                description: 'Indoor Premier League - Exciting indoor sports competition.',
+                banner: '/assets/events/ipl/banner.png',
+                color: 'from-green-600 to-emerald-600'
             },
             {
-                id: 'aej-finals',
-                title: 'Aelaan-E-Jung Finals',
+                id: 'sargam',
+                title: 'Sargam',
                 time: '5:00 PM - 8:00 PM',
-                venue: 'Main Stage',
-                description: 'The final showdown of the dance competition with celebrity judges.',
-                banner: '/assets/events/aej/finals.png',
+                venue: 'Main Auditorium',
+                description: 'A musical extravaganza showcasing the best singing talents.',
+                banner: '/assets/events/sargam/banner.png',
                 color: 'from-amber-600 to-yellow-600'
             },
             {
-                id: 'pronite-day1',
-                title: 'Pronite - Music Night',
-                time: '8:30 PM - 11:00 PM',
-                venue: 'Amphitheater',
-                description: 'Mesmerizing musical performances by renowned artists and bands.',
-                banner: '/assets/events/pronite/image1.png',
+                id: 'aej',
+                title: 'AEJ',
+                time: '6:00 PM - 9:00 PM',
+                venue: 'Dance Arena',
+                description: 'Aelaan-E-Jung - The ultimate dance competition.',
+                banner: '/assets/events/aej/banner.png',
+                color: 'from-red-600 to-rose-600'
+            },
+            {
+                id: 'dj',
+                title: 'DJ',
+                time: '9:00 PM - 11:00 PM',
+                venue: 'College Grounds',
+                description: 'Dance the night away with amazing music by professional DJs.',
+                banner: '/assets/events/dj/banner.png',
                 color: 'from-violet-600 to-purple-600'
             }
         ],
         '23': [
             {
-                id: 'wob-finals',
-                title: 'War of Branches Finals',
+                id: 'robo-sumo',
+                title: 'Robo Sumo',
                 time: '10:00 AM - 1:00 PM',
-                venue: 'Main Auditorium',
-                description: 'The final cultural showdown between college branches.',
-                banner: '/assets/events/wob/finals.png',
+                venue: 'Robotics Lab',
+                description: 'Robot wrestling competition where machines battle it out.',
+                banner: '/assets/events/robo-sumo/banner.png',
                 color: 'from-blue-600 to-indigo-600'
             },
             {
-                id: 'carnival-day2',
-                title: 'Carnival Day 2',
-                time: '2:00 PM - 6:00 PM',
-                venue: 'College Grounds',
-                description: 'Second day of the spectacular fashion and cultural carnival.',
-                banner: '/assets/events/carnival/image1.png',
-                color: 'from-pink-600 to-rose-600'
+                id: 'robo-soccer',
+                title: 'Robo Soccer',
+                time: '2:00 PM - 5:00 PM',
+                venue: 'Sports Ground',
+                description: 'Exciting soccer matches played by robots.',
+                banner: '/assets/events/robo-soccer/banner.png',
+                color: 'from-green-600 to-emerald-600'
             },
             {
-                id: 'closing-ceremony',
-                title: 'Closing Ceremony & Awards',
-                time: '7:00 PM - 9:00 PM',
+                id: 'line-following-robo',
+                title: 'Line Following Robo',
+                time: '3:00 PM - 6:00 PM',
+                venue: 'Robotics Arena',
+                description: 'Robots competing to follow complex line patterns accurately.',
+                banner: '/assets/events/line-following/banner.png',
+                color: 'from-amber-600 to-yellow-600'
+            },
+            {
+                id: 'pronite',
+                title: 'ProNite',
+                time: '7:00 PM - 11:00 PM',
                 venue: 'Main Stage',
-                description: 'Grand finale with award distribution and special performances.',
-                banner: '/assets/events/closing/banner.png',
-                color: 'from-amber-600 to-red-600'
-            },
-            {
-                id: 'pronite-day2',
-                title: 'Pronite - Celebrity Performance',
-                time: '9:30 PM - 12:00 AM',
-                venue: 'Amphitheater',
-                description: 'The grand finale with a celebrity performance to remember.',
-                banner: '/assets/events/pronite/finale.png',
+                description: 'The grand finale night with professional performances and celebrations.',
+                banner: '/assets/events/pronite/banner.png',
                 color: 'from-purple-600 to-fuchsia-600'
             }
         ]
