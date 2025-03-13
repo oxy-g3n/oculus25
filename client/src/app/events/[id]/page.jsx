@@ -59,18 +59,49 @@ const EventDetailsPage = () => {
                                 </p>
                             </div>
                         </div>
-                        <a href={event.formUrl}
-                           target="_blank"
-                           rel="noopener noreferrer"
-                           className="px-6 py-2 text-base font-semibold rounded-lg
-                                    shadow-md transition-all transform hover:scale-105 text-white
-                                    text-center font-['Aref_Ruqaa_Ink']"
-                           style={{ 
-                               backgroundColor: primaryColor,
-                               boxShadow: `0 0 20px ${primaryColor}40`
-                           }}>
-                            Register
-                        </a>
+                        {event.id === 'tedx' ? (
+                            <div className="flex gap-4">
+                                <a href={event.formUrl}
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                   className="px-6 py-2 text-base font-semibold rounded-lg
+                                            shadow-md transition-all transform hover:scale-105 text-white
+                                            text-center font-['Aref_Ruqaa_Ink']"
+                                   style={{ 
+                                       backgroundColor: primaryColor,
+                                       boxShadow: `0 0 20px ${primaryColor}40`
+                                   }}>
+                                    Register (Outside SPIT)
+                                </a>
+                                <a href={event.formUrl2}
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                   className="px-6 py-2 text-base font-semibold rounded-lg
+                                            shadow-md transition-all transform hover:scale-105 text-white
+                                            text-center font-['Aref_Ruqaa_Ink']
+                                            border-2"
+                                   style={{ 
+                                       borderColor: primaryColor,
+                                       color: primaryColor,
+                                       boxShadow: `0 0 20px ${primaryColor}40`
+                                   }}>
+                                    Register (SPIT)
+                                </a>
+                            </div>
+                        ) : (
+                            <a href={event.formUrl}
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               className="px-6 py-2 text-base font-semibold rounded-lg
+                                        shadow-md transition-all transform hover:scale-105 text-white
+                                        text-center font-['Aref_Ruqaa_Ink']"
+                               style={{ 
+                                   backgroundColor: primaryColor,
+                                   boxShadow: `0 0 20px ${primaryColor}40`
+                               }}>
+                                Register
+                            </a>
+                        )}
                     </div>
                 </div>
             </section>

@@ -1,17 +1,18 @@
 const eventsData = [
   {
-    id: "techrace",
-    name: "TechRace",
-    type: "Pre - Event",
-    date: "2025-02-28",
+    id: "tedx",
+    name: "TEDxSPIT",
+    type: "fun",
+    date: "2025-03-20",
     location: "Mumbai",
     time: "4 hours",
     description:
-      "Techrace is the mega pre-event of OCULUS which marks the beginning of OCULUS. All college students can participate in this treasure hunt across mumbai whose clues will be available on our app along with a variety of power cards to make the event more fun and challenging",
-    frontImage: "/assets/events/techrace/techrace-front.png",
-    backImage: "/assets/events/techrace/techrace-back.png",
-    banner: "/assets/events/techrace/banner.png",
-    formUrl: "#",
+      "TEDxSPIT is a platform for sharing ideas and experiences that spark conversations and inspire change. It's a celebration of creativity, innovation, and the power of ideas to make a difference. Join us for a day of thought-provoking talks, engaging discussions, and inspiring stories.",
+    frontImage: "/assets/events/tedx/tedx-front.png",
+    backImage: "/assets/events/tedx/tedx-back.png",
+    banner: "/assets/events/tedx/banner.png",
+    formUrl: "https://docs.google.com/forms/d/e/1FAIpQLScRHyBNVeAH-gbDo4bum2jZEcVUKA7lIkGR_PZEsaJBwfgXhw/viewform", //for OUTSIDE SPIT
+    formUrl2: "https://docs.google.com/forms/d/e/1FAIpQLScex0nB9RRwimzLVUzyCdChqQt1T9hj9Nm0PMyGLyVLH2tpxQ/viewform", //for SPIT
     month: "February",
     colorTheme: {
       primary: "#D4AF37", // Gold
@@ -19,27 +20,82 @@ const eventsData = [
     },
     faq: [
       {
-        "question": "Do we need technical skills to participate?",
-        "answer": "No, it's just for the name"
+        "question": "What is the duration of each talk?",
+        "answer": "Each talk is typically 18 minutes or less, following the standard TED format"
       },
       {
-        "question": "Can we participate with other college students?",
-        "answer": "Yes, you can"
+        "question": "Will there be breaks between sessions?",
+        "answer": "Yes, there will be short breaks between sessions for refreshments and networking"
       },
       {
-        "question": "How do we get points?",
-        "answer": "You get points based on how much time you take to reach the next location"
+        "question": "Can I take photos during the event?",
+        "answer": "No"
       },
       {
-        "question": "If we cannot solve the clue, do we get hints?",
-        "answer": "Yes, you can buy two hints for points"
+        "question": "Will the talks be recorded?",
+        "answer": "Yes, the talks will be professionally recorded and shared on our official channels after the event"
       }
     ],
     "rules": [
-      "You can team up with your friends from different colleges as well or go solo",
-      "Only public transport should be used by the participants",
-      "You have various power cards which cost you points in the game",
-      "Winner is declared on the basis of who reaches the last location first and not who has maximum points"
+      "Maintain complete silence during the talks and switch your mobile phones to silent mode",
+      "Entry/Exit is only allowed between talks to avoid disturbing the ongoing session",
+      "Recording of talks on personal devices is strictly prohibited",
+      "Arrive at least 15 minutes before the scheduled start time",
+      "Be respectful to speakers and other attendees during Q&A sessions",
+      "Food and beverages are not allowed in the auditorium during talks"
+    ],
+  },
+  {
+    id: "rangmanch",
+    name: "Rangmanch",
+    type: "fun",
+    date: "2025-03-23",
+    location: "SPIT",
+    time: "10:00 AM",
+    description:
+      "Lights, camera, action! Rangmanch, the only drama event of SPIT, is back with a stage set for passion, expression, and storytelling. Get ready to witness the power of theatre through Short Films, Nukkad Natak, and a Monologue Competition – three events that bring emotions to life like never before! Join us for an unforgettable theatrical experience and witness the true essence of drama at SPIT!",
+    frontImage: "/assets/events/rangmanch/rangmanch-front.png",   
+    backImage: "/assets/events/rangmanch/rangmanch-back.png",
+    banner: "/assets/events/rangmanch/banner.png",
+    formUrl: "https://linktr.ee/Mudra_S.P.I.T",
+    month: "March",
+    colorTheme: {
+      primary: "#D4AF37", // Gold
+      secondary: "#8B4513" // Saddle Brown
+    },
+    faq: [
+      {
+        "question": "What are the different events in Rangmanch?",
+        "answer": "Rangmanch features three main events: Short Film Competition, Nukkad Natak (Street Play), and Monologue Competition."
+      },
+      {
+        "question": "What is the time limit for each event?",
+        "answer": "Short Films should be 5-15 minutes, Nukkad Natak performances 15-20 minutes, and Monologues 3-5 minutes."
+      },
+      {
+        "question": "Can I participate in multiple events?",
+        "answer": "Yes, participants can register for multiple events, but ensure there are no timing clashes."
+      },
+      {
+        "question": "What should be the team size?",
+        "answer": "Short Films: 3-15 members, Nukkad Natak: 8-20 members, Monologue: Individual participation."
+      },
+      {
+        "question": "Are there any language restrictions?",
+        "answer": "Performances can be in Hindi, English, or a mix of both. Other languages must include subtitles/translation."
+      }
+    ],
+    "rules": [
+      "Short Films must be original content and submitted in MP4 format before the deadline",
+      "Nukkad Natak performances must address social issues or relevant themes",
+      "Monologues can be original or adapted from existing works with proper credits",
+      "Use of offensive language or inappropriate content will lead to immediate disqualification",
+      "Props and costumes are allowed but must be arranged by the participants",
+      "Background music/sound effects are permitted for all three events",
+      "Judges' decision will be final and binding",
+      "All team members must carry valid college ID cards",
+      "Time limits must be strictly followed for all performances",
+      "Registration is mandatory through the provided link before the event"
     ],
   },
   {
@@ -90,7 +146,7 @@ const eventsData = [
     location: "Auditorium",
     time: "6:00 PM",
     description:
-      "What better opportunity for young aspiring singers with bags of potential to showcase their extraordinary musical side than Sargam’25! Get a chance to allure and amaze the audience with your euphonious melodies and compete to get top-notch prices along with the glory and prestige of winning Sargam’25.",
+      "What better opportunity for young aspiring singers with bags of potential to showcase their extraordinary musical side than Sargam'25! Get a chance to allure and amaze the audience with your euphonious melodies and compete to get top-notch prices along with the glory and prestige of winning Sargam'25.",
     frontImage: "/assets/events/sargam/sargam-front.png",
     backImage: "/assets/events/sargam/sargam-back.png",
     banner: "/assets/events/sargam/banner.png",
@@ -189,13 +245,13 @@ const eventsData = [
     id: "carnival",
     name: "Carnival",
     type: "Cultural",
-    date: "2025-03-01",
+    date: "2025-03-21",
     location: "College Ground",
     time: "Whole Day",
     description:
       "Get ready to unleash your inner fashion icon! Carnival is here, a competition where the fiercest design rivals clash in a dazzling display of creativity. This isn't just a show, it's a battleground for bold ideas and show-stopping style. Transform the runway with your most innovative looks and compete for ultimate fashion glory!  Register right now or you'll be STRESSED later. This is your chance to SERVE some LOOKS that'll have everyone SHOOK.  Let's get this fashion party STARTED!",
-    frontImage: "/assets/events/carnival/carnival-front.jpg",
-    backImage: "/assets/events/carnival/carnival-back.jpg",
+    frontImage: "/assets/events/carnival/carnival-front.png",
+    backImage: "/assets/events/carnival/carnival-back.png",
     banner: "/assets/events/carnival/banner.png",
     formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSeVj7XpryEiC8JoslEgH7B2On-7VPtNI4B7KsYXBhh-S3Ucog/viewform",
     month: "March",
@@ -235,6 +291,49 @@ const eventsData = [
       "Teams are to prepare their CD and Pendrive for their performance.",
       "The decisions of the judges will be final.",
       "The organizing team will have the right to disqualify the team in case of grave disturbance. The decision of the organizing team will be final."
+    ],
+  },
+  {
+    id: "techrace",
+    name: "TechRace",
+    type: "Pre - Event",
+    date: "2025-02-28",
+    location: "Mumbai",
+    time: "4 hours",
+    description:
+      "Techrace is the mega pre-event of OCULUS which marks the beginning of OCULUS. All college students can participate in this treasure hunt across mumbai whose clues will be available on our app along with a variety of power cards to make the event more fun and challenging",
+    frontImage: "/assets/events/techrace/techrace-front.png",
+    backImage: "/assets/events/techrace/techrace-back.png",
+    banner: "/assets/events/techrace/banner.png",
+    formUrl: "#",
+    month: "February",
+    colorTheme: {
+      primary: "#D4AF37", // Gold
+      secondary: "#8B4513" // Saddle Brown
+    },
+    faq: [
+      {
+        "question": "Do we need technical skills to participate?",
+        "answer": "No, it's just for the name"
+      },
+      {
+        "question": "Can we participate with other college students?",
+        "answer": "Yes, you can"
+      },
+      {
+        "question": "How do we get points?",
+        "answer": "You get points based on how much time you take to reach the next location"
+      },
+      {
+        "question": "If we cannot solve the clue, do we get hints?",
+        "answer": "Yes, you can buy two hints for points"
+      }
+    ],
+    "rules": [
+      "You can team up with your friends from different colleges as well or go solo",
+      "Only public transport should be used by the participants",
+      "You have various power cards which cost you points in the game",
+      "Winner is declared on the basis of who reaches the last location first and not who has maximum points"
     ],
   },
 
