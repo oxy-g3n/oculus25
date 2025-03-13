@@ -10,7 +10,7 @@ const ContactCard = ({ text, number }) => {
                 <Card
                     title="Sphurti Asawa"
                     subtitle="+91 88284 22842"
-                    description="General Secretary Stcu"
+                    description="General Secretary Stuco"
                     Icon={FiUser}
 
                     isMain={true}
@@ -27,13 +27,13 @@ const ContactCard = ({ text, number }) => {
                 <Card
                     title="Arya Patkar"
                     subtitle="+91 84199 19062"
-                    description="Finance Secretary Stcu"
+                    description="Finance Secretary Stuco"
                     Icon={FiUser}
                 />
                 <Card
                     title="Mandar Dumbre"
                     subtitle="+91 93728 43787"
-                    description="Technical Secretary Stcu"
+                    description="Technical Secretary Stuco"
                     Icon={FiUser}
                 />
                 <Card
@@ -45,13 +45,13 @@ const ContactCard = ({ text, number }) => {
                 <Card
                     title="Soumorup Chakrabarti"
                     subtitle="+91 88280 90474"
-                    description="Cultural Secretary Stcu"
+                    description="Cultural Secretary Stuco"
                     Icon={FiUser}
                 />
                 <Card
                     title="Samrith Shetty"
                     subtitle="+91 93222 41530"
-                    description="Cultural Secretary Stcu"
+                    description="Cultural Secretary Stuco"
                     Icon={FiUser}
                 />
             </div>

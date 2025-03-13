@@ -35,8 +35,18 @@
                 const canvas = document.querySelector('canvas');
                 const blackLogo = document.querySelector('.black-logo');
                 const whiteLogo = document.querySelector('.white-logo');
+                const interactionText = document.querySelector('.interaction-text');
+                let hasInteracted = false;
+
+                const hideInteractionText = () => {
+                    if (!hasInteracted) {
+                        hasInteracted = true;
+                        interactionText.classList.add('hidden');
+                    }
+                };
 
                 logoContainer.addEventListener('mousedown', (e) => {
+                    hideInteractionText();
                     const rect = canvas.getBoundingClientRect();
                     const newEvent = new MouseEvent('mousedown', {
                         bubbles: true,
@@ -68,7 +78,6 @@
 
                 // Mobile tap and hold handling
                 let currentLogo = 'white';
-                let touchTimer = null;
                 
                 const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
                 
@@ -88,6 +97,7 @@
                     disableInteractions(logoContainer);
 
                     const toggleLogo = () => {
+                        hideInteractionText();
                         if (currentLogo === 'white') {
                             blackLogo.style.opacity = '1';
                             blackLogo.style.transform = 'scale(1)';
@@ -145,9 +155,10 @@
                 class="logo-image white-logo"
             />
         </div>
-        <div id="interaction-text" class="interaction-text">
-            <span class="mobile-text"`>Drag me</span>
-            <span class="desktop-text">Drag me</span>
+        <div class="interaction-text">
+            <div class="interaction-ring"></div>
+            <span class="text mobile-text">Drag to Flow</span>
+            <span class="text desktop-text">Drag to Flow</span>
         </div>
         <script src="./script.js"></script>
     </body>
