@@ -1,293 +1,190 @@
 "use client"
 
 import Link from 'next/link';
-import { useParams, useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useParams } from 'next/navigation';
+import { useState } from 'react';
 import events from '../../../data/eventsData';
 
 const EventDetailsPage = () => {
-  const router = useRouter();
-  const params = useParams();
-  const id = params?.id;
-  const event = events.find((event) => event.id === id);
-  const [selected, setSelected] = useState('Summary');
-  //Carousel useStates
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [carouselImages, setCarouselImages] = useState([]);
+    const { id } = useParams();
+    const event = events.find(event => event.id === id);
+    const [selectedTab, setSelectedTab] = useState('Summary');
+    const [openFaq, setOpenFaq] = useState(null);
 
-//   functions to handle the carousel
-   // Generate random Lorem Picsum images for the carousel --> replace with code to fetch images from our soon to be added carousel images folder
-   useEffect(() => {
-    const imageIds = [237, 244, 338, 433, 823, 1024, 1025];
-    const images = imageIds.map(id => `https://picsum.photos/id/${id}/800/600`);
-    setCarouselImages(images);
-  }, []);
-
-  // Auto-advance carousel
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [carouselImages.length]);
-
-  // Function to go to next slide
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
-  };
-
-  // Function to go to previous slide
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + carouselImages.length) % carouselImages.length);
-  };
-
-  // Get event colors or use default Arabian Nights theme
-  const primaryColor = event?.colorTheme?.primary || "#D4AF37"; // Gold default
-  const secondaryColor = event?.colorTheme?.secondary || "#8B4513"; // Saddle Brown default
-
-  return (
-    <>
-        <div 
-          className='w-full min-h-screen relative pb-12'
-          style={{ 
-            background: `linear-gradient(to bottom, ${secondaryColor}05, ${secondaryColor}40)`,
-            backgroundAttachment: 'fixed'
-          }}
-        >
-            {/* Simple back button */}
-            <div className="absolute top-4 left-4 md:top-6 md:left-6 z-50">
-                <Link href="/events">
-                    <button 
-                        className="bg-black/50 text-white px-3 py-2 md:px-5 md:py-2.5 rounded-lg border-2 border-amber-500/70 hover:bg-amber-500/40 transition-all duration-300 font-['Aref_Ruqaa_Ink'] text-base md:text-lg shadow-lg hover:shadow-amber-500/30"
-                        style={{
-                            boxShadow: "0 0 10px rgba(0,0,0,0.5)"
-                        }}
-                    >
-                        ← Back
-                    </button>
-                </Link>
+    if (!event) {
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-black">
+                <div className="text-lg text-white font-['Aref_Ruqaa_Ink']">Event not found</div>
             </div>
+        );
+    }
 
-            <div className='w-full h-[250px] md:h-[350px] overflow-hidden'>
-                <img
-                className='w-full h-full object-cover bg-no-repeat left-0 z-10'
-                src={`/assets/events/${event.id}/${event.id}-web.png`}
-                alt={event.name}
-                />
-            </div>
-            <div className="absolute top-[150px] md:top-[200px] left-0 w-full h-24 bg-gradient-to-t from-black to-transparent"></div>
-            <div className="absolute top-[246px] md:top-[296px] left-0 w-full h-full" style={{ background: `linear-gradient(to bottom, #000000, ${secondaryColor}90)` }}></div>
-            
-            <div className='w-full -mt-32 md:-mt-48 lg:-mt-52 filter-causer relative pt-8 md:pt-12 px-4 md:pl-20'>
-                <div className='x-container'>
-                    <div className='flex flex-col items-center justify-center lg:flex-row lg:justify-between'>
-                        <div className='flex flex-col md:flex-row gap-2 items-center'>
-                            <img src={event.frontImage} alt="hackathon logo" className="w-24 md:w-32 lg:w-48" />
-                            <div className='flex flex-col items-center lg:items-start'>
-                                <h1 className='text-xl md:text-2xl lg:text-4xl font-bold text-white text-center md:text-left' 
-                                    style={{ 
-                                      textShadow: `0 0 10px ${primaryColor}`
-                                    }}>{event.name}</h1>
-                                <p className='text-sm md:text-md lg:text-2xl text-white text-center'
-                                   style={{ color: primaryColor }}>{event.type} • {event.month} 2025</p>
+    const { primary: primaryColor = "#D4AF37", secondary: secondaryColor = "#8B4513" } = event.colorTheme || {};
+
+    return (
+        <main className="min-h-screen bg-black">
+            {/* Banner Section */}
+            <section className="relative h-[300px] md:h-[400px]">
+                {/* Back Button */}
+                <div className="absolute top-4 left-4 z-50">
+                    <Link href="/events">
+                        <button className="bg-black/50 text-white px-4 py-2 rounded-lg border border-amber-500/70 
+                                         hover:bg-amber-500/40 transition-all duration-300 font-['Aref_Ruqaa_Ink'] text-sm">
+                            ← Back
+                        </button>
+                    </Link>
+                </div>
+
+                {/* Banner Image */}
+                <div className="absolute inset-0">
+                    <img src={event.banner} alt={event.name} 
+                         className="w-full h-full object-cover" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/60 to-black"></div>
+                </div>
+
+                {/* Event Info */}
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                    <div className="container mx-auto flex flex-col md:flex-row items-center md:items-end justify-between gap-6">
+                        <div className="flex items-center gap-4">
+                            <img src={event.frontImage} alt={event.name} 
+                                 className="w-24 md:w-28" />
+                            <div>
+                                <h1 className="text-2xl md:text-3xl font-bold text-white font-['Aref_Ruqaa_Ink']"
+                                    style={{ textShadow: `0 0 10px ${primaryColor}` }}>
+                                    {event.name}
+                                </h1>
+                                <p className="text-base md:text-lg mt-1 font-['Noto_Naskh_Arabic']"
+                                   style={{ color: primaryColor }}>
+                                    {event.type} • {event.month} 2024
+                                </p>
                             </div>
                         </div>
+                        <a href={event.formUrl}
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           className="px-6 py-2 text-base font-semibold rounded-lg
+                                    shadow-md transition-all transform hover:scale-105 text-white
+                                    text-center font-['Aref_Ruqaa_Ink']"
+                           style={{ 
+                               backgroundColor: primaryColor,
+                               boxShadow: `0 0 20px ${primaryColor}40`
+                           }}>
+                            Register
+                        </a>
                     </div>
                 </div>
-            </div>
-            
-            <div className='x-container mt-5 font-bold'>
-                <div className='flex flex-col px-4 md:pl-20'>
-                    {/* carousel with Arabian style - Moved up for mobile */}
-                    <div 
-                        className='block lg:hidden mb-8 h-64 w-full rounded-2xl overflow-hidden shadow-xl'
-                        style={{ 
-                            boxShadow: `0 10px 25px rgba(0,0,0,0.5), 0 0 15px ${primaryColor}40`,
-                            border: `2px solid ${primaryColor}80`
-                        }}
-                    >
-                        <div className='relative w-full h-full'>
-                            {carouselImages.map((image, index) => (
-                                <div 
-                                    key={index} 
-                                    className={`absolute top-0 left-0 w-full h-full transition-opacity duration-500 ${
-                                        index === currentSlide ? 'opacity-100' : 'opacity-0'
-                                    }`}
-                                >
-                                    <img 
-                                        src={image} 
-                                        alt={`Carousel image ${index + 1}`} 
-                                        className='w-full h-full object-cover rounded-2xl'
-                                    />
-                                </div>
-                            ))}
-                                
-                            {/* Carousel controls */}
-                            <button 
-                                onClick={prevSlide}
-                                className='absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors z-10'
-                                style={{ backgroundColor: `${secondaryColor}80` }}
-                            >
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-                                </svg>
-                            </button>
-                            <button 
-                                onClick={nextSlide}
-                                className='absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors z-10'
-                                style={{ backgroundColor: `${secondaryColor}80` }}
-                            >
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                                </svg>
-                            </button>
-                                
-                            {/* Dots indicators */}
-                            <div className='absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 z-10'>
-                                {carouselImages.map((_, index) => (
-                                    <button 
-                                        key={index}
-                                        onClick={() => setCurrentSlide(index)}
-                                        className={`w-3 h-3 rounded-full transition-colors`}
-                                        style={{ 
-                                            backgroundColor: index === currentSlide ? primaryColor : 'rgba(255,255,255,0.5)'
-                                        }}
-                                    ></button>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
+            </section>
 
-                    {/* Buttons row with Arabian style */}
-                    <div className='flex flex-row gap-2 md:gap-4 flex-wrap mb-6 justify-center lg:justify-start'>
+            {/* Content Section */}
+            <section className="container mx-auto px-4 py-6">
+                {/* Navigation Tabs */}
+                <div className="flex gap-6 mb-6 max-w-[600px]">
+                    {['Summary', 'Rules', 'FAQs'].map(tab => (
                         <button
-                            className={`event-btn w-28 md:w-36 h-10 md:h-12 text-base md:text-lg px-4 md:px-6 py-2 md:py-3 rounded-xl shadow-lg transition-colors transition-all transform hover:scale-110 border-2 ${
-                                selected === 'Summary' 
-                                ? `bg-opacity-90 text-white border-${primaryColor}` 
-                                : 'bg-slate-800 bg-opacity-50 text-gray-200 border-transparent'
-                            }`}
-                            style={{ 
-                                backgroundColor: selected === 'Summary' ? primaryColor : '',
-                                borderColor: selected === 'Summary' ? primaryColor : 'transparent',
-                                boxShadow: selected === 'Summary' ? `0 0 15px ${primaryColor}80` : ''
-                            }}
-                            onClick={() => setSelected('Summary')}
-                        >
-                            Summary
+                            key={tab}
+                            onClick={() => setSelectedTab(tab)}
+                            className={`px-8 py-3 text-base font-medium rounded-lg transition-all duration-300
+                                      font-['Aref_Ruqaa_Ink'] border border-transparent
+                                      hover:scale-105 hover:shadow-lg
+                                      ${selectedTab === tab 
+                                        ? 'text-white border-white/20' 
+                                        : 'text-gray-400 hover:text-white hover:border-white/10'}`}
+                            style={{
+                                backgroundColor: selectedTab === tab ? primaryColor : 'rgba(0,0,0,0.3)',
+                                boxShadow: selectedTab === tab 
+                                    ? `0 0 20px ${primaryColor}40` 
+                                    : 'none',
+                                transform: `translateY(${selectedTab === tab ? '-2px' : '0'})`,
+                                minWidth: '120px'
+                            }}>
+                            {tab}
                         </button>
-                        <button
-                            className={`event-btn w-28 md:w-36 h-10 md:h-12 text-base md:text-lg px-4 md:px-6 py-2 md:py-3 rounded-xl shadow-lg transition-colors transition-all transform hover:scale-110 border-2 ${
-                                selected === 'Rules' 
-                                ? `bg-opacity-90 text-white border-${primaryColor}` 
-                                : 'bg-slate-800 bg-opacity-50 text-gray-200 border-transparent'
-                            }`}
-                            style={{ 
-                                backgroundColor: selected === 'Rules' ? primaryColor : '',
-                                borderColor: selected === 'Rules' ? primaryColor : 'transparent',
-                                boxShadow: selected === 'Rules' ? `0 0 15px ${primaryColor}80` : ''
-                            }}
-                            onClick={() => setSelected('Rules')}
-                        >
-                            Rules
-                        </button>
-                        <button
-                            className={`event-btn w-28 md:w-36 h-10 md:h-12 text-base md:text-lg px-4 md:px-6 py-2 md:py-3 rounded-xl shadow-lg transition-colors transition-all transform hover:scale-110 border-2 ${
-                                selected === 'FAQs' 
-                                ? `bg-opacity-90 text-white border-${primaryColor}` 
-                                : 'bg-slate-800 bg-opacity-50 text-gray-200 border-transparent'
-                            }`}
-                            style={{ 
-                                backgroundColor: selected === 'FAQs' ? primaryColor : '',
-                                borderColor: selected === 'FAQs' ? primaryColor : 'transparent',
-                                boxShadow: selected === 'FAQs' ? `0 0 15px ${primaryColor}80` : ''
-                            }}
-                            onClick={() => setSelected('FAQs')}
-                        >
-                            FAQs
-                        </button>
-                    </div>
-
-                    {/* Content section with Arabian style */}
-                    <div 
-                        className='w-full text-white z-20 lg:max-w-[60%] text-sm md:text-md font-semibold mt-4 p-4 md:p-6 rounded-lg'
-                        style={{ 
-                            width: '100%',
-                            backgroundColor: 'rgba(0,0,0,0.5)',
-                            borderLeft: `4px solid ${primaryColor}`,
-                            boxShadow: `0 4px 20px rgba(0,0,0,0.3), 0 0 10px ${primaryColor}40`,
-                            backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.5))`
-                        }}
-                    >
-                        {selected === "Summary" && event.description}
-                        {selected === "Rules" && (event.rules || "Rules")}
-                        {selected === "FAQs" && (event.faqs || "FAQs")}
-                    </div>
-                    
-                    {/* Desktop carousel */}
-                    <div 
-                        className='hidden lg:block absolute lg:top-[350px] lg:right-20 h-80 w-[400px] rounded-2xl overflow-hidden shadow-xl'
-                        style={{ 
-                            boxShadow: `0 10px 25px rgba(0,0,0,0.5), 0 0 15px ${primaryColor}40`,
-                            border: `2px solid ${primaryColor}80`
-                        }}
-                    >
-                        <div className='relative w-full h-full'>
-                            {carouselImages.map((image, index) => (
-                                <div 
-                                    key={index} 
-                                    className={`absolute top-0 left-0 w-full h-full transition-opacity duration-500 ${
-                                        index === currentSlide ? 'opacity-100' : 'opacity-0'
-                                    }`}
-                                >
-                                    <img 
-                                        src={image} 
-                                        alt={`Carousel image ${index + 1}`} 
-                                        className='w-full h-full object-cover rounded-2xl'
-                                    />
-                                </div>
-                            ))}
-                                
-                            {/* Carousel controls */}
-                            <button 
-                                onClick={prevSlide}
-                                className='absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors z-10'
-                                style={{ backgroundColor: `${secondaryColor}80` }}
-                            >
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-                                </svg>
-                            </button>
-                            <button 
-                                onClick={nextSlide}
-                                className='absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors z-10'
-                                style={{ backgroundColor: `${secondaryColor}80` }}
-                            >
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                                </svg>
-                            </button>
-                                
-                            {/* Dots indicators */}
-                            <div className='absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 z-10'>
-                                {carouselImages.map((_, index) => (
-                                    <button 
-                                        key={index}
-                                        onClick={() => setCurrentSlide(index)}
-                                        className={`w-3 h-3 rounded-full transition-colors`}
-                                        style={{ 
-                                            backgroundColor: index === currentSlide ? primaryColor : 'rgba(255,255,255,0.5)'
-                                        }}
-                                    ></button>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
+                    ))}
                 </div>
-            </div>
-        </div>
-    </>
-    
-);
-}
+
+                {/* Content Area */}
+                <div className="bg-[#1a1f2e]/90 rounded-lg p-4 text-white max-w-[900px]
+                              transition-all duration-300 hover:bg-[#1a1f2e]
+                              hover:shadow-xl hover:shadow-black/20"
+                     style={{ 
+                         borderLeft: `4px solid ${primaryColor}`,
+                         boxShadow: `0 4px 20px rgba(0,0,0,0.2)`,
+                     }}>
+                    {/* Summary Content */}
+                    {selectedTab === 'Summary' && (
+                        <p className="text-sm leading-relaxed text-gray-200 transition-colors duration-300
+                                    hover:text-white">
+                            {event.description}
+                        </p>
+                    )}
+
+                    {/* Rules Content */}
+                    {selectedTab === 'Rules' && (
+                        <ul className="space-y-2">
+                            {event.rules?.map((rule, index) => (
+                                <li key={index} className="flex items-start gap-2 transition-all duration-300
+                                                         hover:translate-x-1">
+                                    <span className="text-base mt-0.5" style={{ color: primaryColor }}>•</span>
+                                    <span className="text-sm text-gray-200 transition-colors duration-300
+                                                   hover:text-white">
+                                        {rule}
+                                    </span>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+
+                    {/* FAQs Content */}
+                    {selectedTab === 'FAQs' && (
+                        <div className="space-y-2">
+                            {event.faq?.map((faq, index) => (
+                                <div key={index} 
+                                     className="border border-gray-700 rounded-lg overflow-hidden
+                                              transition-all duration-300 hover:border-opacity-100
+                                              hover:shadow-lg"
+                                     style={{ 
+                                         borderColor: openFaq === index ? primaryColor : undefined,
+                                         boxShadow: openFaq === index 
+                                             ? `0 4px 12px ${primaryColor}20` 
+                                             : 'none'
+                                     }}>
+                                    <button
+                                        onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                                        className="w-full p-3 flex items-center justify-between text-left
+                                                 bg-black/20 transition-all duration-300
+                                                 hover:bg-black/40">
+                                        <span className="text-sm font-medium pr-4 transition-colors duration-300"
+                                              style={{ 
+                                                  color: openFaq === index ? primaryColor : 'white',
+                                              }}>
+                                            {faq.question}
+                                        </span>
+                                        <svg
+                                            className={`w-4 h-4 transition-transform duration-300 ${openFaq === index ? 'rotate-180' : ''}`}
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke={openFaq === index ? primaryColor : 'white'}>
+                                            <path strokeLinecap="round" 
+                                                  strokeLinejoin="round" 
+                                                  strokeWidth="2" 
+                                                  d="M19 9l-7 7-7-7" />
+                                        </svg>
+                                    </button>
+                                    <div className={`transition-all duration-300 ease-in-out overflow-hidden
+                                                   ${openFaq === index ? 'max-h-48' : 'max-h-0'}`}>
+                                        <p className="p-3 text-sm text-gray-300 transition-colors duration-300
+                                                    hover:text-white">
+                                            {faq.answer}
+                                        </p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
+            </section>
+        </main>
+    );
+};
 
 export default EventDetailsPage;

@@ -19,7 +19,7 @@ export default function Aftermovie() {
                 transition={{ duration: 1 }}
                 className="w-full max-w-6xl mx-auto px-4"
             >
-                <h2 className="text-4xl md:text-5xl text-center font-bold mb-12 font-['Aref_Ruqaa_Ink'] grad drop-shadow-[0_0_25px_rgba(255,215,0,0.2)]">
+                <h2 className="text-4xl md:text-5xl text-center font-bold mb-12 font-['Aref_Ruqaa_Ink'] text-amber-500 drop-shadow-[0_0_25px_rgba(255,215,0,0.2)]">
                     Oculus 2023 Aftermovie
                 </h2>
                 <div className="relative aspect-video w-full">

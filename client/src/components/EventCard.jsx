@@ -5,70 +5,74 @@ import { useState } from "react";
 const EventCard = ({ event }) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
-  const handleMouseEnter = () => setIsFlipped(true);
-  const handleMouseLeave = () => setIsFlipped(false);
-
-  //   const handleTap = (id) => {
-  //     setIsFlipped(false);
-  //     setTimeout(() => {
-  //       window.location.href = `/event/${id}`;
-  //     }, 600);
-  //   };
-
   const handleTap = (id) => {
     setIsFlipped(false);
     setTimeout(() => {
       window.location.href = `/events/${id}`;
-    }, 600);
+    }, 300);
   };
 
   return (
     <motion.div
-      whileHover={{ scale: 1.1 }}
-      onHoverStart={handleMouseEnter}
-      onHoverEnd={handleMouseLeave}
-      onTap={() => {handleTap(event.id)}}
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.9 }}
-      transition={{ duration: 0.5 }}
-      className="perspective-1000 pointer-events-auto h-[300px] w-[250px] m-10 mb-20"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.3 }}
+      className="perspective-[2000px] pointer-events-auto h-[300px] w-[250px] m-10 mb-20"
+      onHoverStart={() => setIsFlipped(true)}
+      onHoverEnd={() => setIsFlipped(false)}
+      onClick={() => handleTap(event.id)}
+      whileHover={{ scale: 1.03 }}
     >
       <motion.div
-        className="relative w-full h-full cursor-pointer preserve-3d transition-all duration-100"
-        animate={{
+        className="relative w-full h-full"
+        initial={false}
+        animate={{ 
           rotateY: isFlipped ? 180 : 0,
-          transition: {
-            duration: 0.3,
-            ease: "easeInOut",
-          },
         }}
-        transition={{ duration: 0.6 }}
-        style={{ transformStyle: "preserve-3d" }}
+        transition={{
+          duration: 0.3
+        }}
+        style={{ 
+          transformStyle: "preserve-3d",
+          transformOrigin: "center center"
+        }}
       >
-        <motion.img
-          src={event.frontImage}
-          alt={event.name}
-          className="w-full object-contain absolute backface-hidden"
-          style={{ backfaceVisibility: "hidden" }}
-          transition={{
-            duration: 0.3,
-            ease: "easeInOut",
-          }}
-        />
-        <motion.img
-          src={event.backImage}
-          alt={event.name}
-          className="w-full object-contain absolute"
+        {/* Front of card */}
+        <div
+          className="absolute w-full h-full backface-hidden rounded-lg"
           style={{
             backfaceVisibility: "hidden",
-            transform: "rotateY(180deg)",
+            WebkitBackfaceVisibility: "hidden",
+            transform: "translateZ(1px)",
+            willChange: "transform"
           }}
-          transition={{
-            duration: 0.3,
-            ease: "easeInOut",
+        >
+          <img
+            src={event.frontImage}
+            alt={event.name}
+            className="w-full h-full object-contain rounded-lg"
+            style={{ willChange: "transform" }}
+          />
+        </div>
+
+        {/* Back of card */}
+        <div
+          className="absolute w-full h-full backface-hidden rounded-lg"
+          style={{
+            backfaceVisibility: "hidden",
+            WebkitBackfaceVisibility: "hidden",
+            transform: "rotateY(180deg) translateZ(1px)",
+            willChange: "transform"
           }}
-        />
+        >
+          <img
+            src={event.backImage}
+            alt={event.name}
+            className="w-full h-full object-contain rounded-lg"
+            style={{ willChange: "transform" }}
+          />
+        </div>
       </motion.div>
     </motion.div>
   );
