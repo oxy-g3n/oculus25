@@ -54,7 +54,7 @@ const eventsData = [
     frontImage: "/assets/events/ipl/ipl-front.png",
     backImage: "/assets/events/ipl/ipl-back.png",
     banner: "/assets/events/ipl/banner.png",
-    formUrl: "#",
+    formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSdyIqdOB-OPwg5h9JgtLv9NwpzAeQe-1QA5EjGTQLRaZ9Dbow/viewform",
     month: "March",
     colorTheme: {
       primary: "#32CD32", // Lime Green
@@ -94,7 +94,7 @@ const eventsData = [
     frontImage: "/assets/events/sargam/sargam-front.png",
     backImage: "/assets/events/sargam/sargam-back.png",
     banner: "/assets/events/sargam/banner.png",
-    formUrl: "#",
+    formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSfgajJNFOscyYSBv_y-sn1AaYvWUTX22wTZr_-5-j4LPAtatw/viewform?usp=send_form",
     month: "March",
     colorTheme: {
       primary: "#9370DB", // Medium Purple
@@ -139,7 +139,7 @@ const eventsData = [
     frontImage: "/assets/events/aej/aej-front.png",
     backImage: "/assets/events/aej/aej-back.png",
     banner: "/assets/events/aej/banner.png",  
-    formUrl: "#",
+    formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSegpWvkfqDmDfQ-hzKdbrIE3mVUknLJBZinBAykIrHZjBG9Yw/viewform",
     month: "March",
     colorTheme: {
       primary: "#9370DB", // Medium Purple
@@ -197,7 +197,7 @@ const eventsData = [
     frontImage: "/assets/events/carnival/carnival-front.jpg",
     backImage: "/assets/events/carnival/carnival-back.jpg",
     banner: "/assets/events/carnival/banner.png",
-    formUrl: "#",
+    formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSeVj7XpryEiC8JoslEgH7B2On-7VPtNI4B7KsYXBhh-S3Ucog/viewform",
     month: "March",
     colorTheme: {
       primary: "#FF4500", // Orange Red
