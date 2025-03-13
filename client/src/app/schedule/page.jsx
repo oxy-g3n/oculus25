@@ -56,7 +56,7 @@ export default function SchedulePage() {
                 time: '6:00 PM - 9:00 PM',
                 venue: 'Main Stage',
                 description: 'War of Branches - The ultimate showdown between college branches.',
-                banner: '/assets/events/wob/image1.png',
+                banner: '/assets/events/wob/banner.png',
                 color: 'from-blue-600 to-cyan-600'
             }
         ],
@@ -67,7 +67,7 @@ export default function SchedulePage() {
                 time: '4:00 PM - 8:00 PM',
                 venue: 'College Grounds',
                 description: 'A spectacular carnival featuring various fun activities and performances.',
-                banner: '/assets/events/carnival/image1.png',
+                banner: '/assets/events/carnival/banner.png',
                 color: 'from-pink-600 to-fuchsia-600'
             },
             {
@@ -300,14 +300,13 @@ export default function SchedulePage() {
                                 }}
                             >
                                 <div className="relative h-40 overflow-hidden">
-                                    <div className={`absolute inset-0 bg-gradient-to-r ${event.color} opacity-40`}></div>
                                     <img
                                         src={event.banner}
                                         alt={event.title}
                                         onError={handleImageError}
                                         className="w-full h-full object-cover"
                                     />
-                                    <div className="absolute top-0 left-0 right-0 p-3 bg-gradient-to-b from-black/80 to-transparent">
+                                    <div className="absolute top-0 left-0 right-0 p-3 bg-black/60">
                                         <div className="flex justify-between items-start">
                                             <h3 className="text-xl font-bold text-amber-300 font-['Aref_Ruqaa_Ink'] drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]">
                                                 {event.title}
@@ -426,15 +425,13 @@ export default function SchedulePage() {
                                             className="group bg-black/40 rounded-lg overflow-hidden border border-amber-500/40 shadow-[0_0_15px_rgba(0,0,0,0.3)] transform transition-all duration-500 hover:shadow-[0_0_20px_rgba(245,158,11,0.4)] hover:-translate-y-1"
                                         >
                                             <div className="relative h-24 overflow-hidden">
-                                                <div className={`absolute inset-0 bg-gradient-to-r ${event.color} opacity-40 group-hover:opacity-60 transition-opacity duration-300`}></div>
                                                 <img
                                                     src={event.banner}
                                                     alt={event.title}
                                                     onError={handleImageError}
                                                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                                 />
-                                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-70"></div>
-                                                <div className="absolute bottom-0 left-0 right-0 p-4">
+                                                <div className="absolute bottom-0 left-0 right-0 p-4 bg-black/60">
                                                     <h3 className="text-xl font-bold text-amber-300 font-['Aref_Ruqaa_Ink'] drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] group-hover:text-amber-200 transition-colors duration-300">
                                                         {event.title}
                                                     </h3>
@@ -487,15 +484,13 @@ export default function SchedulePage() {
                                     }}
                                 >
                                     <div className="relative h-48 overflow-hidden">
-                                        <div className={`absolute inset-0 bg-gradient-to-r ${event.color} opacity-40 group-hover:opacity-60 transition-opacity duration-300`}></div>
                                         <img
                                             src={event.banner}
                                             alt={event.title}
                                             onError={handleImageError}
                                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                         />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-70"></div>
-                                        <div className="absolute bottom-0 left-0 right-0 p-4">
+                                        <div className="absolute bottom-0 left-0 right-0 p-4 bg-black/60">
                                             <h3 className="text-2xl font-bold text-amber-300 font-['Aref_Ruqaa_Ink'] drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] group-hover:text-amber-200 transition-colors duration-300">
                                                 {event.title}
                                             </h3>
