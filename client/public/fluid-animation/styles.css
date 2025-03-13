@@ -244,4 +244,80 @@
                     transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
                 }
             }
+
+            .scroll-indicator {
+                position: fixed;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                display: none;
+                pointer-events: auto;
+                z-index: 1001;
+                opacity: 0;
+                cursor: pointer;
+                transition: opacity 0.6s ease-out;
+            }
+
+            .scroll-indicator.visible {
+                opacity: 1;
+            }
+
+            .scroll-icon {
+                width: 20px;
+                height: 32px;
+                border: 2px solid rgba(255, 255, 255, 0.4);
+                border-radius: 10px;
+                position: relative;
+                display: flex;
+                justify-content: center;
+                backdrop-filter: blur(4px);
+                -webkit-backdrop-filter: blur(4px);
+                background: rgba(0, 0, 0, 0.2);
+                transition: border-color 0.3s ease, transform 0.3s ease;
+            }
+
+            .scroll-icon:hover {
+                border-color: rgba(255, 255, 255, 0.6);
+                transform: scale(1.05);
+            }
+
+            .scroll-icon:active {
+                transform: scale(0.95);
+            }
+
+            .scroll-icon::before {
+                content: '';
+                width: 3px;
+                height: 6px;
+                position: absolute;
+                top: 6px;
+                background: rgba(255, 255, 255, 0.8);
+                border-radius: 1.5px;
+                animation: scrollDot 2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+            }
+
+            .scroll-text {
+                display: none;
+            }
+
+            @keyframes scrollDot {
+                0% {
+                    transform: translateY(0);
+                    opacity: 0.8;
+                }
+                50% {
+                    transform: translateY(15px);
+                    opacity: 0.3;
+                }
+                100% {
+                    transform: translateY(0);
+                    opacity: 0.8;
+                }
+            }
+
+            @media (max-width: 768px) {
+                .scroll-indicator {
+                    display: block;
+                }
+            }
         </style>

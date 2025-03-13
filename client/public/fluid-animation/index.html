@@ -36,7 +36,19 @@
                 const blackLogo = document.querySelector('.black-logo');
                 const whiteLogo = document.querySelector('.white-logo');
                 const interactionText = document.querySelector('.interaction-text');
+                const scrollIndicator = document.querySelector('.scroll-indicator');
                 let hasInteracted = false;
+
+                // Show scroll indicator after 3 seconds
+                setTimeout(() => {
+                    if (window.innerWidth <= 768) { // Only on mobile
+                        scrollIndicator.style.display = 'block';
+                        // Small delay to ensure display: block has taken effect
+                        requestAnimationFrame(() => {
+                            scrollIndicator.classList.add('visible');
+                        });
+                    }
+                }, 3000);
 
                 const hideInteractionText = () => {
                     if (!hasInteracted) {
@@ -159,6 +171,9 @@
             <div class="interaction-ring"></div>
             <span class="text mobile-text">Drag to Flow</span>
             <span class="text desktop-text">Drag to Flow</span>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-icon" onclick="window.scrollBy({ top: window.innerHeight, behavior: 'smooth' })"></div>
         </div>
         <script src="./script.js"></script>
     </body>
