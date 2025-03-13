@@ -55,43 +55,8 @@ function Footer() {
               </div>
             </div>
           </div>
-          <div className='flex flex-col items-center justify-center gap-2'>
-            <div className='text-lg font-bold tracking-wide'>
-              Quick Links
-            </div>
-            <div className='flex flex-col items-center gap-1'>
-              <NavigationLink href="/" className='font-semibold opacity-70 hover:opacity-100 cursor-pointer'>
-                Home
-              </NavigationLink>
-              <NavigationLink href="/events" className='font-semibold opacity-70 hover:opacity-100 cursor-pointer'>
-                Events
-              </NavigationLink>
-              <NavigationLink href="/sponsors" className='font-semibold opacity-70 hover:opacity-100 cursor-pointer'>
-                Sponsors
-              </NavigationLink>
-              <NavigationLink href="/schedule" className='font-semibold opacity-70 hover:opacity-100 cursor-pointer'>
-                Schedule
-              </NavigationLink>
-              <NavigationLink href="/contact-us" className='font-semibold opacity-70 hover:opacity-100 cursor-pointer'>
-                Contact Us
-              </NavigationLink>
-              <NavigationLink href="/playground" className='font-semibold opacity-70 hover:opacity-100 cursor-pointer'>
-                Playground
-              </NavigationLink>
-            </div>
-          </div>
-          <div className='flex flex-col items-center justify-center gap-2'>
-            <div className='text-lg font-bold tracking-wide'>
-              Mobile App
-            </div>
-            <button>
-              <Image
-                src={googlePlay}
-                alt="Play Store"
-                width={150}
-              />
-            </button>
-          </div>
+          
+          
           <div className='flex flex-col items-center justify-center gap-2'>
             <div className='text-lg font-bold tracking-wide'>
               Legal
