@@ -58,7 +58,7 @@ export default function EventGalleryPage() {
         <div className="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center">
           <div className="text-center">
             <h1 className="text-4xl font-bold mb-2">{event.gallery.title}</h1>
-            <p className="text-xl">{event.name} - {event.date}</p>
+            {/* <p className="text-xl">{event.name} - {event.date}</p> */}
           </div>
         </div>
       </div>

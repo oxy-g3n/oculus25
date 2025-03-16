@@ -256,6 +256,7 @@
                 opacity: 0;
                 cursor: pointer;
                 transition: opacity 0.6s ease-out;
+                padding-bottom: 50px;
             }
 
             .scroll-indicator.visible {

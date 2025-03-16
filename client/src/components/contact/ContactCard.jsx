@@ -2,58 +2,81 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { FiUser } from "react-icons/fi";
+import { FiCode } from "react-icons/fi";
 
 const ContactCard = ({ text, number }) => {
     return (
         <div className="flex flex-col items-center gap-6 w-full p-4 md:p-6">
-            <div className="w-full border-2 border-transparent hover:border-yellow-600 hover:shadow-lg hover:shadow-yellow-600/50 transition-all duration-300">
-                <Card
-                    title="Sphurti Asawa"
-                    subtitle="+91 88284 22842"
-                    description="General Secretary Stuco"
-                    Icon={FiUser}
-
-                    isMain={true}
-                />
+            {/* Site Developers Section */}
+            <div className="w-full border-2 border-amber-600/50 rounded-lg p-4 shadow-md shadow-amber-600/30">
+                <h2 className="text-center text-xl md:text-2xl font-['Aref_Ruqaa_Ink'] text-amber-200 mb-4">Site Developers</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 w-full gap-4 md:gap-6">
+                    <Card
+                        title="Ibrahim"
+                        subtitle="+91 91759 27612"
+                        description="Lead Developer"
+                        Icon={FiCode}
+                    />
+                    <Card
+                        title="Swaraj"
+                        subtitle="+91 80104 94942"
+                        description="Site Developer"
+                        Icon={FiCode}
+                    />
+                </div>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 w-full gap-4 md:gap-6">
-                <Card
-                    title="Vivek (Director) "
-                    subtitle="+91 89287 31857"
-                    description="Director @oculus"
-                    Icon={FiUser}
-                />
-                <Card
-                    title="Arya Patkar"
-                    subtitle="+91 84199 19062"
-                    description="Finance Secretary Stuco"
-                    Icon={FiUser}
-                />
-                <Card
-                    title="Mandar Dumbre"
-                    subtitle="+91 93728 43787"
-                    description="Technical Secretary Stuco"
-                    Icon={FiUser}
-                />
-                <Card
-                    title="Aishwarya Bichave"
-                    subtitle="+91 85910 69045"
-                    description="Ladies' Representative"
-                    Icon={FiUser}
-                />
-                <Card
-                    title="Soumorup Chakrabarti"
-                    subtitle="+91 88280 90474"
-                    description="Cultural Secretary Stuco"
-                    Icon={FiUser}
-                />
-                <Card
-                    title="Samrith Shetty"
-                    subtitle="+91 93222 41530"
-                    description="Cultural Secretary Stuco"
-                    Icon={FiUser}
-                />
+            {/* Main Contact Section */}
+            <div className="w-full border-2 border-purple-600/50 rounded-lg p-4 shadow-md shadow-purple-600/30">
+                <h2 className="text-center text-xl md:text-2xl font-['Aref_Ruqaa_Ink'] text-purple-200 mb-4">Student Council</h2>
+                <div className="w-full border-2 border-transparent hover:border-yellow-600 hover:shadow-lg hover:shadow-yellow-600/50 transition-all duration-300 mb-6">
+                    <Card
+                        title="Sphurti Asawa"
+                        subtitle="+91 88284 22842"
+                        description="General Secretary Stuco"
+                        Icon={FiUser}
+                        isMain={true}
+                    />
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 w-full gap-4 md:gap-6">
+                    <Card
+                        title="Vivek (Director) "
+                        subtitle="+91 89287 31857"
+                        description="Director @oculus"
+                        Icon={FiUser}
+                    />
+                    <Card
+                        title="Arya Patkar"
+                        subtitle="+91 84199 19062"
+                        description="Finance Secretary Stuco"
+                        Icon={FiUser}
+                    />
+                    <Card
+                        title="Mandar Dumbre"
+                        subtitle="+91 93728 43787"
+                        description="Technical Secretary Stuco"
+                        Icon={FiUser}
+                    />
+                    <Card
+                        title="Aishwarya Bichave"
+                        subtitle="+91 85910 69045"
+                        description="Ladies' Representative"
+                        Icon={FiUser}
+                    />
+                    <Card
+                        title="Soumorup Chakrabarti"
+                        subtitle="+91 88280 90474"
+                        description="Cultural Secretary Stuco"
+                        Icon={FiUser}
+                    />
+                    <Card
+                        title="Samrith Shetty"
+                        subtitle="+91 93222 41530"
+                        description="Cultural Secretary Stuco"
+                        Icon={FiUser}
+                    />
+                </div>
             </div>
         </div>
     );

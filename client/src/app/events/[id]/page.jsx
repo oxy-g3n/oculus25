@@ -65,58 +65,68 @@ const EventDetailsPage = () => {
                                     <button
                                         className="px-6 py-2 text-base font-semibold rounded-lg
                                                 shadow-md transition-all transform hover:scale-105
-                                                text-center font-['Aref_Ruqaa_Ink'] border-2"
+                                                text-center font-['Aref_Ruqaa_Ink'] border-2
+                                                relative"
                                         style={{ 
-                                            borderColor: secondaryColor,
-                                            color: secondaryColor,
-                                            boxShadow: `0 0 20px ${secondaryColor}40`
+                                            borderColor: primaryColor,
+                                            color: 'white',
+                                            backgroundColor: primaryColor,
+                                            boxShadow: `0 0 25px ${primaryColor}80`
                                         }}>
-                                        View Gallery
+                                        <span className="relative z-10 flex items-center justify-center gap-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                                <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                                <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
+                                            </svg>
+                                            View Gallery
+                                        </span>
                                     </button>
                                 </Link>
                             )}
-                            {event.id === 'tedx' ? (
-                                <>
+                            {event.formUrl && (
+                                event.id === 'tedx' ? (
+                                    <>
+                                        <a href={event.formUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="px-6 py-2 text-base font-semibold rounded-lg
+                                                    shadow-md transition-all transform hover:scale-105 text-white
+                                                    text-center font-['Aref_Ruqaa_Ink']"
+                                        style={{ 
+                                            backgroundColor: primaryColor,
+                                            boxShadow: `0 0 20px ${primaryColor}40`
+                                        }}>
+                                            Register (Outside SPIT)
+                                        </a>
+                                        <a href={event.formUrl2}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="px-6 py-2 text-base font-semibold rounded-lg
+                                                    shadow-md transition-all transform hover:scale-105 text-white
+                                                    text-center font-['Aref_Ruqaa_Ink']
+                                                    border-2"
+                                        style={{ 
+                                            borderColor: primaryColor,
+                                            color: primaryColor,
+                                            boxShadow: `0 0 20px ${primaryColor}40`
+                                        }}>
+                                            Register (SPIT)
+                                        </a>
+                                    </>
+                                ) : (
                                     <a href={event.formUrl}
-                                       target="_blank"
-                                       rel="noopener noreferrer"
-                                       className="px-6 py-2 text-base font-semibold rounded-lg
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="px-6 py-2 text-base font-semibold rounded-lg
                                                 shadow-md transition-all transform hover:scale-105 text-white
                                                 text-center font-['Aref_Ruqaa_Ink']"
-                                       style={{ 
-                                           backgroundColor: primaryColor,
-                                           boxShadow: `0 0 20px ${primaryColor}40`
-                                       }}>
-                                        Register (Outside SPIT)
+                                    style={{ 
+                                        backgroundColor: primaryColor,
+                                        boxShadow: `0 0 20px ${primaryColor}40`
+                                    }}>
+                                        Register
                                     </a>
-                                    <a href={event.formUrl2}
-                                       target="_blank"
-                                       rel="noopener noreferrer"
-                                       className="px-6 py-2 text-base font-semibold rounded-lg
-                                                shadow-md transition-all transform hover:scale-105 text-white
-                                                text-center font-['Aref_Ruqaa_Ink']
-                                                border-2"
-                                       style={{ 
-                                           borderColor: primaryColor,
-                                           color: primaryColor,
-                                           boxShadow: `0 0 20px ${primaryColor}40`
-                                       }}>
-                                        Register (SPIT)
-                                    </a>
-                                </>
-                            ) : (
-                                <a href={event.formUrl}
-                                   target="_blank"
-                                   rel="noopener noreferrer"
-                                   className="px-6 py-2 text-base font-semibold rounded-lg
-                                            shadow-md transition-all transform hover:scale-105 text-white
-                                            text-center font-['Aref_Ruqaa_Ink']"
-                                   style={{ 
-                                       backgroundColor: primaryColor,
-                                       boxShadow: `0 0 20px ${primaryColor}40`
-                                   }}>
-                                    Register
-                                </a>
+                                )
                             )}
                         </div>
                     </div>
@@ -126,24 +136,25 @@ const EventDetailsPage = () => {
             {/* Content Section */}
             <section className="container mx-auto px-4 py-6">
                 {/* Navigation Tabs */}
-                <div className="flex gap-6 mb-6 max-w-[600px]">
+                <div className="flex flex-wrap justify-center sm:justify-start gap-2 sm:gap-4 md:gap-6 mb-6 max-w-[600px] mx-auto sm:mx-0">
                     {['Summary', 'Rules', 'FAQs'].map(tab => (
                         <button
                             key={tab}
                             onClick={() => setSelectedTab(tab)}
-                            className={`px-8 py-3 text-base font-medium rounded-lg transition-all duration-300
-                                      font-['Aref_Ruqaa_Ink'] border border-transparent
-                                      hover:scale-105 hover:shadow-lg
-                                      ${selectedTab === tab 
-                                        ? 'text-white border-white/20' 
-                                        : 'text-gray-400 hover:text-white hover:border-white/10'}`}
+                            className={`px-3 sm:px-5 md:px-8 py-2 md:py-3 text-sm md:text-base font-medium rounded-lg transition-all duration-300
+                                      font-['Aref_Ruqaa_Ink'] border-2
+                                      hover:scale-105 hover:shadow-lg flex-1 sm:flex-none
+                                      bg-black/30 backdrop-blur-sm`}
                             style={{
-                                backgroundColor: selectedTab === tab ? primaryColor : 'rgba(0,0,0,0.3)',
+                                borderColor: '#9370DB',
+                                color: selectedTab === tab ? 'white' : '#9370DB',
+                                backgroundColor: selectedTab === tab ? 'rgba(147, 112, 219, 0.5)' : 'transparent',
                                 boxShadow: selectedTab === tab 
-                                    ? `0 0 20px ${primaryColor}40` 
-                                    : 'none',
+                                    ? '0 0 25px rgba(147, 112, 219, 0.6)' 
+                                    : '0 0 15px rgba(147, 112, 219, 0.3)',
                                 transform: `translateY(${selectedTab === tab ? '-2px' : '0'})`,
-                                minWidth: '120px'
+                                minWidth: '80px',
+                                maxWidth: '120px'
                             }}>
                             {tab}
                         </button>
@@ -151,7 +162,7 @@ const EventDetailsPage = () => {
                 </div>
 
                 {/* Content Area */}
-                <div className="bg-[#1a1f2e]/90 rounded-lg p-4 text-white max-w-[900px]
+                <div className="bg-[#1a1f2e]/90 rounded-lg p-3 sm:p-4 text-white max-w-[900px] mx-auto
                               transition-all duration-300 hover:bg-[#1a1f2e]
                               hover:shadow-xl hover:shadow-black/20"
                      style={{ 
@@ -169,41 +180,56 @@ const EventDetailsPage = () => {
                     {/* Rules Content */}
                     {selectedTab === 'Rules' && (
                         <div className="flex flex-col items-center justify-center py-4">
-                            {event.rules ? (
+                            {event.rule_book ? (
                                 <>
                                     <a 
                                         href={`/assets/events/${event.id}/rules.pdf`}
                                         download={`${event.name}_Rules.pdf`}
-                                        className="flex items-center gap-3 px-8 py-4 rounded-lg
+                                        className="flex items-center gap-2 sm:gap-3 px-4 sm:px-6 md:px-8 py-3 md:py-4 rounded-lg
                                                  transition-all duration-300 transform hover:scale-105
-                                                 text-center font-['Aref_Ruqaa_Ink'] border-2"
+                                                 text-center font-['Aref_Ruqaa_Ink'] border-2
+                                                 bg-black/30 backdrop-blur-sm"
                                         style={{ 
-                                            borderColor: primaryColor,
-                                            color: primaryColor,
-                                            boxShadow: `0 0 20px ${primaryColor}40`
+                                            borderColor: '#9370DB',
+                                            color: '#9370DB',
+                                            boxShadow: '0 0 20px rgba(147, 112, 219, 0.4)'
                                         }}
                                     >
                                         <svg 
                                             xmlns="http://www.w3.org/2000/svg" 
-                                            width="24" 
-                                            height="24" 
+                                            width="20" 
+                                            height="20" 
                                             viewBox="0 0 24 24" 
                                             fill="none" 
                                             stroke="currentColor" 
                                             strokeWidth="2" 
                                             strokeLinecap="round" 
                                             strokeLinejoin="round"
+                                            className="w-5 h-5 md:w-6 md:h-6"
                                         >
                                             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                                             <polyline points="7 10 12 15 17 10"></polyline>
                                             <line x1="12" y1="15" x2="12" y2="3"></line>
                                         </svg>
-                                        <span className="text-base font-semibold">Download Rules PDF</span>
+                                        <span className="text-sm sm:text-base font-semibold">Download Rules PDF</span>
                                     </a>
                                     <p className="mt-4 text-sm text-gray-300 text-center">
                                         Click the button above to download the complete rules for {event.name}.
                                     </p>
                                 </>
+                            ) : event.rules ? (
+                                <div className="w-full max-w-3xl">
+                                    <h3 className="text-lg font-semibold mb-4 text-center" style={{ color: '#9370DB' }}>
+                                        Rules for {event.name}
+                                    </h3>
+                                    <ul className="list-disc pl-6 space-y-2">
+                                        {event.rules.map((rule, index) => (
+                                            <li key={index} className="text-sm text-gray-200">
+                                                {rule}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
                             ) : (
                                 <p className="text-sm text-gray-300 text-center">
                                     Rules for this event are not available at the moment.
@@ -228,17 +254,17 @@ const EventDetailsPage = () => {
                                      }}>
                                     <button
                                         onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                                        className="w-full p-3 flex items-center justify-between text-left
+                                        className="w-full p-2 sm:p-3 flex items-center justify-between text-left
                                                  bg-black/20 transition-all duration-300
                                                  hover:bg-black/40">
-                                        <span className="text-sm font-medium pr-4 transition-colors duration-300"
+                                        <span className="text-xs sm:text-sm font-medium pr-2 sm:pr-4 transition-colors duration-300"
                                               style={{ 
                                                   color: openFaq === index ? primaryColor : 'white',
                                               }}>
                                             {faq.question}
                                         </span>
                                         <svg
-                                            className={`w-4 h-4 transition-transform duration-300 ${openFaq === index ? 'rotate-180' : ''}`}
+                                            className={`w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0 transition-transform duration-300 ${openFaq === index ? 'rotate-180' : ''}`}
                                             fill="none"
                                             viewBox="0 0 24 24"
                                             stroke={openFaq === index ? primaryColor : 'white'}>
@@ -249,8 +275,8 @@ const EventDetailsPage = () => {
                                         </svg>
                                     </button>
                                     <div className={`transition-all duration-300 ease-in-out overflow-hidden
-                                                   ${openFaq === index ? 'max-h-48' : 'max-h-0'}`}>
-                                        <p className="p-3 text-sm text-gray-300 transition-colors duration-300
+                                                   ${openFaq === index ? 'max-h-60 sm:max-h-48' : 'max-h-0'}`}>
+                                        <p className="p-2 sm:p-3 text-xs sm:text-sm text-gray-300 transition-colors duration-300
                                                     hover:text-white">
                                             {faq.answer}
                                         </p>

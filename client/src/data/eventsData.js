@@ -111,6 +111,7 @@ const eventsData = [
     date: "2025-03-03",
     location: "Lab Complex",
     time: "9:00 AM",
+    rule_book:true,
     description:
       "Get ready to be blown away at the IPL Auction, happening now at Oculus! Imagine yourself in the hot seat, bidding for cricket's biggest stars and assembling your dream team. With surprises around every corner, this event is not just thrilling – it's downright addictive! Join us for the ride of a lifetime where fortunes are won and lost in the blink of an eye. Whether you're a die-hard fan or just love a good competition, the IPL Auction at Oculus guarantees non-stop excitement. So, what are you waiting for? Get in on the action and bid your way to victory",
     frontImage: "/assets/events/ipl/ipl-front.png",
@@ -151,6 +152,7 @@ const eventsData = [
     date: "2025-03-02",
     location: "Auditorium",
     time: "6:00 PM",
+    rule_book:true,   
     description:
       "What better opportunity for young aspiring singers with bags of potential to showcase their extraordinary musical side than Sargam'25! Get a chance to allure and amaze the audience with your euphonious melodies and compete to get top-notch prices along with the glory and prestige of winning Sargam'25.",
     frontImage: "/assets/events/sargam/sargam-front.png",
@@ -162,7 +164,7 @@ const eventsData = [
       primary: "#9370DB", // Medium Purple
       secondary: "#4B0082" // Indigo
     },
-    rules: true,
+    rule_book:true,   
     "faq": [
       {
         "question": "What are the different categories one could take part in?",
@@ -206,6 +208,12 @@ const eventsData = [
     colorTheme: {
       primary: "#9370DB", // Medium Purple
       secondary: "#4B0082" // Indigo
+    },
+    gallery: {
+      basePath: "/assets/events/aej/image",
+      start: 1,
+      end: 17,
+      title: "Aelaan-E-Jang Gallery"
     },
     "faq": [
       {
@@ -348,6 +356,77 @@ const eventsData = [
       "Winner is declared on the basis of who reaches the last location first and not who has maximum points"
     ],
   },
+  {
+    id: "wob",
+    name: "War of Branches",
+    type: "Cultural",
+    date: "2025-03-20",
+    location: "Mumbai",
+    time: "4 hours",
+    description:
+      "War of Branches is a battle of dance and Music between the various branches of SPIT",
+    frontImage: "/assets/events/wob/wob-front.png",
+    backImage: "/assets/events/wob/wob-back.png",
+    banner: "/assets/events/wob/banner.png",
+    month: "March",
+    colorTheme: {
+      primary: "#D4AF37", // Gold
+      secondary: "#8B4513" // Saddle Brown
+    },
+    gallery: {
+      basePath: "/assets/events/wob/image",
+      start: 1,
+      end: 23,
+      title: "War of Branches Gallery"
+    },
+    faq: [
+      {
+        "question": "What is it?",
+        "answer": "It is a battle of dance and music between the various branches of SPIT"
+      },
+      {
+        "question": "How do we get points?",
+        "answer": "You get points based on the performance of your team, points wil be given by internal faculty members"
+      }
+    ],
+    "rules": [
+     "Common Sense"
+    ],
+  },
+  {
+    id: "pronite",
+    name: "Pronite",
+    type: "Cultural",
+    date: "2025-03-23",
+    location: "Mumbai",
+    time: "4 hours",
+    description:
+      "Pronite at SPIT is an annual musical extravaganza that brings the campus to life with electrifying performances and an unforgettable atmosphere. Featuring top artists and dynamic live acts, it offers an evening of music, energy, and celebration, making it a highlight of the year for students.",
+    frontImage: "/assets/events/pronite/pronite-front.png",
+    backImage: "/assets/events/pronite/pronite-back.png",
+    banner: "/assets/events/pronite/banner.png",
+    month: "March",
+    colorTheme: {
+      primary: "#D4AF37", // Gold
+      secondary: "#8B4513" // Saddle Brown
+    },
+    gallery: {
+      basePath: "/assets/events/pronite/image",
+      start: 1,
+      end: 26,
+      title: "Pronite Gallery"
+    },
+    faq: [
+      {
+        "question": "What is it?",
+        "answer": "Annual Music Festival of SPIT"
+      }
+    ],
+    "rules": [
+     "Common Sense"
+    ],
+  },
+
 
 ];
 
