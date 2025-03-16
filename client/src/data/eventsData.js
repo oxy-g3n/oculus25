@@ -59,6 +59,7 @@ const eventsData = [
     banner: "/assets/events/rangmanch/banner.png",
     formUrl: "https://linktr.ee/Mudra_S.P.I.T",
     month: "March",
+    rule_book:true,
     colorTheme: {
       primary: "#D4AF37", // Gold
       secondary: "#8B4513" // Saddle Brown

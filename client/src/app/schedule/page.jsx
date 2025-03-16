@@ -35,27 +35,27 @@ export default function SchedulePage() {
         '20': [
             {
                 id: 'inaugration',
-                title: 'Inaugration',
-                time: '10:00 AM - 12:00 PM',
+                title: 'Inauguration',
+                time: '12:45 PM',
                 venue: 'Main Auditorium',
                 description: 'The grand opening ceremony of Oculus 2025.',
-                banner: '/assets/events/opening/banner.png',
+                banner: '/assets/gold_gradient_full_transparent.png',
                 color: 'from-purple-600 to-indigo-600'
             },
             {
                 id: 'tedx',
                 title: 'TEDx',
-                time: '2:00 PM - 5:00 PM',
-                venue: 'Main Auditorium',
+                time: '4:00 PM',
+                venue: '008',
                 description: 'TEDxSPIT - A platform for sharing ideas and experiences that spark conversations and inspire change.',
                 banner: '/assets/events/tedx/banner.png',
                 color: 'from-amber-600 to-orange-600'
             },
             {
                 id: 'wob',
-                title: 'W.O.B',
-                time: '6:00 PM - 9:00 PM',
-                venue: 'Main Stage',
+                title: 'War of Branches',
+                time: '7:00 PM',
+                venue: 'SPJ/Adani Ground',
                 description: 'War of Branches - The ultimate showdown between college branches.',
                 banner: '/assets/events/wob/banner.png',
                 color: 'from-blue-600 to-cyan-600'
@@ -63,59 +63,95 @@ export default function SchedulePage() {
         ],
         '21': [
             {
+                id: 'ipl-auction',
+                title: 'IPL Auction',
+                time: '1:00 PM - 4:00 PM',
+                venue: 'Main Auditorium',
+                description: 'Exciting auction event for the Indoor Premier League.',
+                banner: '/assets/events/ipl/banner.png',
+                color: 'from-green-600 to-emerald-600'
+            },
+            {
                 id: 'carnival',
                 title: 'Carnival',
-                time: '4:00 PM - 8:00 PM',
-                venue: 'College Grounds',
+                time: '6:00 PM',
+                venue: 'SPJ/Adani Ground',
                 description: 'A spectacular carnival featuring various fun activities and performances.',
                 banner: '/assets/events/carnival/banner.png',
                 color: 'from-pink-600 to-fuchsia-600'
             },
             {
                 id: 'battle-of-bands',
-                title: 'Battle of Bands',
-                time: '6:00 PM - 10:00 PM',
-                venue: 'Amphitheater',
+                title: 'Battle of Bands (Sargam)',
+                time: '6:00 PM - 9:00 PM',
+                venue: 'Main Stage',
                 description: 'Musical battle between talented bands showcasing their best performances.',
-                banner: '/assets/events/battle-of-bands/banner.png',
+                banner: '/assets/events/sargam/banner.png',
                 color: 'from-violet-600 to-purple-600'
             }
         ],
         '22': [
             {
-                id: 'ipl',
-                title: 'IPL',
-                time: '10:00 AM - 4:00 PM',
-                venue: 'Sports Ground',
-                description: 'Indoor Premier League - Exciting indoor sports competition.',
-                banner: '/assets/events/ipl/banner.png',
-                color: 'from-green-600 to-emerald-600'
+                id: 'rangmanch-solo',
+                title: 'Rangmanch Solo',
+                time: '8:00 AM',
+                venue: 'Main Auditorium',
+                description: 'Solo theatrical performances showcasing individual talent.',
+                banner: '/assets/events/rangmanch/banner.png',
+                color: 'from-amber-600 to-yellow-600'
             },
             {
-                id: 'sargam',
-                title: 'Sargam',
-                time: '5:00 PM - 8:00 PM',
+                id: 'rangmanch-team',
+                title: 'Rangmanch Team',
+                time: '9:00 AM',
                 venue: 'Main Auditorium',
-                description: 'A musical extravaganza showcasing the best singing talents.',
+                description: 'Team theatrical performances showcasing group coordination and talent.',
+                banner: '/assets/events/rangmanch/banner.png',
+                color: 'from-amber-600 to-yellow-600'
+            },
+            {
+                id: 'sargam-solo',
+                title: 'Sargam Solo',
+                time: '11:00 AM - 1:30 PM',
+                venue: 'Main Auditorium',
+                description: 'Solo singing competition showcasing individual vocal talents.',
                 banner: '/assets/events/sargam/banner.png',
                 color: 'from-amber-600 to-yellow-600'
             },
             {
-                id: 'aej',
-                title: 'AEJ',
-                time: '6:00 PM - 9:00 PM',
+                id: 'ipl-auction-2',
+                title: 'IPL Auction',
+                time: '12:00 PM',
+                venue: 'Main Auditorium',
+                description: 'Second round of the exciting IPL auction event.',
+                banner: '/assets/events/ipl/banner.png',
+                color: 'from-green-600 to-emerald-600'
+            },
+            {
+                id: 'aej-solo',
+                title: 'Aelaan-E-Jung Solo',
+                time: '3:00 PM',
                 venue: 'Dance Arena',
-                description: 'Aelaan-E-Jung - The ultimate dance competition.',
+                description: 'Solo dance competition showcasing individual talent.',
+                banner: '/assets/events/aej/banner.png',
+                color: 'from-red-600 to-rose-600'
+            },
+            {
+                id: 'aej-team',
+                title: 'Aelaan-E-Jung Team',
+                time: '6:30 PM',
+                venue: 'Dance Arena',
+                description: 'Team dance competition showcasing group performances.',
                 banner: '/assets/events/aej/banner.png',
                 color: 'from-red-600 to-rose-600'
             },
             {
                 id: 'dj',
-                title: 'DJ',
-                time: '9:00 PM - 11:00 PM',
+                title: 'DJ Night',
+                time: '8:00 PM',
                 venue: 'College Grounds',
                 description: 'Dance the night away with amazing music by professional DJs.',
-                banner: '/assets/events/dj/banner.png',
+                banner: '/assets/events/pronite/image6.png',
                 color: 'from-violet-600 to-purple-600'
             }
         ],
@@ -123,34 +159,34 @@ export default function SchedulePage() {
             {
                 id: 'robo-sumo',
                 title: 'Robo Sumo',
-                time: '10:00 AM - 1:00 PM',
+                time: '10:00 AM',
                 venue: 'Robotics Lab',
                 description: 'Robot wrestling competition where machines battle it out.',
-                banner: '/assets/events/robo-sumo/banner.png',
+                banner: '/assets/events/robo/banner.png',
                 color: 'from-blue-600 to-indigo-600'
             },
             {
                 id: 'robo-soccer',
                 title: 'Robo Soccer',
-                time: '2:00 PM - 5:00 PM',
+                time: '12:00 PM',
                 venue: 'Sports Ground',
                 description: 'Exciting soccer matches played by robots.',
-                banner: '/assets/events/robo-soccer/banner.png',
+                banner: '/assets/events/robo/banner.png',
                 color: 'from-green-600 to-emerald-600'
             },
             {
                 id: 'line-following-robo',
                 title: 'Line Following Robo',
-                time: '3:00 PM - 6:00 PM',
+                time: '2:00 PM',
                 venue: 'Robotics Arena',
                 description: 'Robots competing to follow complex line patterns accurately.',
-                banner: '/assets/events/line-following/banner.png',
+                banner: '/assets/events/robo/banner.png',
                 color: 'from-amber-600 to-yellow-600'
             },
             {
                 id: 'pronite',
                 title: 'ProNite',
-                time: '7:00 PM - 11:00 PM',
+                time: '7:00 PM',
                 venue: 'Main Stage',
                 description: 'The grand finale night with professional performances and celebrations.',
                 banner: '/assets/events/pronite/banner.png',
