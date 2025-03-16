@@ -189,7 +189,7 @@ export default function Navbar({ alwaysShow = false, onNavigate }) {
 
             <SlideAnimation isOpen={open}>
                 <div className="flex flex-col items-center justify-center h-full bg-gradient-to-b from-black/5 to-transparent">
-                    <div className="space-y-8 md:space-y-12 -translate-x-8 md:-translate-x-16">
+                    <div className="space-y-8 md:space-y-12">
                         {menuItems.map((item, index) => (
                             <motion.div
                                 key={item.href}
