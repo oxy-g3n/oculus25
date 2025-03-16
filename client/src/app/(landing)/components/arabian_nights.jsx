@@ -65,6 +65,9 @@ export default function ArabianNights() {
     const [scrollProgress, setScrollProgress] = useState(0);
     const [isScrolling, setIsScrolling] = useState(false);
     const rafRef = useRef(null);
+    const [isDragging, setIsDragging] = useState(false);
+    const [startX, setStartX] = useState(0);
+    const [scrollLeft, setScrollLeft] = useState(0);
 
     // Handle image error fallback
     const handleImageError = (e) => {
@@ -104,6 +107,48 @@ export default function ArabianNights() {
             }
         };
     }, []);
+
+    // Handle mouse down event
+    const handleMouseDown = (e) => {
+        setIsDragging(true);
+        setStartX(e.pageX - scrollContainerRef.current.offsetLeft);
+        setScrollLeft(scrollContainerRef.current.scrollLeft);
+    };
+
+    // Handle mouse move event
+    const handleMouseMove = (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+        const x = e.pageX - scrollContainerRef.current.offsetLeft;
+        const walk = (x - startX) * 2; // Scroll speed multiplier
+        scrollContainerRef.current.scrollLeft = scrollLeft - walk;
+    };
+
+    // Handle mouse up event
+    const handleMouseUp = () => {
+        setIsDragging(false);
+    };
+
+    // Add mouse leave event to stop dragging if mouse leaves the container
+    const handleMouseLeave = () => {
+        setIsDragging(false);
+    };
+
+    // Add cleanup for mouse events
+    useEffect(() => {
+        const container = scrollContainerRef.current;
+        if (!container) return;
+
+        container.addEventListener('mousemove', handleMouseMove);
+        container.addEventListener('mouseup', handleMouseUp);
+        container.addEventListener('mouseleave', handleMouseLeave);
+
+        return () => {
+            container.removeEventListener('mousemove', handleMouseMove);
+            container.removeEventListener('mouseup', handleMouseUp);
+            container.removeEventListener('mouseleave', handleMouseLeave);
+        };
+    }, [isDragging, startX, scrollLeft]);
 
     // Handle card tap
     const handleCardTap = () => {
@@ -160,12 +205,14 @@ export default function ArabianNights() {
                 <div className="w-full flex-1 max-w-[98vw] mx-auto min-h-0 relative">
                     <div 
                         ref={scrollContainerRef}
-                        className="h-full overflow-x-auto scrollbar-hide"
+                        className="h-full overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing"
                         style={{
                             WebkitOverflowScrolling: 'touch',
-                            msOverflowStyle: 'none',  // Hide scrollbar in IE/Edge
-                            scrollbarWidth: 'none',   // Hide scrollbar in Firefox
+                            msOverflowStyle: 'none',
+                            scrollbarWidth: 'none',
+                            userSelect: 'none'
                         }}
+                        onMouseDown={handleMouseDown}
                         onScroll={() => {
                             // Mark as scrolling to prevent other interactions
                             setIsScrolling(true);
