@@ -7,6 +7,7 @@ export default function SchedulePage() {
     const [activeDay, setActiveDay] = useState('20');
     const [isMobile, setIsMobile] = useState(false);
     const [showMap, setShowMap] = useState(false);
+    const [showAlert, setShowAlert] = useState(true);
     const scrollContainerRef = useRef(null);
     
     // Use intersection observer for animations
@@ -222,6 +223,9 @@ export default function SchedulePage() {
                 </button>
             </div>
             
+            {/* Alert for tentative schedule */}
+            {!showMap && <div className="px-4 pt-3"><ScheduleAlert /></div>}
+            
             {/* Content area */}
             {showMap ? (
                 /* Map View */
@@ -237,6 +241,10 @@ export default function SchedulePage() {
                         <h2 className="text-xl font-bold text-amber-300 font-['Aref_Ruqaa_Ink']">
                             Complete Timeline
                         </h2>
+                    </div>
+                    
+                    <div className="px-4 pt-3">
+                        <ScheduleAlert />
                     </div>
                     
                     <div className="p-4 space-y-6">
@@ -413,6 +421,8 @@ export default function SchedulePage() {
                             Complete Event Timeline
                         </h2>
                         
+                        <ScheduleAlert />
+                        
                         {Object.keys(scheduleData).map((day) => (
                             <div key={day} className="mb-12">
                                 <h3 className="text-3xl font-bold text-amber-300 font-['Aref_Ruqaa_Ink'] mb-6 border-b border-amber-500/30 pb-2">
@@ -471,6 +481,8 @@ export default function SchedulePage() {
                             </p>
                         </div>
                         
+                        <ScheduleAlert />
+                        
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                             {scheduleData[activeDay].map((event, index) => (
                                 <div 
@@ -523,6 +535,34 @@ export default function SchedulePage() {
             </div>
         </div>
     );
+
+    // Alert component
+    const ScheduleAlert = () => {
+        if (!showAlert) return null;
+        
+        return (
+            <div className="bg-amber-500/90 text-black px-4 py-3 rounded-lg shadow-lg backdrop-blur-sm mx-auto max-w-4xl mb-4">
+                <div className="flex items-center">
+                    <div className="flex-shrink-0 mr-3">
+                        <i className="fas fa-exclamation-triangle text-xl"></i>
+                    </div>
+                    <div className="flex-1">
+                        <p className="font-['Noto_Naskh_Arabic'] font-medium">
+                            The current Schedule is Tentative and might change. Please check back for updates.
+                        </p>
+                    </div>
+                    <div className="flex-shrink-0 ml-2">
+                        <button 
+                            onClick={() => setShowAlert(false)}
+                            className="text-black hover:text-amber-900 transition-colors"
+                        >
+                            <i className="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        );
+    };
 
     return (
         <div className="relative h-screen bg-black overflow-hidden">

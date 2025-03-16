@@ -63,12 +63,6 @@ const eventsData = [
       primary: "#D4AF37", // Gold
       secondary: "#8B4513" // Saddle Brown
     },
-    gallery: {
-      basePath: "/assets/events/rangmanch/gallery/image",
-      start: 1,
-      end: 15,
-      title: "Rangmanch Event Gallery"
-    },
     faq: [
       {
         "question": "What are the different events in Rangmanch?",
