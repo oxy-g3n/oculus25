@@ -11,7 +11,7 @@ export default function Aftermovie() {
                     <iframe
                         className="absolute inset-0 w-full h-full rounded-lg shadow-2xl"
                         src="https://www.youtube.com/embed/W8asaoyvgNY"
-                        title="Oculus 2024 Aftermovie"
+                        title="Oculus 2023 Aftermovie"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen
                     />

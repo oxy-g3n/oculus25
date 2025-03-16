@@ -55,7 +55,7 @@ const EventDetailsPage = () => {
                                 </h1>
                                 <p className="text-base md:text-lg mt-1 font-['Noto_Naskh_Arabic']"
                                    style={{ color: primaryColor }}>
-                                    {event.type} • {event.month} 2024
+                                    {event.type} • {event.month} 2025
                                 </p>
                             </div>
                         </div>
