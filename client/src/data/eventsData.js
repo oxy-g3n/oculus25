@@ -63,6 +63,12 @@ const eventsData = [
       primary: "#D4AF37", // Gold
       secondary: "#8B4513" // Saddle Brown
     },
+    gallery: {
+      basePath: "/assets/events/rangmanch/gallery/image",
+      start: 1,
+      end: 15,
+      title: "Rangmanch Event Gallery"
+    },
     faq: [
       {
         "question": "What are the different events in Rangmanch?",
@@ -156,14 +162,15 @@ const eventsData = [
       primary: "#9370DB", // Medium Purple
       secondary: "#4B0082" // Indigo
     },
-"faq": [
+    rules: true,
+    "faq": [
       {
         "question": "What are the different categories one could take part in?",
         "answer": "The two categories offered by Sargam are Solo and Duet. Solo Category has 3 sub-categories of Singing, Instrumental and Rap. The third category Rap was introduced last year as the new domain and has become a major hit."
       },
       {
         "question": "Will we get instruments for Sargam?",
-        "answer": "No, you are required to carry your own instruments."
+        "answer": "A Standard Drum Kit will be provided, you are required to arrange for the other instruments."
       },
       {
         "question": "What if we pay for the first round but dont get selected?",
@@ -176,8 +183,7 @@ const eventsData = [
     ],
     "rules": [
       "Will be open to all Undergraduate Students.",
-      "Audition Round: Participants send a video clip of their performance. The audition clip should not exceed a duration of 3 minutes.",
-      "Final Round: Finalists perform in the S.P. Jain auditorium in front of exceptional judges and an audience. The auditions would be judged by a qualified individual, and his/her decision would be final.",
+      "Audition Round: Participants send a video clip of their performance. The audition clip should not exceed a duration of 2 minutes for Solo and 5 minutes for Bands.",
       "There will be four categories: Solo: Instrumental, Singing, Rap Duet. Participants can choose to audition for all four, but can go ahead for a maximum of 2 categories.",
       "If you participate in multiple categories then you will get a discount of Rs.50 after the first registration.",
       "Participants can sing along to the Karaoke version of the song, or play their own musical instruments. Use of autotune is strictly prohibited."
@@ -258,6 +264,12 @@ const eventsData = [
     colorTheme: {
       primary: "#FF4500", // Orange Red
       secondary: "#8B0000" // Dark Red
+    },
+    gallery: {
+      basePath: "/assets/events/carnival/image",
+      start: 1,
+      end: 28,
+      title: "Carnival Gallery"
     },
     "faq": [
       {

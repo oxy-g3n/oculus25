@@ -59,8 +59,52 @@ const EventDetailsPage = () => {
                                 </p>
                             </div>
                         </div>
-                        {event.id === 'tedx' ? (
-                            <div className="flex gap-4">
+                        <div className="flex gap-4 flex-wrap justify-center">
+                            {event.gallery && (
+                                <Link href={`/events/${event.id}/gallery`}>
+                                    <button
+                                        className="px-6 py-2 text-base font-semibold rounded-lg
+                                                shadow-md transition-all transform hover:scale-105
+                                                text-center font-['Aref_Ruqaa_Ink'] border-2"
+                                        style={{ 
+                                            borderColor: secondaryColor,
+                                            color: secondaryColor,
+                                            boxShadow: `0 0 20px ${secondaryColor}40`
+                                        }}>
+                                        View Gallery
+                                    </button>
+                                </Link>
+                            )}
+                            {event.id === 'tedx' ? (
+                                <>
+                                    <a href={event.formUrl}
+                                       target="_blank"
+                                       rel="noopener noreferrer"
+                                       className="px-6 py-2 text-base font-semibold rounded-lg
+                                                shadow-md transition-all transform hover:scale-105 text-white
+                                                text-center font-['Aref_Ruqaa_Ink']"
+                                       style={{ 
+                                           backgroundColor: primaryColor,
+                                           boxShadow: `0 0 20px ${primaryColor}40`
+                                       }}>
+                                        Register (Outside SPIT)
+                                    </a>
+                                    <a href={event.formUrl2}
+                                       target="_blank"
+                                       rel="noopener noreferrer"
+                                       className="px-6 py-2 text-base font-semibold rounded-lg
+                                                shadow-md transition-all transform hover:scale-105 text-white
+                                                text-center font-['Aref_Ruqaa_Ink']
+                                                border-2"
+                                       style={{ 
+                                           borderColor: primaryColor,
+                                           color: primaryColor,
+                                           boxShadow: `0 0 20px ${primaryColor}40`
+                                       }}>
+                                        Register (SPIT)
+                                    </a>
+                                </>
+                            ) : (
                                 <a href={event.formUrl}
                                    target="_blank"
                                    rel="noopener noreferrer"
@@ -71,37 +115,10 @@ const EventDetailsPage = () => {
                                        backgroundColor: primaryColor,
                                        boxShadow: `0 0 20px ${primaryColor}40`
                                    }}>
-                                    Register (Outside SPIT)
+                                    Register
                                 </a>
-                                <a href={event.formUrl2}
-                                   target="_blank"
-                                   rel="noopener noreferrer"
-                                   className="px-6 py-2 text-base font-semibold rounded-lg
-                                            shadow-md transition-all transform hover:scale-105 text-white
-                                            text-center font-['Aref_Ruqaa_Ink']
-                                            border-2"
-                                   style={{ 
-                                       borderColor: primaryColor,
-                                       color: primaryColor,
-                                       boxShadow: `0 0 20px ${primaryColor}40`
-                                   }}>
-                                    Register (SPIT)
-                                </a>
-                            </div>
-                        ) : (
-                            <a href={event.formUrl}
-                               target="_blank"
-                               rel="noopener noreferrer"
-                               className="px-6 py-2 text-base font-semibold rounded-lg
-                                        shadow-md transition-all transform hover:scale-105 text-white
-                                        text-center font-['Aref_Ruqaa_Ink']"
-                               style={{ 
-                                   backgroundColor: primaryColor,
-                                   boxShadow: `0 0 20px ${primaryColor}40`
-                               }}>
-                                Register
-                            </a>
-                        )}
+                            )}
+                        </div>
                     </div>
                 </div>
             </section>
@@ -151,18 +168,48 @@ const EventDetailsPage = () => {
 
                     {/* Rules Content */}
                     {selectedTab === 'Rules' && (
-                        <ul className="space-y-2">
-                            {event.rules?.map((rule, index) => (
-                                <li key={index} className="flex items-start gap-2 transition-all duration-300
-                                                         hover:translate-x-1">
-                                    <span className="text-base mt-0.5" style={{ color: primaryColor }}>•</span>
-                                    <span className="text-sm text-gray-200 transition-colors duration-300
-                                                   hover:text-white">
-                                        {rule}
-                                    </span>
-                                </li>
-                            ))}
-                        </ul>
+                        <div className="flex flex-col items-center justify-center py-4">
+                            {event.rules ? (
+                                <>
+                                    <a 
+                                        href={`/assets/events/${event.id}/rules.pdf`}
+                                        download={`${event.name}_Rules.pdf`}
+                                        className="flex items-center gap-3 px-8 py-4 rounded-lg
+                                                 transition-all duration-300 transform hover:scale-105
+                                                 text-center font-['Aref_Ruqaa_Ink'] border-2"
+                                        style={{ 
+                                            borderColor: primaryColor,
+                                            color: primaryColor,
+                                            boxShadow: `0 0 20px ${primaryColor}40`
+                                        }}
+                                    >
+                                        <svg 
+                                            xmlns="http://www.w3.org/2000/svg" 
+                                            width="24" 
+                                            height="24" 
+                                            viewBox="0 0 24 24" 
+                                            fill="none" 
+                                            stroke="currentColor" 
+                                            strokeWidth="2" 
+                                            strokeLinecap="round" 
+                                            strokeLinejoin="round"
+                                        >
+                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                            <polyline points="7 10 12 15 17 10"></polyline>
+                                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                                        </svg>
+                                        <span className="text-base font-semibold">Download Rules PDF</span>
+                                    </a>
+                                    <p className="mt-4 text-sm text-gray-300 text-center">
+                                        Click the button above to download the complete rules for {event.name}.
+                                    </p>
+                                </>
+                            ) : (
+                                <p className="text-sm text-gray-300 text-center">
+                                    Rules for this event are not available at the moment.
+                                </p>
+                            )}
+                        </div>
                     )}
 
                     {/* FAQs Content */}
